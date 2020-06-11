@@ -1,8 +1,19 @@
 package cliente.vista;
 
-public class VtnRegistrarUsuario extends javax.swing.JFrame {
+import cliente.servicios.cliente;
+import com.google.gson.Gson;
+import java.io.IOException;
+import modelo.ClsPeticion;
+import modelo.ClsResultado;
+import modelo.ClsUsuario;
+import utilidades.Utilidades;
 
-    public VtnRegistrarUsuario() {
+public class VtnRegistrarUsuario extends javax.swing.JFrame {
+    
+    private cliente objCliente;
+    private String login;
+
+    public VtnRegistrarUsuario(String login) {
         initComponents();
         jLabelErrorCodigo.setVisible(false);
         jLabelErrorNombres.setVisible(false);
@@ -44,8 +55,8 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         jLabelErrorNombres = new javax.swing.JLabel();
         jPanelRegistrar = new javax.swing.JPanel();
         jButtonRegistrar = new javax.swing.JButton();
-        jComboBoxGenero1 = new javax.swing.JComboBox<>();
-        jComboBoxRol1 = new javax.swing.JComboBox<>();
+        jComboBoxGenero = new javax.swing.JComboBox<>();
+        jComboBoxRol = new javax.swing.JComboBox<>();
         jPanelRegresar = new javax.swing.JPanel();
         jButtonRegresar = new javax.swing.JButton();
 
@@ -187,6 +198,7 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         jPanelRegistro.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanelRegistro.setMaximumSize(new java.awt.Dimension(310, 360));
         jPanelRegistro.setMinimumSize(new java.awt.Dimension(310, 360));
+        jPanelRegistro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelCabecera.setBackground(new java.awt.Color(204, 0, 0));
         jPanelCabecera.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -196,65 +208,74 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         jLabelTituloRegistro.setText("Registrar Usuario");
         jPanelCabecera.add(jLabelTituloRegistro);
 
+        jPanelRegistro.add(jPanelCabecera, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 306, -1));
+
         jLabelCodigo.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabelCodigo.setForeground(new java.awt.Color(0, 0, 0));
         jLabelCodigo.setText("Código:");
+        jPanelRegistro.add(jLabelCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 60, -1, -1));
 
         jLabelNombres.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabelNombres.setForeground(new java.awt.Color(0, 0, 0));
         jLabelNombres.setText("Nombres:");
+        jPanelRegistro.add(jLabelNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 111, -1, 26));
 
         jLabelApellidos.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabelApellidos.setForeground(new java.awt.Color(0, 0, 0));
         jLabelApellidos.setText("Apellidos:");
+        jPanelRegistro.add(jLabelApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 167, -1, 26));
 
         jLabelGenero.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabelGenero.setForeground(new java.awt.Color(0, 0, 0));
         jLabelGenero.setText("Genero:");
+        jPanelRegistro.add(jLabelGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 223, 61, 26));
 
         jLabelRol.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabelRol.setForeground(new java.awt.Color(0, 0, 0));
         jLabelRol.setText("Rol:");
+        jPanelRegistro.add(jLabelRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 277, 61, 26));
 
         jTextFieldCodigo.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldCodigo.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jTextFieldCodigo.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldCodigo.setMaximumSize(new java.awt.Dimension(6, 26));
+        jPanelRegistro.add(jTextFieldCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 57, 160, -1));
 
         jTextFieldNombres.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldNombres.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jTextFieldNombres.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldNombres.setMaximumSize(new java.awt.Dimension(6, 26));
-        jTextFieldNombres.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNombresActionPerformed(evt);
-            }
-        });
+        jPanelRegistro.add(jTextFieldNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 111, 160, -1));
 
         jTextFieldApellidos.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldApellidos.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jTextFieldApellidos.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldApellidos.setMaximumSize(new java.awt.Dimension(6, 26));
+        jPanelRegistro.add(jTextFieldApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 167, 160, -1));
 
         jLabelErrorCodigo.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jLabelErrorCodigo.setForeground(new java.awt.Color(255, 0, 0));
         jLabelErrorCodigo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelErrorCodigo.setText("Error");
+        jPanelRegistro.add(jLabelErrorCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 89, -1, -1));
 
         jLabelErrorApellidos.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jLabelErrorApellidos.setForeground(new java.awt.Color(255, 0, 0));
         jLabelErrorApellidos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelErrorApellidos.setText("Error");
+        jPanelRegistro.add(jLabelErrorApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 199, -1, -1));
 
         jLabelErrorGenero.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jLabelErrorGenero.setForeground(new java.awt.Color(255, 0, 0));
         jLabelErrorGenero.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelErrorGenero.setText("Error");
+        jPanelRegistro.add(jLabelErrorGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 255, -1, -1));
 
         jLabelErrorNombres.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jLabelErrorNombres.setForeground(new java.awt.Color(255, 0, 0));
         jLabelErrorNombres.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelErrorNombres.setText("Error");
+        jPanelRegistro.add(jLabelErrorNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 143, -1, -1));
 
         jPanelRegistrar.setBackground(new java.awt.Color(255, 255, 255));
         jPanelRegistrar.setLayout(new java.awt.GridBagLayout());
@@ -271,89 +292,25 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         });
         jPanelRegistrar.add(jButtonRegistrar, new java.awt.GridBagConstraints());
 
-        jComboBoxGenero1.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBoxGenero1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jComboBoxGenero1.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBoxGenero1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Masculino", "Femenino", "Otro" }));
-        jComboBoxGenero1.setMaximumSize(new java.awt.Dimension(6, 26));
-        jComboBoxGenero1.setMinimumSize(new java.awt.Dimension(6, 26));
-        jComboBoxGenero1.setPreferredSize(new java.awt.Dimension(6, 26));
+        jPanelRegistro.add(jPanelRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 309, 306, 80));
 
-        jComboBoxRol1.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBoxRol1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jComboBoxRol1.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBoxRol1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No asignado", "Estudiante", "Administrativo", "Docente" }));
-        jComboBoxRol1.setMaximumSize(new java.awt.Dimension(6, 26));
-        jComboBoxRol1.setMinimumSize(new java.awt.Dimension(6, 26));
-        jComboBoxRol1.setPreferredSize(new java.awt.Dimension(6, 26));
-        jComboBoxRol1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxRol1ActionPerformed(evt);
-            }
-        });
+        jComboBoxGenero.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBoxGenero.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jComboBoxGenero.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBoxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Masculino", "Femenino", "Otro" }));
+        jComboBoxGenero.setMaximumSize(new java.awt.Dimension(6, 26));
+        jComboBoxGenero.setMinimumSize(new java.awt.Dimension(6, 26));
+        jComboBoxGenero.setPreferredSize(new java.awt.Dimension(6, 26));
+        jPanelRegistro.add(jComboBoxGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 223, 160, -1));
 
-        javax.swing.GroupLayout jPanelRegistroLayout = new javax.swing.GroupLayout(jPanelRegistro);
-        jPanelRegistro.setLayout(jPanelRegistroLayout);
-        jPanelRegistroLayout.setHorizontalGroup(
-            jPanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelCabecera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanelRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanelRegistroLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(jPanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelApellidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelNombres)
-                    .addComponent(jLabelCodigo)
-                    .addComponent(jLabelRol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelGenero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(29, 29, 29)
-                .addGroup(jPanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextFieldNombres, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                    .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                    .addComponent(jTextFieldApellidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBoxGenero1, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBoxRol1, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelErrorCodigo)
-                    .addComponent(jLabelErrorNombres)
-                    .addComponent(jLabelErrorApellidos)
-                    .addComponent(jLabelErrorGenero))
-                .addContainerGap(31, Short.MAX_VALUE))
-        );
-        jPanelRegistroLayout.setVerticalGroup(
-            jPanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelRegistroLayout.createSequentialGroup()
-                .addComponent(jPanelCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
-                .addGroup(jPanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelErrorCodigo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldNombres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelErrorNombres)
-                .addGap(8, 8, 8)
-                .addGroup(jPanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldApellidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelErrorApellidos)
-                .addGap(8, 8, 8)
-                .addGroup(jPanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxGenero1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelErrorGenero)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelRol, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxRol1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanelRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        jComboBoxRol.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBoxRol.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jComboBoxRol.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBoxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No asignado", "Estudiante", "Administrativo", "Docente" }));
+        jComboBoxRol.setMaximumSize(new java.awt.Dimension(6, 26));
+        jComboBoxRol.setMinimumSize(new java.awt.Dimension(6, 26));
+        jComboBoxRol.setPreferredSize(new java.awt.Dimension(6, 26));
+        jPanelRegistro.add(jComboBoxRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 277, 160, -1));
 
         PanelPrincipal.add(jPanelRegistro, new java.awt.GridBagConstraints());
 
@@ -396,31 +353,111 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombresActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNombresActionPerformed
-
-    private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
-    }//GEN-LAST:event_jButtonRegistrarActionPerformed
-
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
-        //VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador();
-        //objVtnPrincipalAdministrador.setVisible(true);
-        //this.dispose();
+        VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador(objCliente, login);
+        objVtnPrincipalAdministrador.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
-    private void jComboBoxRol1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxRol1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxRol1ActionPerformed
+    private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
+        
+        if(verificarCampos() == true){
+            
+            try {
+            
+                this.objCliente.crearConexion();
+                Gson gson= new Gson();
+                ClsPeticion objPeticion= new ClsPeticion();
+                ClsResultado objResultado= new ClsResultado();
 
+                String codigo, nombres, apellidos, genero, rol;
+                
+                codigo = jTextFieldCodigo.getText();                
+                nombres=jTextFieldNombres.getText();
+                apellidos=jTextFieldApellidos.getText();
+                genero = (String) jComboBoxGenero.getSelectedItem();
+                rol = (String) jComboBoxRol.getSelectedItem();
+
+                ClsUsuario objUsuario= new ClsUsuario(codigo, nombres, apellidos, genero, rol);
+                String JSONPersona=gson.toJson(objUsuario);
+
+                objPeticion.setAccion("registrarUsuario");
+                objPeticion.setArgumentos(JSONPersona);
+                String JSONPeticion=gson.toJson(objPeticion);
+
+                String resultado=objCliente.enviarPeticion(JSONPeticion);
+                objResultado=gson.fromJson(resultado, ClsResultado.class);
+
+                if(objResultado.getCodigoResultado()==1)
+                {
+                    utilidades.Utilidades.mensajeExito("Registro exitoso del usuario", "Registro exitoso");
+                    this.dispose();
+                    VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador(objCliente,login);
+                }
+                else
+                {
+                    utilidades.Utilidades.mensajeAdvertencia("El usuario ya se encuentra registrado en el sistema", "Error en el registro");
+                }
+            
+                this.objCliente.cerrarConexion();
+             
+            }catch (IOException ex) {
+
+            }
+            
+        }else{
+            Utilidades.mensajeAdvertencia("Hay campos obligatorios sin llenar", "Error");
+        }
+        
+    }//GEN-LAST:event_jButtonRegistrarActionPerformed
+
+    private boolean verificarCampos(){
+        
+        boolean bandera = true; //true = campos correctos
+        
+        if (jTextFieldCodigo.getText().equals("")) {
+            this.jLabelErrorCodigo.setText("Error, campo vacío");
+            this.jLabelErrorCodigo.setVisible(true);
+            bandera = false;
+        }else{
+            this.jLabelErrorCodigo.setVisible(false);
+        }
+        
+        if (jTextFieldNombres.getText().equals("")) {
+            this.jLabelErrorNombres.setText("Error, campo vacío");
+            this.jLabelErrorNombres.setVisible(true);
+            bandera = false;
+        }else{
+            this.jLabelErrorNombres.setVisible(false);
+        }
+        
+        if (jTextFieldApellidos.getText().equals("")) {
+            this.jLabelErrorApellidos.setText("Error, campo vacío");
+            this.jLabelErrorApellidos.setVisible(true);
+            bandera = false;
+        }else{
+            this.jLabelErrorApellidos.setVisible(false);
+        }
+        
+        if (jComboBoxGenero.getSelectedIndex() == 1) {
+            this.jLabelErrorGenero.setText("Error, seleccione genero");
+            this.jLabelErrorGenero.setVisible(true);
+            bandera = false;
+        }else{
+            this.jLabelErrorGenero.setVisible(false);
+        }
+        
+        return bandera;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Barra;
     private javax.swing.JLabel IconoUniversidad;
     private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JButton jButtonRegresar;
-    private javax.swing.JComboBox<String> jComboBoxGenero1;
-    private javax.swing.JComboBox<String> jComboBoxRol1;
+    private javax.swing.JComboBox<String> jComboBoxGenero;
+    private javax.swing.JComboBox<String> jComboBoxRol;
     private javax.swing.JLabel jLabelAdmin;
     private javax.swing.JLabel jLabelApellidos;
     private javax.swing.JLabel jLabelCodigo;

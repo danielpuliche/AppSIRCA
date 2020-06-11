@@ -14,13 +14,8 @@ public class VtnPrincipalAdministrador extends javax.swing.JFrame {
         Image icon = Toolkit.getDefaultToolkit().getImage("./src/recursos/logo.png");
         this.setIconImage(icon);
         this.objCliente = objCliente;
-        ponerAdminLogueado(login);        
-    }
-    
-    private void ponerAdminLogueado(String login){
         jLabelAdmin.setText(login);
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -441,9 +436,9 @@ public class VtnPrincipalAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButtonAsignacionMasivaRolesActionPerformed
 
     private void jButtonRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarUsuarioActionPerformed
-        VtnRegistrarUsuario ObjVtnRegistrarUsuario = new VtnRegistrarUsuario();
+        VtnRegistrarUsuario ObjVtnRegistrarUsuario = new VtnRegistrarUsuario(jLabelAdmin.getText());
         ObjVtnRegistrarUsuario.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jButtonRegistrarUsuarioActionPerformed
 
     private void jTextFieldDigiteCodigoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldDigiteCodigoFocusGained

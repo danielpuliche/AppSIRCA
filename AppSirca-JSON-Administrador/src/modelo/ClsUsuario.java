@@ -8,12 +8,53 @@ public class ClsUsuario {
     private enumGenero genero;
     private enumRol rol;
 
-    public ClsUsuario(String identificacion, String nombres, String apellidos, enumGenero genero, enumRol rol) {
+    public ClsUsuario(String identificacion, String nombres, String apellidos, String genero, String rol) {
         this.identificacion = identificacion;
         this.nombres = nombres;
         this.apellidos = apellidos;
-        this.genero = genero;
-        this.rol = rol;
+        this.genero = darGenero(genero);
+        this.rol = darRol(rol);
+    }
+    
+    public enumGenero darGenero(String generoRecibido){
+        
+        enumGenero generoEnum = enumGenero.Femenino;
+        
+        switch(generoRecibido){
+            case "Masculino":
+                generoEnum = enumGenero.Masculino;
+            break;
+            case "Femenino":
+                generoEnum = enumGenero.Femenino;
+            break;
+            case "Otro":
+                generoEnum = enumGenero.Otro;
+            break;
+        }
+        
+        return generoEnum;
+    }
+    
+    public enumRol darRol(String rolRecibido){
+        
+        enumRol rolEnum = enumRol.Administrativo;
+        
+        switch(rolRecibido){
+            case "Administrativo":
+                rolEnum = enumRol.Administrativo;
+            break;
+            case "Docente":
+                rolEnum = enumRol.Docente;
+            break;
+            case "Estudiante":
+                rolEnum = enumRol.Estudiante;
+            break;
+            case "No asignado":
+                rolEnum = enumRol.No_Asignado;
+            break;
+        }
+        
+        return rolEnum;
     }
 
     public String getIdentificacion() {

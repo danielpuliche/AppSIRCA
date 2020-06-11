@@ -1,4 +1,3 @@
-
 package servidor.vista;
 
 import servidor.controlador.Controladorx;

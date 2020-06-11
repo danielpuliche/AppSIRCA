@@ -34,7 +34,7 @@ public class Controlador {
         
         switch (accion) {
 
-            case "registrarPersona":
+            case "registrarUsuario":
                   
                 ClsUsuario objUsuario = objConvertidor.fromJson(argumentosPeticion, ClsUsuario.class);
 

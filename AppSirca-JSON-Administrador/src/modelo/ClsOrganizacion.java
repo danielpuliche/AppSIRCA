@@ -8,9 +8,9 @@ public class ClsOrganizacion {
     
     public ClsOrganizacion(){
         objUsuarios = new ArrayList();
-        ClsUsuario objUsuario1 = new ClsUsuario("100617123654", "Pepito Filipino", "Apellido Random", enumGenero.Masculino, enumRol.Docente);
+        ClsUsuario objUsuario1 = new ClsUsuario("100617123654", "Pepito Filipino", "Apellido Random", "Masculino", "Docente");
         objUsuarios.add(objUsuario1);
-        ClsUsuario objUsuario2 = new ClsUsuario("100678965412", "Nombre Random", "Apellido Random", enumGenero.Femenino, enumRol.No_Asignado);
+        ClsUsuario objUsuario2 = new ClsUsuario("100678965412", "Nombre Random", "Apellido Random", "Femenino", "No asignado");
         objUsuarios.add(objUsuario2);
     }
     
