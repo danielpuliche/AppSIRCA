@@ -323,10 +323,8 @@ public class VtnIngresoAlSistema extends javax.swing.JFrame {
 
     private void jButtonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngresarActionPerformed
 
-        try {
-            
-            if(verificarCampos() == true){
-            
+        if(verificarCampos() == true){
+            try {
                 objCliente.crearConexion();
                 Gson objConvertidor= new Gson();
                 ClsPeticion objPeticion= new ClsPeticion();
@@ -344,21 +342,16 @@ public class VtnIngresoAlSistema extends javax.swing.JFrame {
                     this.dispose();   
                 }
                 else
-                {
+                {                    
                     Utilidades.mensajeAdvertencia("Usuario o contraseña incorrecta", "Atención");
-                    jTextFieldLogin.setText("Digite su login");
-                    jTextFieldLogin.setForeground(new java.awt.Color(102,102,102));
-                    jPasswordFieldContraseña.setText("Password");
-                    jPasswordFieldContraseña.setForeground(new java.awt.Color(102, 102, 102));
                 }
-                
-            }else{
-                Utilidades.mensajeAdvertencia("Hay campos obligatorios sin llenar", "Error en el ingreso");
+
+            } catch (IOException ex) {
+                Logger.getLogger(GUIAutenticacion.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-        } catch (IOException ex) {
-            Logger.getLogger(GUIAutenticacion.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }else{
+            Utilidades.mensajeAdvertencia("Hay campos obligatorios sin llenar", "Error");
+        }   
         
     }//GEN-LAST:event_jButtonIngresarActionPerformed
 
@@ -366,7 +359,7 @@ public class VtnIngresoAlSistema extends javax.swing.JFrame {
         
         boolean bandera = true; //true = campos correctos
         
-        if(this.jTextFieldLogin.getText().equals("")){
+        if(this.jTextFieldLogin.getText().equals("Digite su login")){
             this.jLabelErrorLogin.setText("Error, campo vacío");
             this.jLabelErrorLogin.setVisible(true);
             bandera = false;
@@ -374,7 +367,7 @@ public class VtnIngresoAlSistema extends javax.swing.JFrame {
             this.jLabelErrorLogin.setVisible(false);
         }
         
-        if(this.jPasswordFieldContraseña.getText().equals("")){
+        if(this.jPasswordFieldContraseña.getText().equals("Password")){
             this.jLabelErrorContrasenia.setText("Error, digite su contraseña");
             this.jLabelErrorContrasenia.setVisible(true);
             bandera = false;
