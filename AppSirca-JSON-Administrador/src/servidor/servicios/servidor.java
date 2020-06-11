@@ -1,20 +1,20 @@
 package servidor.servicios;
 
-import servidor.controlador.Controladorx;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import servidor.controlador.Controlador;
  
 public class servidor {
  
     private ServerSocket objServidor = null;  
     private DataInputStream objFlujoDeEntrada;//leer peticiones
     private DataOutputStream objFlujoDeSalida;//escribir respuesta
-    private final Controladorx objControlador;
+    private final Controlador objControlador;
     
-    public servidor(int puerto,Controladorx objControlador) throws IOException {
+    public servidor(int puerto,Controlador objControlador) throws IOException {
         objServidor = new ServerSocket(puerto);
         this.objControlador=objControlador;
     }

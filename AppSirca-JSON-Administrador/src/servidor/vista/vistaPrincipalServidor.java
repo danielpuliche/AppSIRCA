@@ -1,8 +1,8 @@
 package servidor.vista;
 
-import servidor.controlador.Controladorx;
 import java.io.IOException;
-import modelo.ClsEmpresax;
+import modelo.ClsOrganizacion;
+import servidor.controlador.Controlador;
 import servidor.servicios.servidor;
 
 public class vistaPrincipalServidor {
@@ -10,9 +10,9 @@ public class vistaPrincipalServidor {
     public static void main(String[] args) {
         
         try {
-            ClsEmpresax objEmpresax= new ClsEmpresax();
-            Controladorx objControladorx= new Controladorx(objEmpresax);
-            servidor objServidor= new servidor(5000,objControladorx);
+            ClsOrganizacion objOrganizacion = new ClsOrganizacion();
+            Controlador objControlador = new Controlador(objOrganizacion);
+            servidor objServidor= new servidor(5000,objControlador);
             objServidor.ejecutarServidor();
         } catch (IOException ex) {
             System.out.println("Error al ejecutar el servidor");

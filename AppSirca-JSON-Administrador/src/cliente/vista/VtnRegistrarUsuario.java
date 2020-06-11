@@ -11,10 +11,10 @@ import utilidades.Utilidades;
 public class VtnRegistrarUsuario extends javax.swing.JFrame {
     
     private cliente objCliente;
-    private String login;
 
     public VtnRegistrarUsuario(String login) {
         initComponents();
+        jLabelAdmin.setText(login);
         jLabelErrorCodigo.setVisible(false);
         jLabelErrorNombres.setVisible(false);
         jLabelErrorApellidos.setVisible(false);
@@ -354,7 +354,7 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
-        VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador(objCliente, login);
+        VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador(objCliente, jLabelAdmin.getText());
         objVtnPrincipalAdministrador.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonRegresarActionPerformed
@@ -392,7 +392,7 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
                 {
                     utilidades.Utilidades.mensajeExito("Registro exitoso del usuario", "Registro exitoso");
                     this.dispose();
-                    VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador(objCliente,login);
+                    VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador(objCliente,jLabelAdmin.getText());
                 }
                 else
                 {
@@ -439,7 +439,7 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
             this.jLabelErrorApellidos.setVisible(false);
         }
         
-        if (jComboBoxGenero.getSelectedIndex() == 1) {
+        if (jComboBoxGenero.getSelectedIndex() == 0) {
             this.jLabelErrorGenero.setText("Error, seleccione genero");
             this.jLabelErrorGenero.setVisible(true);
             bandera = false;
