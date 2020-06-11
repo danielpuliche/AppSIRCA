@@ -404,9 +404,9 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
-        VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador();
-        objVtnPrincipalAdministrador.setVisible(true);
-        this.dispose();
+        //VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador();
+        //objVtnPrincipalAdministrador.setVisible(true);
+        //this.dispose();
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
     private void jComboBoxRol1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxRol1ActionPerformed

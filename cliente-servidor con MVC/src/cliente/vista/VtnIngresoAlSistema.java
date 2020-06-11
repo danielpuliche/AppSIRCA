@@ -322,9 +322,6 @@ public class VtnIngresoAlSistema extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngresarActionPerformed
-//        VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador();
-//        objVtnPrincipalAdministrador.setVisible(true);
-//        this.dispose();
 
         try {
             objCliente.crearConexion();
@@ -338,13 +335,10 @@ public class VtnIngresoAlSistema extends javax.swing.JFrame {
             ClsResultado objResultado= objConvertidor.fromJson(respuestaJSON, ClsResultado.class); 
             objCliente.cerrarConexion();
             if(objResultado.getCodigoResultado()==1)
-            {
-//                GUIMenu vtnMenu = new GUIMenu(this.objCliente,jTextFieldLogin.getText());
-//                
-                VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador();
+            {                
+                VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador(this.objCliente,jTextFieldLogin.getText());
                 objVtnPrincipalAdministrador.setVisible(true);
-                this.dispose();               
-                
+                this.dispose();   
             }
             else
             {

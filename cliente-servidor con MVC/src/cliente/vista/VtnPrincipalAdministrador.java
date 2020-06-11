@@ -1,10 +1,24 @@
 package cliente.vista;
 
+import cliente.servicios.cliente;
+import java.awt.Image;
+import java.awt.Toolkit;
+
 public class VtnPrincipalAdministrador extends javax.swing.JFrame {
 
-    public VtnPrincipalAdministrador() {
+    private cliente objCliente;
+    
+    public VtnPrincipalAdministrador(cliente objCliente, String login) {
         initComponents();
         jLabelErrorDigiteCodigo.setVisible(false);
+        Image icon = Toolkit.getDefaultToolkit().getImage("./src/recursos/logo.png");
+        this.setIconImage(icon);
+        this.objCliente = objCliente;
+        ponerAdminLogueado(login);        
+    }
+    
+    private void ponerAdminLogueado(String login){
+        jLabelAdmin.setText(login);
     }
 
     @SuppressWarnings("unchecked")
@@ -300,11 +314,6 @@ public class VtnPrincipalAdministrador extends javax.swing.JFrame {
                 jTextFieldDigiteCodigoFocusLost(evt);
             }
         });
-        jTextFieldDigiteCodigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldDigiteCodigoActionPerformed(evt);
-            }
-        });
 
         jButtonRegistrarUsuario.setBackground(new java.awt.Color(204, 0, 0));
         jButtonRegistrarUsuario.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
@@ -434,12 +443,8 @@ public class VtnPrincipalAdministrador extends javax.swing.JFrame {
     private void jButtonRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarUsuarioActionPerformed
         VtnRegistrarUsuario ObjVtnRegistrarUsuario = new VtnRegistrarUsuario();
         ObjVtnRegistrarUsuario.setVisible(true);
-        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_jButtonRegistrarUsuarioActionPerformed
-
-    private void jTextFieldDigiteCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDigiteCodigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldDigiteCodigoActionPerformed
 
     private void jTextFieldDigiteCodigoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldDigiteCodigoFocusGained
         if(jTextFieldDigiteCodigo.getText().equals("Digite Código")){
@@ -454,8 +459,6 @@ public class VtnPrincipalAdministrador extends javax.swing.JFrame {
             jTextFieldDigiteCodigo.setText("Digite Código");
         }
     }//GEN-LAST:event_jTextFieldDigiteCodigoFocusLost
-
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Barra;
