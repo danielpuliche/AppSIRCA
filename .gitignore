@@ -1,0 +1,395 @@
+/AppSIRCA-1/nbproject/private/
+*.xml
+AppSIRCA-1/build.xml
+AppSIRCA-1/gson-2.8.2.jar
+AppSIRCA-1/manifest.mf
+AppSIRCA-1/nbproject/build-impl.xml
+AppSIRCA-1/nbproject/genfiles.properties
+AppSIRCA-1/nbproject/project.properties
+AppSIRCA-1/nbproject/project.xml
+AppSIRCA-1/src/cliente/servicios/cliente.java
+AppSIRCA-1/src/cliente/vista/GUIAutenticacion.form
+AppSIRCA-1/src/cliente/vista/GUIAutenticacion.java
+AppSIRCA-1/src/cliente/vista/GUIConsultaDePersonas.form
+AppSIRCA-1/src/cliente/vista/GUIConsultaDePersonas.java
+AppSIRCA-1/src/cliente/vista/GUIMenu.form
+AppSIRCA-1/src/cliente/vista/GUIMenu.java
+AppSIRCA-1/src/cliente/vista/GUIRegistrarPersona.form
+AppSIRCA-1/src/cliente/vista/GUIRegistrarPersona.java
+AppSIRCA-1/src/cliente/vista/vistaPrincipalCliente.java
+AppSIRCA-1/src/modelo/ClsAdministrador.java
+AppSIRCA-1/src/modelo/ClsEmpresa.java
+AppSIRCA-1/src/modelo/ClsPersona.java
+AppSIRCA-1/src/modelo/ClsPeticion.java
+AppSIRCA-1/src/modelo/ClsResultado.java
+AppSIRCA-1/src/recursos/agregar.png
+AppSIRCA-1/src/recursos/aplicar.png
+AppSIRCA-1/src/recursos/buscar.png
+AppSIRCA-1/src/recursos/cerrar.png
+AppSIRCA-1/src/recursos/error.png
+AppSIRCA-1/src/recursos/exitoso.png
+AppSIRCA-1/src/recursos/grabar.png
+AppSIRCA-1/src/recursos/logo.png
+AppSIRCA-1/src/recursos/print.png
+AppSIRCA-1/src/recursos/recibo-entrada.png
+AppSIRCA-1/src/recursos/recibo-salida.png
+AppSIRCA-1/src/recursos/remove.png
+AppSIRCA-1/src/recursos/tarifas.png
+AppSIRCA-1/src/recursos/warning.png
+AppSIRCA-1/src/servidor/controlador/Controlador.java
+AppSIRCA-1/src/servidor/servicios/servidor.java
+AppSIRCA-1/src/servidor/vista/vistaPrincipalServidor.java
+AppSIRCA-1/src/utilidades/Utilidades.java
+AppSirca-JSON-Administrador/build/classes/.netbeans_automatic_build
+AppSirca-JSON-Administrador/build/classes/.netbeans_update_resources
+AppSirca-JSON-Administrador/build/classes/cliente/servicios/cliente.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/GUIAutenticacion$1.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/GUIAutenticacion$2.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/GUIAutenticacion$3.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/GUIAutenticacion.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/GUIAutenticacion.form
+AppSirca-JSON-Administrador/build/classes/cliente/vista/GUIConsultaDePersonas$1.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/GUIConsultaDePersonas$2.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/GUIConsultaDePersonas$3.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/GUIConsultaDePersonas$4.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/GUIConsultaDePersonas.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/GUIConsultaDePersonas.form
+AppSirca-JSON-Administrador/build/classes/cliente/vista/GUIMenu$1.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/GUIMenu$2.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/GUIMenu$3.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/GUIMenu$4.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/GUIMenu.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/GUIMenu.form
+AppSirca-JSON-Administrador/build/classes/cliente/vista/GUIRegistrarPersona$1.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/GUIRegistrarPersona$2.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/GUIRegistrarPersona$3.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/GUIRegistrarPersona.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/GUIRegistrarPersona.form
+AppSirca-JSON-Administrador/build/classes/cliente/vista/vistaPrincipalCliente.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnIngresoAlSistema$1.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnIngresoAlSistema$2.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnIngresoAlSistema$3.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnIngresoAlSistema$4.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnIngresoAlSistema.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnIngresoAlSistema.form
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnModificarLogin$1.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnModificarLogin$2.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnModificarLogin$3.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnModificarLogin$4.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnModificarLogin.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnModificarLogin.form
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnPrincipalAdministrador$1.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnPrincipalAdministrador$2.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnPrincipalAdministrador$3.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnPrincipalAdministrador$4.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnPrincipalAdministrador$5.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnPrincipalAdministrador$6.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnPrincipalAdministrador$7.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnPrincipalAdministrador.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnPrincipalAdministrador.form
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnRegistrarUsuario$1.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnRegistrarUsuario$2.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnRegistrarUsuario$3.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnRegistrarUsuario$4.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnRegistrarUsuario.class
+AppSirca-JSON-Administrador/build/classes/cliente/vista/VtnRegistrarUsuario.form
+AppSirca-JSON-Administrador/build/classes/modelo/ClsAdministrador.class
+AppSirca-JSON-Administrador/build/classes/modelo/ClsEmpresax.class
+AppSirca-JSON-Administrador/build/classes/modelo/ClsOrganizacion.class
+AppSirca-JSON-Administrador/build/classes/modelo/ClsPersona.class
+AppSirca-JSON-Administrador/build/classes/modelo/ClsPeticion.class
+AppSirca-JSON-Administrador/build/classes/modelo/ClsResultado.class
+AppSirca-JSON-Administrador/build/classes/modelo/ClsUsuario.class
+AppSirca-JSON-Administrador/build/classes/recursos/add.png
+AppSirca-JSON-Administrador/build/classes/recursos/agregar.png
+AppSirca-JSON-Administrador/build/classes/recursos/aplicar.png
+AppSirca-JSON-Administrador/build/classes/recursos/buscar.png
+AppSirca-JSON-Administrador/build/classes/recursos/cerrar.png
+AppSirca-JSON-Administrador/build/classes/recursos/error.png
+AppSirca-JSON-Administrador/build/classes/recursos/exitoso.png
+AppSirca-JSON-Administrador/build/classes/recursos/grabar.png
+AppSirca-JSON-Administrador/build/classes/recursos/lock-7-32.png
+AppSirca-JSON-Administrador/build/classes/recursos/logo.png
+AppSirca-JSON-Administrador/build/classes/recursos/logo_1.png
+AppSirca-JSON-Administrador/build/classes/recursos/print.png
+AppSirca-JSON-Administrador/build/classes/recursos/recibo-entrada.png
+AppSirca-JSON-Administrador/build/classes/recursos/recibo-salida.png
+AppSirca-JSON-Administrador/build/classes/recursos/remove.png
+AppSirca-JSON-Administrador/build/classes/recursos/search-13-16.png
+AppSirca-JSON-Administrador/build/classes/recursos/search.png
+AppSirca-JSON-Administrador/build/classes/recursos/tarifas.png
+AppSirca-JSON-Administrador/build/classes/recursos/universidad_blanco.png
+AppSirca-JSON-Administrador/build/classes/recursos/universidad_negro.png
+AppSirca-JSON-Administrador/build/classes/recursos/user-32.png
+AppSirca-JSON-Administrador/build/classes/recursos/user.png
+AppSirca-JSON-Administrador/build/classes/recursos/usercircle.png
+AppSirca-JSON-Administrador/build/classes/recursos/warning.png
+AppSirca-JSON-Administrador/build/classes/servidor/controlador/Controlador.class
+AppSirca-JSON-Administrador/build/classes/servidor/controlador/Controladorx.class
+AppSirca-JSON-Administrador/build/classes/servidor/servicios/servidor.class
+AppSirca-JSON-Administrador/build/classes/servidor/vista/vistaPrincipalServidor.class
+AppSirca-JSON-Administrador/build/classes/utilidades/Utilidades.class
+AppSirca-JSON-Administrador/nbproject/private/private.properties
+cliente-servidor con MVC/build.xml
+cliente-servidor con MVC/gson-2.8.2.jar
+cliente-servidor con MVC/manifest.mf
+cliente-servidor con MVC/nbproject/build-impl.xml
+cliente-servidor con MVC/nbproject/genfiles.properties
+cliente-servidor con MVC/nbproject/project.properties
+cliente-servidor con MVC/nbproject/project.xml
+cliente-servidor con MVC/src/cliente/servicios/cliente.java
+cliente-servidor con MVC/src/cliente/vista/GUIAutenticacion.form
+cliente-servidor con MVC/src/cliente/vista/GUIAutenticacion.java
+cliente-servidor con MVC/src/cliente/vista/GUIConsultaDePersonas.form
+cliente-servidor con MVC/src/cliente/vista/GUIConsultaDePersonas.java
+cliente-servidor con MVC/src/cliente/vista/GUIMenu.form
+cliente-servidor con MVC/src/cliente/vista/GUIMenu.java
+cliente-servidor con MVC/src/cliente/vista/GUIRegistrarPersona.form
+cliente-servidor con MVC/src/cliente/vista/GUIRegistrarPersona.java
+cliente-servidor con MVC/src/cliente/vista/vistaPrincipalCliente.java
+cliente-servidor con MVC/src/cliente/vista/VtnIngresoAlSistema.form
+cliente-servidor con MVC/src/cliente/vista/VtnIngresoAlSistema.java
+cliente-servidor con MVC/src/cliente/vista/VtnModificarLogin.form
+cliente-servidor con MVC/src/cliente/vista/VtnModificarLogin.java
+cliente-servidor con MVC/src/cliente/vista/VtnPrincipalAdministrador.form
+cliente-servidor con MVC/src/cliente/vista/VtnPrincipalAdministrador.java
+cliente-servidor con MVC/src/cliente/vista/VtnRegistrarUsuario.form
+cliente-servidor con MVC/src/cliente/vista/VtnRegistrarUsuario.java
+cliente-servidor con MVC/src/modelo/ClsAdministrador.java
+cliente-servidor con MVC/src/modelo/ClsEmpresax.java
+cliente-servidor con MVC/src/modelo/ClsOrganizacion.java
+cliente-servidor con MVC/src/modelo/ClsPersona.java
+cliente-servidor con MVC/src/modelo/ClsPeticion.java
+cliente-servidor con MVC/src/modelo/ClsResultado.java
+cliente-servidor con MVC/src/modelo/ClsUsuario.java
+cliente-servidor con MVC/src/recursos/add.png
+cliente-servidor con MVC/src/recursos/agregar.png
+cliente-servidor con MVC/src/recursos/aplicar.png
+cliente-servidor con MVC/src/recursos/buscar.png
+cliente-servidor con MVC/src/recursos/cerrar.png
+cliente-servidor con MVC/src/recursos/error.png
+cliente-servidor con MVC/src/recursos/exitoso.png
+cliente-servidor con MVC/src/recursos/grabar.png
+cliente-servidor con MVC/src/recursos/lock-7-32.png
+cliente-servidor con MVC/src/recursos/logo.png
+cliente-servidor con MVC/src/recursos/logo_1.png
+cliente-servidor con MVC/src/recursos/print.png
+cliente-servidor con MVC/src/recursos/recibo-entrada.png
+cliente-servidor con MVC/src/recursos/recibo-salida.png
+cliente-servidor con MVC/src/recursos/remove.png
+cliente-servidor con MVC/src/recursos/search-13-16.png
+cliente-servidor con MVC/src/recursos/search.png
+cliente-servidor con MVC/src/recursos/tarifas.png
+cliente-servidor con MVC/src/recursos/universidad_blanco.png
+cliente-servidor con MVC/src/recursos/universidad_negro.png
+cliente-servidor con MVC/src/recursos/user-32.png
+cliente-servidor con MVC/src/recursos/user.png
+cliente-servidor con MVC/src/recursos/usercircle.png
+cliente-servidor con MVC/src/recursos/warning.png
+cliente-servidor con MVC/src/servidor/controlador/Controlador.java
+cliente-servidor con MVC/src/servidor/controlador/Controladorx.java
+cliente-servidor con MVC/src/servidor/servicios/servidor.java
+cliente-servidor con MVC/src/servidor/vista/vistaPrincipalServidor.java
+cliente-servidor con MVC/src/utilidades/Utilidades.java
+AppSIRCA-1/build.xml
+AppSIRCA-1/gson-2.8.2.jar
+AppSIRCA-1/manifest.mf
+AppSIRCA-1/nbproject/build-impl.xml
+AppSIRCA-1/nbproject/genfiles.properties
+AppSIRCA-1/nbproject/project.properties
+AppSIRCA-1/nbproject/project.xml
+AppSIRCA-1/src/cliente/servicios/cliente.java
+AppSIRCA-1/src/cliente/vista/GUIAutenticacion.form
+AppSIRCA-1/src/cliente/vista/GUIAutenticacion.java
+AppSIRCA-1/src/cliente/vista/GUIConsultaDePersonas.form
+AppSIRCA-1/src/cliente/vista/GUIConsultaDePersonas.java
+AppSIRCA-1/src/cliente/vista/GUIMenu.form
+AppSIRCA-1/src/cliente/vista/GUIMenu.java
+AppSIRCA-1/src/cliente/vista/GUIRegistrarPersona.form
+AppSIRCA-1/src/cliente/vista/GUIRegistrarPersona.java
+AppSIRCA-1/src/cliente/vista/vistaPrincipalCliente.java
+AppSIRCA-1/src/modelo/ClsAdministrador.java
+AppSIRCA-1/src/modelo/ClsEmpresa.java
+AppSIRCA-1/src/modelo/ClsPersona.java
+AppSIRCA-1/src/modelo/ClsPeticion.java
+AppSIRCA-1/src/modelo/ClsResultado.java
+AppSIRCA-1/src/recursos/agregar.png
+AppSIRCA-1/src/recursos/aplicar.png
+AppSIRCA-1/src/recursos/buscar.png
+AppSIRCA-1/src/recursos/cerrar.png
+AppSIRCA-1/src/recursos/error.png
+AppSIRCA-1/src/recursos/exitoso.png
+AppSIRCA-1/src/recursos/grabar.png
+AppSIRCA-1/src/recursos/logo.png
+AppSIRCA-1/src/recursos/print.png
+AppSIRCA-1/src/recursos/recibo-entrada.png
+AppSIRCA-1/src/recursos/recibo-salida.png
+AppSIRCA-1/src/recursos/remove.png
+AppSIRCA-1/src/recursos/tarifas.png
+AppSIRCA-1/src/recursos/warning.png
+AppSIRCA-1/src/servidor/controlador/Controlador.java
+AppSIRCA-1/src/servidor/servicios/servidor.java
+AppSIRCA-1/src/servidor/vista/vistaPrincipalServidor.java
+AppSIRCA-1/src/utilidades/Utilidades.java
+cliente-servidor con MVC/build.xml
+cliente-servidor con MVC/gson-2.8.2.jar
+cliente-servidor con MVC/manifest.mf
+cliente-servidor con MVC/nbproject/build-impl.xml
+cliente-servidor con MVC/nbproject/genfiles.properties
+cliente-servidor con MVC/nbproject/project.properties
+cliente-servidor con MVC/nbproject/project.xml
+cliente-servidor con MVC/src/cliente/servicios/cliente.java
+cliente-servidor con MVC/src/cliente/vista/GUIAutenticacion.form
+cliente-servidor con MVC/src/cliente/vista/GUIAutenticacion.java
+cliente-servidor con MVC/src/cliente/vista/GUIConsultaDePersonas.form
+cliente-servidor con MVC/src/cliente/vista/GUIConsultaDePersonas.java
+cliente-servidor con MVC/src/cliente/vista/GUIMenu.form
+cliente-servidor con MVC/src/cliente/vista/GUIMenu.java
+cliente-servidor con MVC/src/cliente/vista/GUIRegistrarPersona.form
+cliente-servidor con MVC/src/cliente/vista/GUIRegistrarPersona.java
+cliente-servidor con MVC/src/cliente/vista/vistaPrincipalCliente.java
+cliente-servidor con MVC/src/cliente/vista/VtnIngresoAlSistema.form
+cliente-servidor con MVC/src/cliente/vista/VtnIngresoAlSistema.java
+cliente-servidor con MVC/src/cliente/vista/VtnModificarLogin.form
+cliente-servidor con MVC/src/cliente/vista/VtnModificarLogin.java
+cliente-servidor con MVC/src/cliente/vista/VtnPrincipalAdministrador.form
+cliente-servidor con MVC/src/cliente/vista/VtnPrincipalAdministrador.java
+cliente-servidor con MVC/src/cliente/vista/VtnRegistrarUsuario.form
+cliente-servidor con MVC/src/cliente/vista/VtnRegistrarUsuario.java
+cliente-servidor con MVC/src/modelo/ClsAdministrador.java
+cliente-servidor con MVC/src/modelo/ClsEmpresax.java
+cliente-servidor con MVC/src/modelo/ClsOrganizacion.java
+cliente-servidor con MVC/src/modelo/ClsPersona.java
+cliente-servidor con MVC/src/modelo/ClsPeticion.java
+cliente-servidor con MVC/src/modelo/ClsResultado.java
+cliente-servidor con MVC/src/modelo/ClsUsuario.java
+cliente-servidor con MVC/src/recursos/add.png
+cliente-servidor con MVC/src/recursos/agregar.png
+cliente-servidor con MVC/src/recursos/aplicar.png
+cliente-servidor con MVC/src/recursos/buscar.png
+cliente-servidor con MVC/src/recursos/cerrar.png
+cliente-servidor con MVC/src/recursos/error.png
+cliente-servidor con MVC/src/recursos/exitoso.png
+cliente-servidor con MVC/src/recursos/grabar.png
+cliente-servidor con MVC/src/recursos/lock-7-32.png
+cliente-servidor con MVC/src/recursos/logo.png
+cliente-servidor con MVC/src/recursos/logo_1.png
+cliente-servidor con MVC/src/recursos/print.png
+cliente-servidor con MVC/src/recursos/recibo-entrada.png
+cliente-servidor con MVC/src/recursos/recibo-salida.png
+cliente-servidor con MVC/src/recursos/remove.png
+cliente-servidor con MVC/src/recursos/search-13-16.png
+cliente-servidor con MVC/src/recursos/search.png
+cliente-servidor con MVC/src/recursos/tarifas.png
+cliente-servidor con MVC/src/recursos/universidad_blanco.png
+cliente-servidor con MVC/src/recursos/universidad_negro.png
+cliente-servidor con MVC/src/recursos/user-32.png
+cliente-servidor con MVC/src/recursos/user.png
+cliente-servidor con MVC/src/recursos/usercircle.png
+cliente-servidor con MVC/src/recursos/warning.png
+cliente-servidor con MVC/src/servidor/controlador/Controlador.java
+cliente-servidor con MVC/src/servidor/controlador/Controladorx.java
+cliente-servidor con MVC/src/servidor/servicios/servidor.java
+cliente-servidor con MVC/src/servidor/vista/vistaPrincipalServidor.java
+cliente-servidor con MVC/src/utilidades/Utilidades.java
+AppSIRCA-1/build.xml
+AppSIRCA-1/gson-2.8.2.jar
+AppSIRCA-1/manifest.mf
+AppSIRCA-1/nbproject/build-impl.xml
+AppSIRCA-1/nbproject/genfiles.properties
+AppSIRCA-1/nbproject/project.properties
+AppSIRCA-1/nbproject/project.xml
+AppSIRCA-1/src/cliente/servicios/cliente.java
+AppSIRCA-1/src/cliente/vista/GUIAutenticacion.form
+AppSIRCA-1/src/cliente/vista/GUIAutenticacion.java
+AppSIRCA-1/src/cliente/vista/GUIConsultaDePersonas.form
+AppSIRCA-1/src/cliente/vista/GUIConsultaDePersonas.java
+AppSIRCA-1/src/cliente/vista/GUIMenu.form
+AppSIRCA-1/src/cliente/vista/GUIMenu.java
+AppSIRCA-1/src/cliente/vista/GUIRegistrarPersona.form
+AppSIRCA-1/src/cliente/vista/GUIRegistrarPersona.java
+AppSIRCA-1/src/cliente/vista/vistaPrincipalCliente.java
+AppSIRCA-1/src/modelo/ClsAdministrador.java
+AppSIRCA-1/src/modelo/ClsEmpresa.java
+AppSIRCA-1/src/modelo/ClsPersona.java
+AppSIRCA-1/src/modelo/ClsPeticion.java
+AppSIRCA-1/src/modelo/ClsResultado.java
+AppSIRCA-1/src/recursos/agregar.png
+AppSIRCA-1/src/recursos/aplicar.png
+AppSIRCA-1/src/recursos/buscar.png
+AppSIRCA-1/src/recursos/cerrar.png
+AppSIRCA-1/src/recursos/error.png
+AppSIRCA-1/src/recursos/exitoso.png
+AppSIRCA-1/src/recursos/grabar.png
+AppSIRCA-1/src/recursos/logo.png
+AppSIRCA-1/src/recursos/print.png
+AppSIRCA-1/src/recursos/recibo-entrada.png
+AppSIRCA-1/src/recursos/recibo-salida.png
+AppSIRCA-1/src/recursos/remove.png
+AppSIRCA-1/src/recursos/tarifas.png
+AppSIRCA-1/src/recursos/warning.png
+AppSIRCA-1/src/servidor/controlador/Controlador.java
+AppSIRCA-1/src/servidor/servicios/servidor.java
+AppSIRCA-1/src/servidor/vista/vistaPrincipalServidor.java
+AppSIRCA-1/src/utilidades/Utilidades.java
+cliente-servidor con MVC/build.xml
+cliente-servidor con MVC/gson-2.8.2.jar
+cliente-servidor con MVC/manifest.mf
+cliente-servidor con MVC/nbproject/build-impl.xml
+cliente-servidor con MVC/nbproject/genfiles.properties
+cliente-servidor con MVC/nbproject/project.properties
+cliente-servidor con MVC/nbproject/project.xml
+cliente-servidor con MVC/src/cliente/servicios/cliente.java
+cliente-servidor con MVC/src/cliente/vista/GUIAutenticacion.form
+cliente-servidor con MVC/src/cliente/vista/GUIAutenticacion.java
+cliente-servidor con MVC/src/cliente/vista/GUIConsultaDePersonas.form
+cliente-servidor con MVC/src/cliente/vista/GUIConsultaDePersonas.java
+cliente-servidor con MVC/src/cliente/vista/GUIMenu.form
+cliente-servidor con MVC/src/cliente/vista/GUIMenu.java
+cliente-servidor con MVC/src/cliente/vista/GUIRegistrarPersona.form
+cliente-servidor con MVC/src/cliente/vista/GUIRegistrarPersona.java
+cliente-servidor con MVC/src/cliente/vista/vistaPrincipalCliente.java
+cliente-servidor con MVC/src/cliente/vista/VtnIngresoAlSistema.form
+cliente-servidor con MVC/src/cliente/vista/VtnIngresoAlSistema.java
+cliente-servidor con MVC/src/cliente/vista/VtnModificarLogin.form
+cliente-servidor con MVC/src/cliente/vista/VtnModificarLogin.java
+cliente-servidor con MVC/src/cliente/vista/VtnPrincipalAdministrador.form
+cliente-servidor con MVC/src/cliente/vista/VtnPrincipalAdministrador.java
+cliente-servidor con MVC/src/cliente/vista/VtnRegistrarUsuario.form
+cliente-servidor con MVC/src/cliente/vista/VtnRegistrarUsuario.java
+cliente-servidor con MVC/src/modelo/ClsAdministrador.java
+cliente-servidor con MVC/src/modelo/ClsEmpresax.java
+cliente-servidor con MVC/src/modelo/ClsOrganizacion.java
+cliente-servidor con MVC/src/modelo/ClsPersona.java
+cliente-servidor con MVC/src/modelo/ClsPeticion.java
+cliente-servidor con MVC/src/modelo/ClsResultado.java
+cliente-servidor con MVC/src/modelo/ClsUsuario.java
+cliente-servidor con MVC/src/recursos/add.png
+cliente-servidor con MVC/src/recursos/agregar.png
+cliente-servidor con MVC/src/recursos/aplicar.png
+cliente-servidor con MVC/src/recursos/buscar.png
+cliente-servidor con MVC/src/recursos/cerrar.png
+cliente-servidor con MVC/src/recursos/error.png
+cliente-servidor con MVC/src/recursos/exitoso.png
+cliente-servidor con MVC/src/recursos/grabar.png
+cliente-servidor con MVC/src/recursos/lock-7-32.png
+cliente-servidor con MVC/src/recursos/logo.png
+cliente-servidor con MVC/src/recursos/logo_1.png
+cliente-servidor con MVC/src/recursos/print.png
+cliente-servidor con MVC/src/recursos/recibo-entrada.png
+cliente-servidor con MVC/src/recursos/recibo-salida.png
+cliente-servidor con MVC/src/recursos/remove.png
+cliente-servidor con MVC/src/recursos/search-13-16.png
+cliente-servidor con MVC/src/recursos/search.png
+cliente-servidor con MVC/src/recursos/tarifas.png
+cliente-servidor con MVC/src/recursos/universidad_blanco.png
+cliente-servidor con MVC/src/recursos/universidad_negro.png
+cliente-servidor con MVC/src/recursos/user-32.png
+cliente-servidor con MVC/src/recursos/user.png
+cliente-servidor con MVC/src/recursos/usercircle.png
+cliente-servidor con MVC/src/recursos/warning.png
+cliente-servidor con MVC/src/servidor/controlador/Controlador.java
+cliente-servidor con MVC/src/servidor/controlador/Controladorx.java
+cliente-servidor con MVC/src/servidor/servicios/servidor.java
+cliente-servidor con MVC/src/servidor/vista/vistaPrincipalServidor.java
+cliente-servidor con MVC/src/utilidades/Utilidades.java
