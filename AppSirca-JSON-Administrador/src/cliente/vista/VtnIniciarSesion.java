@@ -12,11 +12,11 @@ import modelo.ClsPeticion;
 import modelo.ClsResultado;
 import utilidades.Utilidades;
 
-public class VtnIngresoAlSistema extends javax.swing.JFrame {
+public class VtnIniciarSesion extends javax.swing.JFrame {
     
     private cliente objCliente;
 
-    public VtnIngresoAlSistema(cliente objCliente) {
+    public VtnIniciarSesion(cliente objCliente) {
         initComponents();
         jLabelErrorLogin.setVisible(false);
         jLabelErrorContrasenia.setVisible(false);
@@ -293,7 +293,7 @@ public class VtnIngresoAlSistema extends javax.swing.JFrame {
 
         jLabelIniciarSesion.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
         jLabelIniciarSesion.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelIniciarSesion.setText("Iniciar Sesión");
+        jLabelIniciarSesion.setText("Iniciar sesión");
         jPanelSuperiorInterior.add(jLabelIniciarSesion);
 
         jPanelInterior.add(jPanelSuperiorInterior, java.awt.BorderLayout.PAGE_START);
