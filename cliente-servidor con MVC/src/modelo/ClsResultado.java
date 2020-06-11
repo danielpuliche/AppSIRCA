@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
-/**
- *
- * @author Lenovo!
- */
 public class ClsResultado {
     private int codigoResultado;//1 si se registro el cliente exitosamente, 2 si el cliente ya exite en el servidor
     private String JSONResultado;//los datos correspondientes a un conductor consultado

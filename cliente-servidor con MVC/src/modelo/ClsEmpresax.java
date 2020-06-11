@@ -1,21 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Lenovo!
- */
-public class ClsEmpresa {
-    private ArrayList<ClsPersona> objPersonas;
+public class ClsEmpresax {
+
+    private ArrayList<ClsPersona> objPersonas;    
     
-    
-    public ClsEmpresa()
+    public ClsEmpresax()
     {
         objPersonas=new ArrayList();
         ClsPersona objPersona1= new  ClsPersona("CC", "1.061", "juan", "lopez");

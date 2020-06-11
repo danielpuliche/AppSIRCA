@@ -1,33 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servidor.servicios;
 
-import servidor.controlador.Controlador;
+import servidor.controlador.Controladorx;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-
-
  
 public class servidor {
  
     private ServerSocket objServidor = null;  
     private DataInputStream objFlujoDeEntrada;//leer peticiones
     private DataOutputStream objFlujoDeSalida;//escribir respuesta
-    private final Controlador objControlador;
+    private final Controladorx objControlador;
     
-    public servidor(int puerto,Controlador objControlador) throws IOException {
-         objServidor = new ServerSocket(puerto);
-         this.objControlador=objControlador;
+    public servidor(int puerto,Controladorx objControlador) throws IOException {
+        objServidor = new ServerSocket(puerto);
+        this.objControlador=objControlador;
     }
     
     public  void ejecutarServidor() {
- 
        
         Socket objSocket = null;//representar el socket del cliente
  
@@ -43,8 +35,7 @@ public class servidor {
                
                 objFlujoDeEntrada = new DataInputStream(objSocket.getInputStream());//referencia al canal para leer
                 objFlujoDeSalida = new DataOutputStream(objSocket.getOutputStream());//referencia al canal para escribir
- 
-               
+                
                 String JSONRecibido = objFlujoDeEntrada.readUTF();
                 String resultado=objControlador.decodificarPeticion(JSONRecibido);
                 objFlujoDeSalida.writeUTF(resultado);
@@ -59,8 +50,6 @@ public class servidor {
             System.out.println("error de conexión");
         }
  
-    }
- 
-    
+    }   
    
 }
