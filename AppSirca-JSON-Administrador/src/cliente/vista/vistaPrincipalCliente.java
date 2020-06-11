@@ -9,7 +9,7 @@ public class vistaPrincipalCliente {
         cliente objCliente= new cliente("localhost", 5000);//al cliente se le envia la dirección ip del servidor y puerto del servidor
         VtnIniciarSesion objVtnIniciarSesion = new VtnIniciarSesion(objCliente);
         objVtnIniciarSesion.setVisible(true);
-        System.out.println("x");
+        
     }
     
 }

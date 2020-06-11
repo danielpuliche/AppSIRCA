@@ -321,6 +321,40 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void keyPressedEvent(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_keyPressedEvent
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jButtonIngresarActionPerformed(null);
+        }
+    }//GEN-LAST:event_keyPressedEvent
+
+    private void focusLostPassword(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_focusLostPassword
+        if(jPasswordFieldContraseña.getText().equals("")){
+            jPasswordFieldContraseña.setForeground(new java.awt.Color(102,102,102));
+            jPasswordFieldContraseña.setText("Password");
+        }
+    }//GEN-LAST:event_focusLostPassword
+
+    private void focusGainedPassword(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_focusGainedPassword
+        if(jPasswordFieldContraseña.getText().equals("Password")){
+            this.jPasswordFieldContraseña.setText("");
+            jPasswordFieldContraseña.setForeground(new java.awt.Color(0, 0, 0));
+        }
+    }//GEN-LAST:event_focusGainedPassword
+
+    private void focusLostLogin(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_focusLostLogin
+        if(jTextFieldLogin.getText().equals("")){
+            jTextFieldLogin.setForeground(new java.awt.Color(102,102,102));
+            jTextFieldLogin.setText("Digite su login");
+        }
+    }//GEN-LAST:event_focusLostLogin
+
+    private void focusGainedLogin(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_focusGainedLogin
+        if(jTextFieldLogin.getText().equals("Digite su login")){
+            this.jTextFieldLogin.setText("");
+            jTextFieldLogin.setForeground(new java.awt.Color(0, 0, 0));
+        }
+    }//GEN-LAST:event_focusGainedLogin
+
     private void jButtonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngresarActionPerformed
 
         if(verificarCampos() == true){
@@ -333,26 +367,26 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
                 objPeticion.setArgumentos(argumentos);
                 String JSON = objConvertidor.toJson(objPeticion);
                 String respuestaJSON=objCliente.enviarPeticion(JSON);
-                ClsResultado objResultado= objConvertidor.fromJson(respuestaJSON, ClsResultado.class); 
+                ClsResultado objResultado= objConvertidor.fromJson(respuestaJSON, ClsResultado.class);
                 objCliente.cerrarConexion();
                 if(objResultado.getCodigoResultado()==1)
-                {                
+                {
                     VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador(this.objCliente,jTextFieldLogin.getText());
                     objVtnPrincipalAdministrador.setVisible(true);
-                    this.dispose();   
+                    this.dispose();
                 }
                 else
-                {                    
+                {
                     Utilidades.mensajeAdvertencia("Usuario o contraseña incorrecta", "Atención");
                 }
 
             } catch (IOException ex) {
-                Logger.getLogger(GUIAutenticacion.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(VtnIniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else{
             Utilidades.mensajeAdvertencia("Hay campos obligatorios sin llenar", "Error");
-        }   
-        
+        }
+
     }//GEN-LAST:event_jButtonIngresarActionPerformed
 
     private boolean verificarCampos(){
@@ -378,40 +412,6 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
         return bandera;
     }
     
-    private void focusGainedLogin(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_focusGainedLogin
-        if(jTextFieldLogin.getText().equals("Digite su login")){
-            this.jTextFieldLogin.setText("");
-            jTextFieldLogin.setForeground(new java.awt.Color(0, 0, 0));
-        }            
-    }//GEN-LAST:event_focusGainedLogin
-
-    private void focusLostLogin(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_focusLostLogin
-        if(jTextFieldLogin.getText().equals("")){
-            jTextFieldLogin.setForeground(new java.awt.Color(102,102,102));
-            jTextFieldLogin.setText("Digite su login");
-        }
-    }//GEN-LAST:event_focusLostLogin
-
-    private void focusGainedPassword(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_focusGainedPassword
-        if(jPasswordFieldContraseña.getText().equals("Password")){
-            this.jPasswordFieldContraseña.setText("");
-            jPasswordFieldContraseña.setForeground(new java.awt.Color(0, 0, 0));
-        }   
-    }//GEN-LAST:event_focusGainedPassword
-
-    private void focusLostPassword(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_focusLostPassword
-        if(jPasswordFieldContraseña.getText().equals("")){
-            jPasswordFieldContraseña.setForeground(new java.awt.Color(102,102,102));
-            jPasswordFieldContraseña.setText("Password");
-        }
-    }//GEN-LAST:event_focusLostPassword
-
-    private void keyPressedEvent(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_keyPressedEvent
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            jButtonIngresarActionPerformed(null);
-        }
-    }//GEN-LAST:event_keyPressedEvent
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Barra;
     private javax.swing.JLabel IconoUniversidad;

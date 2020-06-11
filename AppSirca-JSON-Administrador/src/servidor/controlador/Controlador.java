@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import modelo.ClsAdministrador;
 import modelo.ClsOrganizacion;
 import modelo.ClsPeticion;
+import modelo.ClsResultado;
+import modelo.ClsUsuario;
 
 public class Controlador {
 
@@ -27,7 +29,46 @@ public class Controlador {
     }
 
     private String procesarAccion(String accion, String argumentosPeticion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String resultadoJSON="";
+        ClsResultado objResultado=new ClsResultado();
+        
+        switch (accion) {
+
+            case "registrarPersona":
+                  
+                ClsUsuario objUsuario = objConvertidor.fromJson(argumentosPeticion, ClsUsuario.class);
+
+                if(this.objOrganizacion.existeUsuario(objUsuario.getIdentificacion()) == false)
+                {
+                    this.objOrganizacion.agregarUsuario(objUsuario);
+                    objResultado.setCodigoResultado(1);
+                }
+                else
+                {
+                    objResultado.setCodigoResultado(-1);
+                }
+                
+            break;
+            
+            case "ingresarAlSistema":
+                String login, contrasenia;                
+                String vectorL[]=argumentosPeticion.split(",");
+                login=vectorL[0];
+                contrasenia=vectorL[1];
+                System.out.println("login "+vectorL.length+" " + "contraseña " + contrasenia);
+                if(objAdministrador.getLogin().equals(login) && objAdministrador.getConstrasenia().equals(contrasenia))
+                {
+                    objResultado.setCodigoResultado(1);
+                }                
+                else
+                {
+                    objResultado.setCodigoResultado(-1);
+                }
+            break;
+            
+        }
+        resultadoJSON=objConvertidor.toJson(objResultado);
+        return resultadoJSON;
     }
     
 }
