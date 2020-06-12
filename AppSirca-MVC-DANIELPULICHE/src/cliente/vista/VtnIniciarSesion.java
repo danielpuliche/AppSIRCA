@@ -62,18 +62,22 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
         jPanelSuperior.setBackground(new java.awt.Color(204, 0, 0));
         jPanelSuperior.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanelSuperior.setPreferredSize(new java.awt.Dimension(700, 140));
+        jPanelSuperior.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         IconoUniversidad.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         IconoUniversidad.setForeground(new java.awt.Color(255, 255, 255));
         IconoUniversidad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/universidad_blanco.png"))); // NOI18N
+        jPanelSuperior.add(IconoUniversidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 29, -1, -1));
 
         jLabelUniversidad.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 30)); // NOI18N
         jLabelUniversidad.setForeground(new java.awt.Color(255, 255, 255));
         jLabelUniversidad.setText("Universidad");
+        jPanelSuperior.add(jLabelUniversidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, -1, -1));
 
         jLabelDelCauca.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 24)); // NOI18N
         jLabelDelCauca.setForeground(new java.awt.Color(255, 255, 255));
         jLabelDelCauca.setText("del Cauca");
+        jPanelSuperior.add(jLabelDelCauca, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, -1, -1));
 
         Barra.setBackground(new java.awt.Color(255, 255, 255));
         Barra.setPreferredSize(new java.awt.Dimension(4, 100));
@@ -89,70 +93,25 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
             .addGap(0, 85, Short.MAX_VALUE)
         );
 
+        jPanelSuperior.add(Barra, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 29, 2, 85));
+
         jLabelSIRCA1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 24)); // NOI18N
         jLabelSIRCA1.setForeground(new java.awt.Color(255, 255, 255));
         jLabelSIRCA1.setText("Sistema Integrado de");
         jLabelSIRCA1.setAlignmentY(0.0F);
+        jPanelSuperior.add(jLabelSIRCA1, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 19, -1, -1));
 
         jLabelSIRCA2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 24)); // NOI18N
         jLabelSIRCA2.setForeground(new java.awt.Color(255, 255, 255));
         jLabelSIRCA2.setText("Registro y Control");
         jLabelSIRCA2.setAlignmentY(0.0F);
+        jPanelSuperior.add(jLabelSIRCA2, new org.netbeans.lib.awtextra.AbsoluteConstraints(423, 44, -1, -1));
 
         jLabelSIRCA3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 24)); // NOI18N
         jLabelSIRCA3.setForeground(new java.awt.Color(255, 255, 255));
         jLabelSIRCA3.setText("de Acceso");
         jLabelSIRCA3.setAlignmentY(0.0F);
-
-        javax.swing.GroupLayout jPanelSuperiorLayout = new javax.swing.GroupLayout(jPanelSuperior);
-        jPanelSuperior.setLayout(jPanelSuperiorLayout);
-        jPanelSuperiorLayout.setHorizontalGroup(
-            jPanelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelSuperiorLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(IconoUniversidad)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addGroup(jPanelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabelUniversidad)
-                    .addComponent(jLabelDelCauca))
-                .addGap(32, 32, 32)
-                .addComponent(Barra, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addGroup(jPanelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabelSIRCA1)
-                    .addComponent(jLabelSIRCA2)
-                    .addComponent(jLabelSIRCA3))
-                .addGap(60, 60, 60))
-        );
-        jPanelSuperiorLayout.setVerticalGroup(
-            jPanelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelSuperiorLayout.createSequentialGroup()
-                .addGroup(jPanelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelSuperiorLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(jPanelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelSIRCA1)
-                            .addGroup(jPanelSuperiorLayout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addComponent(jLabelSIRCA3))
-                            .addGroup(jPanelSuperiorLayout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(jLabelSIRCA2))))
-                    .addGroup(jPanelSuperiorLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelUniversidad)
-                            .addGroup(jPanelSuperiorLayout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(jLabelDelCauca)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSuperiorLayout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addGroup(jPanelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Barra, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(IconoUniversidad))
-                .addGap(24, 24, 24))
-        );
+        jPanelSuperior.add(jLabelSIRCA3, new org.netbeans.lib.awtextra.AbsoluteConstraints(467, 69, -1, -1));
 
         getContentPane().add(jPanelSuperior, java.awt.BorderLayout.PAGE_START);
 
@@ -166,7 +125,7 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
 
         getContentPane().add(jPanelInferior, java.awt.BorderLayout.PAGE_END);
 
-        jPanelCentral.setBackground(new java.awt.Color(0, 0, 153));
+        jPanelCentral.setBackground(new java.awt.Color(0, 0, 102));
         jPanelCentral.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jPanelInterior.setBackground(new java.awt.Color(255, 255, 255));
