@@ -10,6 +10,9 @@ public class vistaPrincipalCliente {
         VtnIniciarSesion objVtnIniciarSesion = new VtnIniciarSesion(objCliente);
         objVtnIniciarSesion.setVisible(true);
         
+//        Type listType = new TypeToken<ArrayList<VigilanteDTO>>(){}.getType(); 
+//        ArrayList<VigilanteDTO> arrayDeJson = gson.fromJson(jsonArray, listType);
+        
     }
     
 }
