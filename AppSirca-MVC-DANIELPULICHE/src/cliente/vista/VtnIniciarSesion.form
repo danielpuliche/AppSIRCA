@@ -386,7 +386,7 @@
                 <Component class="javax.swing.JLabel" name="jLabelIconoUser">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/Recursos/user-32.png"/>
+                      <Image iconType="3" name="/recursos/user-rojo-32.png"/>
                     </Property>
                   </Properties>
                 </Component>

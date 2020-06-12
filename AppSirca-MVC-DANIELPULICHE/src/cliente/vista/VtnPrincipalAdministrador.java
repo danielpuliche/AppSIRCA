@@ -103,7 +103,7 @@ public class VtnPrincipalAdministrador extends javax.swing.JFrame {
         jLabelSIRCA3.setText("de Acceso");
         jLabelSIRCA3.setAlignmentY(0.0F);
 
-        jLabelAdmin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
+        jLabelAdmin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         jLabelAdmin.setForeground(new java.awt.Color(255, 255, 255));
         jLabelAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/usercircle.png"))); // NOI18N
         jLabelAdmin.setText("Administrador12");

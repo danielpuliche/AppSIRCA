@@ -107,7 +107,7 @@ public class VtnModificarLogin extends javax.swing.JFrame {
         jLabelSIRCA3.setText("de Acceso");
         jLabelSIRCA3.setAlignmentY(0.0F);
 
-        jLabelAdmin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
+        jLabelAdmin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         jLabelAdmin.setForeground(new java.awt.Color(255, 255, 255));
         jLabelAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/usercircle.png"))); // NOI18N
         jLabelAdmin.setText("Administrador12");
@@ -123,7 +123,7 @@ public class VtnModificarLogin extends javax.swing.JFrame {
                 .addGroup(jPanelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabelUniversidad)
                     .addComponent(jLabelDelCauca))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(Barra, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelSuperiorLayout.createSequentialGroup()
@@ -175,6 +175,7 @@ public class VtnModificarLogin extends javax.swing.JFrame {
         jPanelCentral.setMinimumSize(new java.awt.Dimension(700, 510));
 
         jPanelPrincipal.setBackground(new java.awt.Color(0, 0, 153));
+        jPanelPrincipal.setPreferredSize(new java.awt.Dimension(700, 510));
         jPanelPrincipal.setLayout(new java.awt.GridBagLayout());
 
         jPanelRegistro.setBackground(new java.awt.Color(255, 255, 255));

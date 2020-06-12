@@ -186,7 +186,7 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
             }
         });
 
-        jLabelIconoUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/user-32.png"))); // NOI18N
+        jLabelIconoUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/user-rojo-32.png"))); // NOI18N
 
         jTextFieldLogin.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldLogin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
