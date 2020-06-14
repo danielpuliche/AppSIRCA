@@ -4,44 +4,44 @@ import java.util.ArrayList;
 
 public class ClsOrganizacion {
 
-    private ArrayList<ClsUsuario> objUsuarios;
+    private ClsAdministrador objAdministrador;
+    private ArrayList<ClsUsuario> listaUsuarios;
+    
     
     public ClsOrganizacion(){
-        objUsuarios = new ArrayList();
-        ClsUsuario objUsuario1 = new ClsUsuario("100617123654", "Pepito Filipino", "Apellido Random", "Masculino", "Docente");
-        objUsuarios.add(objUsuario1);
-        ClsUsuario objUsuario2 = new ClsUsuario("100678965412", "Nombre Random", "Apellido Random", "Femenino", "No asignado");
-        objUsuarios.add(objUsuario2);
+        listaUsuarios = new ArrayList();
+        ClsUsuario objUsuario1 = new ClsUsuario("10060000", "Daniel Fernando", "Puliche Cañas", "Masculino", "Estudiante");
+        listaUsuarios.add(objUsuario1);
+        ClsUsuario objUsuario2 = new ClsUsuario("10060001", "Jhon Fredy", "Romero Nuñez", "Masculino", "No asignado");
+        listaUsuarios.add(objUsuario2);
+        objAdministrador = new ClsAdministrador("admin","admin12345" );  
     }
     
-    public boolean agregarUsuario(ClsUsuario objUsuario){
-        return this.objUsuarios.add(objUsuario);
+    public void agregarUsuario(ClsUsuario objUsuario){
+        this.listaUsuarios.add(objUsuario);
     }
     
-    public ArrayList<ClsUsuario> getObjUsuarios() {
-        return objUsuarios;
+    public ArrayList<ClsUsuario> getListaUsuarios() {
+        return listaUsuarios;
+    }
+
+    public ClsAdministrador getAdministrador() {
+        return objAdministrador;
     }
     
     public ClsUsuario consultarUsuario(){
-        
         return null;        
     }
     
-    public boolean existeUsuario(String identificacion)
-    {
-        boolean bandera=false;
-        System.out.println("ejecutando método existe persona");
-        for (int i = 0; i < objUsuarios.size(); i++) {
-            System.out.println("Numero id: "+objUsuarios.get(i).getIdentificacion());
-            if(objUsuarios.get(i).getIdentificacion().equalsIgnoreCase(identificacion))
-            {
+    public boolean existeUsuario(String identificacion){        
+        boolean bandera=false;                
+        for (int i = 0; i < listaUsuarios.size(); i++){            
+            if(listaUsuarios.get(i).getIdentificacion().equals(identificacion)){
                 bandera=true;
-                System.out.println("Usuario encontrado");
                 break;
-            }
-        }
-        
+            }            
+        }        
         return bandera;
     }
-   
+    
 }

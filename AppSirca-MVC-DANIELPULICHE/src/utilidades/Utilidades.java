@@ -1,17 +1,8 @@
 package utilidades;
 
-
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author libardo
- */
 public class Utilidades {
 
     /**

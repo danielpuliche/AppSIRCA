@@ -1,5 +1,5 @@
 package modelo;
 
-public enum enumGenero {
+public enum EnumGenero {
     Masculino,Femenino,Otro
 }

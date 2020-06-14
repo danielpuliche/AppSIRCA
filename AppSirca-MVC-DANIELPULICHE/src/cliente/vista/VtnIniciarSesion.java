@@ -2,8 +2,6 @@ package cliente.vista;
 
 import cliente.servicios.cliente;
 import com.google.gson.Gson;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -21,9 +19,6 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
         jLabelErrorLogin.setVisible(false);
         jLabelErrorContrasenia.setVisible(false);
         this.objCliente=objCliente;
-        setLocationRelativeTo(null);
-        Image icon = Toolkit.getDefaultToolkit().getImage("./src/recursos/logo.png");
-        this.setIconImage(icon);
     }
 
     @SuppressWarnings("unchecked")
@@ -119,6 +114,7 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
         jPanelInferior.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanelInferior.setPreferredSize(new java.awt.Dimension(700, 30));
 
+        jLabelDesarrolladores.setBackground(new java.awt.Color(255, 255, 255));
         jLabelDesarrolladores.setForeground(new java.awt.Color(0, 0, 0));
         jLabelDesarrolladores.setText("F&P Software Development || www.fypsoftwaredevelopment.com || 2020");
         jPanelInferior.add(jLabelDesarrolladores);
@@ -160,6 +156,11 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 focusLostLogin(evt);
+            }
+        });
+        jTextFieldLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldLoginKeyPressed(evt);
             }
         });
 
@@ -336,7 +337,7 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
                 }
                 else
                 {
-                    Utilidades.mensajeAdvertencia("Usuario o contraseña incorrecta", "Atención");
+                    Utilidades.mensajeAdvertencia("Login o contraseña incorrecta", "Atención");
                 }
 
             } catch (IOException ex) {
@@ -348,24 +349,46 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonIngresarActionPerformed
 
+    private void jTextFieldLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldLoginKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jButtonIngresarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jTextFieldLoginKeyPressed
+
     private boolean verificarCampos(){
         
         boolean bandera = true; //true = campos correctos
         
-        if(this.jTextFieldLogin.getText().equals("Digite su login")){
-            this.jLabelErrorLogin.setText("Error, campo vacío");
-            this.jLabelErrorLogin.setVisible(true);
-            bandera = false;
-        }else{
-            this.jLabelErrorLogin.setVisible(false);
+        switch (this.jTextFieldLogin.getText()) {
+            case "Digite su login":
+                this.jLabelErrorLogin.setText("Error, campo vacío");
+                this.jLabelErrorLogin.setVisible(true);
+                bandera = false;
+                break;
+            case "":
+                this.jLabelErrorLogin.setText("Error, campo vacío");
+                this.jLabelErrorLogin.setVisible(true);
+                bandera = false;
+                break;
+            default:
+                this.jLabelErrorLogin.setVisible(false);
+                break;
         }
         
-        if(this.jPasswordFieldContraseña.getText().equals("Password")){
-            this.jLabelErrorContrasenia.setText("Error, digite su contraseña");
-            this.jLabelErrorContrasenia.setVisible(true);
-            bandera = false;
-        }else{
-            this.jLabelErrorContrasenia.setVisible(false);
+        switch (this.jPasswordFieldContraseña.getText()) {
+            case "Password":
+                this.jLabelErrorContrasenia.setText("Error, campo vacío");
+                this.jLabelErrorContrasenia.setVisible(true);
+                bandera = false;
+                break;
+            case "":
+                this.jLabelErrorContrasenia.setText("Error, campo vacío");
+                this.jLabelErrorContrasenia.setVisible(true);
+                bandera = false;
+                break;
+            default:
+                this.jLabelErrorContrasenia.setVisible(false);
+                break;
         }
         
         return bandera;

@@ -1,17 +1,33 @@
 package cliente.vista;
 
+import cliente.servicios.cliente;
+import com.google.gson.Gson;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JLabel;
+import modelo.ClsPeticion;
+import modelo.ClsResultado;
+import utilidades.Utilidades;
 
 public class VtnModificarLogin extends javax.swing.JFrame {
+    
+    private String nombrePerfil;
+    private cliente objCliente;
 
-    public VtnModificarLogin() {
+    public VtnModificarLogin(cliente objCliente, String nombrePerfil) {
         initComponents();
         Image icon = Toolkit.getDefaultToolkit().getImage("./src/Recursos/logo.png");
         this.setIconImage(icon);
+        this.objCliente = objCliente;
+        this.nombrePerfil = nombrePerfil;
         jLabelErrorLoginActual.setVisible(false);
         jLabelErrorNuevoLogin.setVisible(false);
         jLabelErrorConfirmarNuevoLogin.setVisible(false);
+        this.jComboBoxPerfil.insertItemAt(this.nombrePerfil, 0);
+        this.jComboBoxPerfil.setSelectedIndex(0);
     }
 
     @SuppressWarnings("unchecked")
@@ -66,7 +82,6 @@ public class VtnModificarLogin extends javax.swing.JFrame {
         jPanelInferior.setPreferredSize(new java.awt.Dimension(700, 30));
 
         jLabelDesarrolladores.setBackground(new java.awt.Color(255, 255, 255));
-        jLabelDesarrolladores.setForeground(new java.awt.Color(0, 0, 0));
         jLabelDesarrolladores.setText("F&P Software Development || www.fypsoftwaredevelopment.com || 2020");
         jPanelInferior.add(jLabelDesarrolladores);
 
@@ -140,7 +155,8 @@ public class VtnModificarLogin extends javax.swing.JFrame {
         jComboBoxPerfil.setBackground(new java.awt.Color(204, 0, 0));
         jComboBoxPerfil.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jComboBoxPerfil.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBoxPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador12", "Modificar Login", "Modificar Contraseña", "Cerrar Sesión" }));
+        jComboBoxPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Modificar Login", "Modificar Contraseña", "Cerrar Sesión" }));
+        jComboBoxPerfil.setSelectedIndex(-1);
         jComboBoxPerfil.setBorder(null);
         jComboBoxPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,7 +193,6 @@ public class VtnModificarLogin extends javax.swing.JFrame {
 
         jLabelLoginActual.setBackground(new java.awt.Color(255, 255, 255));
         jLabelLoginActual.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jLabelLoginActual.setForeground(new java.awt.Color(0, 0, 0));
         jLabelLoginActual.setText("Login Actual:");
 
         jLabelObligatorio1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 36)); // NOI18N
@@ -192,7 +207,6 @@ public class VtnModificarLogin extends javax.swing.JFrame {
 
         jLabelNuevoLogin.setBackground(new java.awt.Color(255, 255, 255));
         jLabelNuevoLogin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jLabelNuevoLogin.setForeground(new java.awt.Color(0, 0, 0));
         jLabelNuevoLogin.setText("Nuevo Login:");
 
         jLabelErrorNuevoLogin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
@@ -202,7 +216,6 @@ public class VtnModificarLogin extends javax.swing.JFrame {
 
         jLabelConfirmarNuevoLogin.setBackground(new java.awt.Color(255, 255, 255));
         jLabelConfirmarNuevoLogin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jLabelConfirmarNuevoLogin.setForeground(new java.awt.Color(0, 0, 0));
         jLabelConfirmarNuevoLogin.setText("Confirmar Nuevo Login:");
 
         jLabelErrorConfirmarNuevoLogin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
@@ -213,7 +226,7 @@ public class VtnModificarLogin extends javax.swing.JFrame {
         jButtonGuardar.setBackground(new java.awt.Color(204, 0, 0));
         jButtonGuardar.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         jButtonGuardar.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/lock-7-32.png"))); // NOI18N
+        jButtonGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/save-32.png"))); // NOI18N
         jButtonGuardar.setText("Guardar");
         jButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,15 +248,6 @@ public class VtnModificarLogin extends javax.swing.JFrame {
         jLabelCamposObligatorios.setForeground(new java.awt.Color(255, 0, 0));
         jLabelCamposObligatorios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCamposObligatorios.setText("* Campos Obligatorios");
-
-        jTextFieldLoginActual.setBackground(new java.awt.Color(255, 255, 255));
-        jTextFieldLoginActual.setForeground(new java.awt.Color(0, 0, 0));
-
-        jTextFieldNuevoLogin.setBackground(new java.awt.Color(255, 255, 255));
-        jTextFieldNuevoLogin.setForeground(new java.awt.Color(0, 0, 0));
-
-        jTextFieldConfirmarNuevoLogin.setBackground(new java.awt.Color(255, 255, 255));
-        jTextFieldConfirmarNuevoLogin.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanelInteriorPrincipalLayout = new javax.swing.GroupLayout(jPanelInteriorPrincipal);
         jPanelInteriorPrincipal.setLayout(jPanelInteriorPrincipalLayout);
@@ -387,46 +391,119 @@ public class VtnModificarLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
-
-        //Ajustar para este trabajo
-
-//        VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador();
-//        objVtnPrincipalAdministrador.setVisible(true);
-//        this.dispose();
+        VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador(this.objCliente, this.nombrePerfil);
+        objVtnPrincipalAdministrador.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
     private void jComboBoxPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPerfilActionPerformed
-        
-    //Ajustar para este trabajo    
-        
-//        switch (jComboBoxPerfil.getSelectedIndex()) {
-//            case 1:
-//                VtnModificarLogin objVtnModificarLogin = new VtnModificarLogin();
-//                objVtnModificarLogin.setVisible(true);
-//                this.dispose();
-//                break;
-//            case 2:
-//                VtnModificarContrasenia objVtnModificarContrasenia = new VtnModificarContrasenia();
-//                objVtnModificarContrasenia.setVisible(true);
-//                this.dispose();
-//                break;
-//            case 3:
-//                VtnIngresarAlSistema objVtnIngresarSistema = new VtnIngresarAlSistema();
-//                objVtnIngresarSistema.setVisible(true);
-//                this.dispose();
-//                break;
-//            default:
-//                break;
-//        }
-        
+        switch (jComboBoxPerfil.getSelectedIndex()) {
+            case 1:
+                this.jComboBoxPerfil.setSelectedIndex(0);
+            break;
+            case 2:
+                VtnModificarContrasenia objVtnModificarContrasenia = new VtnModificarContrasenia(this.objCliente, this.nombrePerfil);
+                objVtnModificarContrasenia.setVisible(true);
+                this.dispose();
+            break;
+            case 3:
+                VtnIniciarSesion objVtnIniciarSesion = new VtnIniciarSesion(this.objCliente);
+                objVtnIniciarSesion.setVisible(true);
+                this.dispose();
+            break;
+            default:
+            break;   
+        }
     }//GEN-LAST:event_jComboBoxPerfilActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-    
-        //Falta por realizar
         
-    }//GEN-LAST:event_jButtonGuardarActionPerformed
+        jLabelErrorLoginActual.setVisible(false);
+        jLabelErrorNuevoLogin.setVisible(false);
+        jLabelErrorConfirmarNuevoLogin.setVisible(false);
+        
+        boolean comprobacion1 = verificarCamposVacios();
+        boolean comprobacion2 = verificarLoginNuevo();
+        if(comprobacion1 == true && comprobacion2 == true){
+            try {
+                objCliente.crearConexion();
+                Gson objConvertidor = new Gson();
+                ClsPeticion objPeticion = new ClsPeticion();
+                String argumentos = jTextFieldLoginActual.getText()+","+jTextFieldNuevoLogin.getText();
+                objPeticion.setAccion("modificarLogin");
+                objPeticion.setArgumentos(argumentos);
+                String JSON = objConvertidor.toJson(objPeticion);
+                String respuestaJSON = objCliente.enviarPeticion(JSON);
+                ClsResultado objResultado = objConvertidor.fromJson(respuestaJSON, ClsResultado.class);
+                objCliente.cerrarConexion();
+                if(objResultado.getCodigoResultado() == 1)
+                {
+                    //MOSTRAR EMERGENTE DE EXITO
+                    this.nombrePerfil = jTextFieldNuevoLogin.getText();
+                    VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador(this.objCliente,nombrePerfil);
+                    objVtnPrincipalAdministrador.setVisible(true);
+                    this.dispose();
+                }
+                else
+                {
+                    Utilidades.mensajeAdvertencia("Administrador no encontrado", "Atención");
+                }
 
+            } catch (IOException ex) {
+                Logger.getLogger(VtnIniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            Utilidades.mensajeAdvertencia("Ha ocurrido un error en el formulario", "Error");
+        }
+    }//GEN-LAST:event_jButtonGuardarActionPerformed
+    
+    private boolean verificarCamposVacios() {
+        boolean banderaFinal = true;
+        boolean bandera1 = true;
+        boolean bandera2 = true;
+        boolean bandera3 = true;
+        if(this.jTextFieldLoginActual.getText().equals(""))
+        {
+            mostrarError(jLabelErrorLoginActual, "Error. Digite login actual");
+            bandera1=false;
+        }
+        if(this.jTextFieldNuevoLogin.getText().equals(""))
+        {
+            mostrarError(jLabelErrorNuevoLogin, "Error. Digite nuevo login");
+            bandera2=false;
+        }
+        if(this.jTextFieldConfirmarNuevoLogin.getText().equals(""))
+        {
+            mostrarError(jLabelErrorConfirmarNuevoLogin, "Error. Digite nuevo login");
+            bandera3=false;
+        }
+        if(bandera1==false || bandera2==false || bandera3==false)
+        {
+            banderaFinal=false;
+        }
+        return banderaFinal;
+    }
+    
+    private boolean verificarLoginNuevo(){
+        boolean banderaFinal = true;
+        if(jTextFieldNuevoLogin.getText().equals(jTextFieldConfirmarNuevoLogin.getText()))
+        {
+            banderaFinal = true;
+        }
+        else
+        {
+            banderaFinal = false;
+            mostrarError(jLabelErrorNuevoLogin, "Error. Login no coincidente");
+            mostrarError(jLabelErrorConfirmarNuevoLogin, "Error. Login no coincidente");
+        }
+        return banderaFinal;
+    }
+    
+    private void mostrarError(JLabel notificacion, String error){
+            notificacion.setText(error);
+            notificacion.setVisible(true);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Barra;
     private javax.swing.JLabel IconoUniversidad;

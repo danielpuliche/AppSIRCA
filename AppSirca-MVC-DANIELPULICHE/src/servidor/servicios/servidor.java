@@ -14,7 +14,7 @@ public class servidor {
     private DataOutputStream objFlujoDeSalida;//escribir respuesta
     private final Controlador objControlador;
     
-    public servidor(int puerto,Controlador objControlador) throws IOException {
+    public servidor(int puerto, Controlador objControlador) throws IOException {
         objServidor = new ServerSocket(puerto);
         this.objControlador=objControlador;
     }

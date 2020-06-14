@@ -11,12 +11,10 @@ public class Controlador {
 
     private final Gson objConvertidor;
     private final ClsOrganizacion objOrganizacion;
-    private final ClsAdministrador objAdministrador;
     
     public Controlador(ClsOrganizacion objOrganizacion){
         this.objConvertidor = new Gson();
         this.objOrganizacion = objOrganizacion;
-        this.objAdministrador = new ClsAdministrador("admin", "admin12345");
     }
     
     public String decodificarPeticion(String JSONPeticion) {    
@@ -33,7 +31,64 @@ public class Controlador {
         ClsResultado objResultado=new ClsResultado();
         
         switch (accion) {
+            
+            case "ingresarAlSistema":
 
+                String login;
+                String contrasenia;
+                String datosDePerfil[] = argumentosPeticion.split(",");
+                login = datosDePerfil[0];
+                contrasenia = datosDePerfil[1];
+                
+                ClsAdministrador objAdministrador = this.objOrganizacion.getAdministrador();
+                if(objAdministrador.getLogin().equals(login) && objAdministrador.getConstrasenia().equals(contrasenia)){
+                    objResultado.setCodigoResultado(1);
+                }else{
+                    objResultado.setCodigoResultado(-1);
+                }
+                
+            break;
+            
+            case "modificarLogin":
+                
+//                String loginActual;
+//                String loginNuevo;
+//                String cambioDeLogin[] = argumentosPeticion.split(",");
+//                loginActual = cambioDeLogin[0];
+//                loginNuevo = cambioDeLogin[1];
+//                if(this.objOrganizacion.existeAdministrador(loginActual)==true)
+//                {
+//                    ClsAdministrador objAdministrador = this.objOrganizacion.consultarAdministrador(loginActual);
+//                    objAdministrador.setLogin(loginNuevo);
+//                    objResultado.setCodigoResultado(1);
+//                }                
+//                else
+//                {
+//                    objResultado.setCodigoResultado(-1);
+//                }
+                
+            break;
+            
+            case "modificarContrasenia":
+                
+//                String loginAdministrador;
+//                String contraseniaNueva;
+//                String cambioDeContrasenia[] = argumentosPeticion.split(",");
+//                loginAdministrador = cambioDeContrasenia[0];
+//                contraseniaNueva = cambioDeContrasenia[1];
+//                if(this.objOrganizacion.existeAdministrador(loginAdministrador)==true)
+//                {
+//                    ClsAdministrador objAdministrador = this.objOrganizacion.consultarAdministrador(loginAdministrador);
+//                    objAdministrador.setConstrasenia(contraseniaNueva);
+//                    objResultado.setCodigoResultado(1);
+//                }                
+//                else
+//                {
+//                    objResultado.setCodigoResultado(-1);
+//                }
+                
+            break;
+            
             case "registrarUsuario":
                   
                 ClsUsuario objUsuario = objConvertidor.fromJson(argumentosPeticion, ClsUsuario.class);
@@ -50,23 +105,8 @@ public class Controlador {
                 
             break;
             
-            case "ingresarAlSistema":
-                String login, contrasenia;                
-                String vectorL[]=argumentosPeticion.split(",");
-                login=vectorL[0];
-                contrasenia=vectorL[1];
-                System.out.println("login "+vectorL.length+" " + "contraseña " + contrasenia);
-                if(objAdministrador.getLogin().equals(login) && objAdministrador.getConstrasenia().equals(contrasenia))
-                {
-                    objResultado.setCodigoResultado(1);
-                }                
-                else
-                {
-                    objResultado.setCodigoResultado(-1);
-                }
-            break;
-            
         }
+        
         resultadoJSON=objConvertidor.toJson(objResultado);
         return resultadoJSON;
     }

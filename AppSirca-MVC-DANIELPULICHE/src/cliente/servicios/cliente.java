@@ -37,7 +37,7 @@ public class cliente {
         
         String respuesta="";
         
-        try {            
+        try {    //ESTA EXCEPCION PUEDE SER LANZADA PORQUE ES GESTIONADA EN LA VISTA       
             objFlujoDeSalida.writeUTF(JSONPeticion);
             respuesta = objFlujoDeEntrada.readUTF(); 
         } catch (IOException ex) {

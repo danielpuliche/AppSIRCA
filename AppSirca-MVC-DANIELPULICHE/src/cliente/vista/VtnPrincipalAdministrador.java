@@ -7,15 +7,17 @@ import java.awt.Toolkit;
 public class VtnPrincipalAdministrador extends javax.swing.JFrame {
 
     private cliente objCliente;
-    private String admin;
+    private String nombrePerfil;
     
-    public VtnPrincipalAdministrador(cliente objCliente, String login) {
+    public VtnPrincipalAdministrador(cliente objCliente, String nombrePerfil) {
         initComponents();
         jLabelErrorDigiteCodigo.setVisible(false);
         Image icon = Toolkit.getDefaultToolkit().getImage("./src/recursos/logo.png");
         this.setIconImage(icon);
         this.objCliente = objCliente;
-        this.admin = login;
+        this.nombrePerfil = nombrePerfil;
+        this.jComboBoxPerfil.insertItemAt(this.nombrePerfil, 0);
+        this.jComboBoxPerfil.setSelectedIndex(0);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -117,7 +119,8 @@ public class VtnPrincipalAdministrador extends javax.swing.JFrame {
         jComboBoxPerfil.setBackground(new java.awt.Color(204, 0, 0));
         jComboBoxPerfil.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jComboBoxPerfil.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBoxPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador12", "Modificar Login", "Modificar Contraseña", "Cerrar Sesión" }));
+        jComboBoxPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Modificar Login", "Modificar Contraseña", "Cerrar Sesión" }));
+        jComboBoxPerfil.setSelectedIndex(-1);
         jComboBoxPerfil.setBorder(null);
         jComboBoxPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,7 +142,6 @@ public class VtnPrincipalAdministrador extends javax.swing.JFrame {
         jPanelInferior.setMinimumSize(new java.awt.Dimension(700, 30));
         jPanelInferior.setPreferredSize(new java.awt.Dimension(700, 30));
 
-        jLabelDesarrolladores.setForeground(new java.awt.Color(0, 0, 0));
         jLabelDesarrolladores.setText("F&P Software Development || www.fypsoftwaredevelopment.com || 2020");
         jPanelInferior.add(jLabelDesarrolladores);
 
@@ -165,7 +167,6 @@ public class VtnPrincipalAdministrador extends javax.swing.JFrame {
 
         jRadioButtonTodos.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroupCriteriosBusqueda.add(jRadioButtonTodos);
-        jRadioButtonTodos.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButtonTodos.setText("Todos");
         jRadioButtonTodos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jRadioButtonTodos.addActionListener(new java.awt.event.ActionListener() {
@@ -176,7 +177,6 @@ public class VtnPrincipalAdministrador extends javax.swing.JFrame {
 
         jRadioButtonDentro.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroupCriteriosBusqueda.add(jRadioButtonDentro);
-        jRadioButtonDentro.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButtonDentro.setText("Dentro de la instalación");
         jRadioButtonDentro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,7 +186,6 @@ public class VtnPrincipalAdministrador extends javax.swing.JFrame {
 
         jRadioButtonFuera.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroupCriteriosBusqueda.add(jRadioButtonFuera);
-        jRadioButtonFuera.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButtonFuera.setText("Fuera de la instalación");
         jRadioButtonFuera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,9 +219,7 @@ public class VtnPrincipalAdministrador extends javax.swing.JFrame {
 
         jPanelCentral.add(jPanelCriterios, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 59, -1, -1));
 
-        jTableUsuarios.setBackground(new java.awt.Color(255, 255, 255));
         jTableUsuarios.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jTableUsuarios.setForeground(new java.awt.Color(0, 0, 0));
         jTableUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -269,9 +266,7 @@ public class VtnPrincipalAdministrador extends javax.swing.JFrame {
         jButtonBuscar.setText("Buscar");
         jPanelCentral.add(jButtonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 97, 110, 30));
 
-        jTextFieldDigiteCodigo.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldDigiteCodigo.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jTextFieldDigiteCodigo.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldDigiteCodigo.setText("Digite Código");
         jTextFieldDigiteCodigo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -300,7 +295,6 @@ public class VtnPrincipalAdministrador extends javax.swing.JFrame {
         jToggleButtonGestionarUsuarios.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroupMenu.add(jToggleButtonGestionarUsuarios);
         jToggleButtonGestionarUsuarios.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jToggleButtonGestionarUsuarios.setForeground(new java.awt.Color(0, 0, 0));
         jToggleButtonGestionarUsuarios.setSelected(true);
         jToggleButtonGestionarUsuarios.setText("Gestionar Usuarios");
         jToggleButtonGestionarUsuarios.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -312,7 +306,6 @@ public class VtnPrincipalAdministrador extends javax.swing.JFrame {
         jToggleButtonAsignacionMasivaRoles.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroupMenu.add(jToggleButtonAsignacionMasivaRoles);
         jToggleButtonAsignacionMasivaRoles.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jToggleButtonAsignacionMasivaRoles.setForeground(new java.awt.Color(0, 0, 0));
         jToggleButtonAsignacionMasivaRoles.setText("Asignación Masiva de Roles");
         jToggleButtonAsignacionMasivaRoles.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jToggleButtonAsignacionMasivaRoles.setMaximumSize(new java.awt.Dimension(210, 29));
@@ -328,7 +321,6 @@ public class VtnPrincipalAdministrador extends javax.swing.JFrame {
         jToggleButtonAyuda.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroupMenu.add(jToggleButtonAyuda);
         jToggleButtonAyuda.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jToggleButtonAyuda.setForeground(new java.awt.Color(0, 0, 0));
         jToggleButtonAyuda.setText("Ayuda");
         jToggleButtonAyuda.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jToggleButtonAyuda.setMaximumSize(new java.awt.Dimension(210, 29));
@@ -367,7 +359,7 @@ public class VtnPrincipalAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButtonAsignacionMasivaRolesActionPerformed
 
     private void jButtonRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarUsuarioActionPerformed
-        VtnRegistrarUsuario ObjVtnRegistrarUsuario = new VtnRegistrarUsuario(admin);
+        VtnRegistrarUsuario ObjVtnRegistrarUsuario = new VtnRegistrarUsuario(this.objCliente ,nombrePerfil);
         ObjVtnRegistrarUsuario.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonRegistrarUsuarioActionPerformed
@@ -387,28 +379,25 @@ public class VtnPrincipalAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldDigiteCodigoFocusLost
 
     private void jComboBoxPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPerfilActionPerformed
-
-        //Ajustar al trabajo
-        
-//        switch (jComboBoxPerfil.getSelectedIndex()) {
-//            case 1:
-//            VtnModificarLogin objVtnModificarLogin = new VtnModificarLogin();
-//            objVtnModificarLogin.setVisible(true);
-//            this.dispose();
-//            break;
-//            case 2:
-//            VtnModificarContrasenia objVtnModificarContrasenia = new VtnModificarContrasenia();
-//            objVtnModificarContrasenia.setVisible(true);
-//            this.dispose();
-//            break;
-//            case 3:
-//            VtnIngresarAlSistema objVtnIngresarSistema = new VtnIngresarAlSistema();
-//            objVtnIngresarSistema.setVisible(true);
-//            this.dispose();
-//            break;
-//            default:
-//            break;
-//        }
+        switch (jComboBoxPerfil.getSelectedIndex()) {
+            case 1:
+                VtnModificarLogin objVtnModificarLogin = new VtnModificarLogin(this.objCliente, this.nombrePerfil);
+                objVtnModificarLogin.setVisible(true);
+                this.dispose();
+            break;
+            case 2:
+                VtnModificarContrasenia objVtnModificarContrasenia = new VtnModificarContrasenia(this.objCliente, this.nombrePerfil);
+                objVtnModificarContrasenia.setVisible(true);
+                this.dispose();
+            break;
+            case 3:
+                VtnIniciarSesion objVtnIniciarSesion = new VtnIniciarSesion(this.objCliente);
+                objVtnIniciarSesion.setVisible(true);
+                this.dispose();
+            break;
+            default:
+            break;
+        }
         
     }//GEN-LAST:event_jComboBoxPerfilActionPerformed
 

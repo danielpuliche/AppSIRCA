@@ -5,8 +5,8 @@ public class ClsUsuario {
     private String identificacion;
     private String nombres;
     private String apellidos;
-    private enumGenero genero;
-    private enumRol rol;
+    private EnumGenero genero;
+    private EnumRol rol;
 
     public ClsUsuario(String identificacion, String nombres, String apellidos, String genero, String rol) {
         this.identificacion = identificacion;
@@ -16,41 +16,41 @@ public class ClsUsuario {
         this.rol = darRol(rol);
     }
     
-    public enumGenero darGenero(String generoRecibido){
+    public static EnumGenero darGenero(String generoRecibido){
         
-        enumGenero generoEnum = enumGenero.Femenino;
+        EnumGenero generoEnum = EnumGenero.Otro;
         
         switch(generoRecibido){
             case "Masculino":
-                generoEnum = enumGenero.Masculino;
+                generoEnum = EnumGenero.Masculino;
             break;
             case "Femenino":
-                generoEnum = enumGenero.Femenino;
+                generoEnum = EnumGenero.Femenino;
             break;
             case "Otro":
-                generoEnum = enumGenero.Otro;
+                generoEnum = EnumGenero.Otro;
             break;
         }
         
         return generoEnum;
     }
     
-    public enumRol darRol(String rolRecibido){
+    public static EnumRol darRol(String rolRecibido){
         
-        enumRol rolEnum = enumRol.Administrativo;
+        EnumRol rolEnum = EnumRol.No_Asignado;
         
         switch(rolRecibido){
             case "Administrativo":
-                rolEnum = enumRol.Administrativo;
+                rolEnum = EnumRol.Administrativo;
             break;
             case "Docente":
-                rolEnum = enumRol.Docente;
+                rolEnum = EnumRol.Docente;
             break;
             case "Estudiante":
-                rolEnum = enumRol.Estudiante;
+                rolEnum = EnumRol.Estudiante;
             break;
             case "No asignado":
-                rolEnum = enumRol.No_Asignado;
+                rolEnum = EnumRol.No_Asignado;
             break;
         }
         
@@ -81,21 +81,20 @@ public class ClsUsuario {
         this.apellidos = apellidos;
     }
 
-    public enumGenero getGenero() {
+    public EnumGenero getGenero() {
         return genero;
     }
 
-    public void setGenero(enumGenero genero) {
+    public void setGenero(EnumGenero genero) {
         this.genero = genero;
     }
 
-    public enumRol getRol() {
+    public EnumRol getRol() {
         return rol;
     }
 
-    public void setRol(enumRol rol) {
+    public void setRol(EnumRol rol) {
         this.rol = rol;
-    }
-    
+    }    
         
 }
