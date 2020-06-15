@@ -33,16 +33,12 @@ public class cliente {
         objSocket.close();// cierra el canal bidireccional
     }
     
-    public  String enviarPeticion(String JSONPeticion) {
+    public String enviarPeticion(String JSONPeticion) throws IOException{
         
         String respuesta="";
+        objFlujoDeSalida.writeUTF(JSONPeticion);
         
-        try {    //ESTA EXCEPCION PUEDE SER LANZADA PORQUE ES GESTIONADA EN LA VISTA       
-            objFlujoDeSalida.writeUTF(JSONPeticion);
-            respuesta = objFlujoDeEntrada.readUTF(); 
-        } catch (IOException ex) {
-            System.out.println("Error al realizar la conexión");
-        }
+        respuesta = objFlujoDeEntrada.readUTF(); 
         
         return respuesta;
     }

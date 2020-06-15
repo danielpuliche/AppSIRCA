@@ -54,15 +54,15 @@ public class VtnModificarLogin extends javax.swing.JFrame {
         jLabelTituloModificarLogin = new javax.swing.JLabel();
         jPanelInteriorPrincipal = new javax.swing.JPanel();
         jLabelLoginActual = new javax.swing.JLabel();
-        jLabelObligatorio1 = new javax.swing.JLabel();
+        jLabelObligatorioActual = new javax.swing.JLabel();
         jLabelErrorLoginActual = new javax.swing.JLabel();
         jLabelNuevoLogin = new javax.swing.JLabel();
         jLabelErrorNuevoLogin = new javax.swing.JLabel();
         jLabelConfirmarNuevoLogin = new javax.swing.JLabel();
         jLabelErrorConfirmarNuevoLogin = new javax.swing.JLabel();
         jButtonGuardar = new javax.swing.JButton();
-        jLabelObligatorio2 = new javax.swing.JLabel();
-        jLabelObligatorio3 = new javax.swing.JLabel();
+        jLabelObligatorioNuevo = new javax.swing.JLabel();
+        jLabelObligatorioConfirmar = new javax.swing.JLabel();
         jLabelCamposObligatorios = new javax.swing.JLabel();
         jTextFieldLoginActual = new javax.swing.JTextField();
         jTextFieldNuevoLogin = new javax.swing.JTextField();
@@ -82,6 +82,7 @@ public class VtnModificarLogin extends javax.swing.JFrame {
         jPanelInferior.setPreferredSize(new java.awt.Dimension(700, 30));
 
         jLabelDesarrolladores.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelDesarrolladores.setForeground(new java.awt.Color(0, 0, 0));
         jLabelDesarrolladores.setText("F&P Software Development || www.fypsoftwaredevelopment.com || 2020");
         jPanelInferior.add(jLabelDesarrolladores);
 
@@ -190,38 +191,50 @@ public class VtnModificarLogin extends javax.swing.JFrame {
         jPanelCabecera.add(jLabelTituloModificarLogin);
 
         jPanelInteriorPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelInteriorPrincipal.setPreferredSize(new java.awt.Dimension(440, 290));
+        jPanelInteriorPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelLoginActual.setBackground(new java.awt.Color(255, 255, 255));
         jLabelLoginActual.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jLabelLoginActual.setForeground(new java.awt.Color(0, 0, 0));
         jLabelLoginActual.setText("Login Actual:");
+        jPanelInteriorPrincipal.add(jLabelLoginActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
-        jLabelObligatorio1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 36)); // NOI18N
-        jLabelObligatorio1.setForeground(new java.awt.Color(255, 0, 0));
-        jLabelObligatorio1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelObligatorio1.setText("*");
+        jLabelObligatorioActual.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 36)); // NOI18N
+        jLabelObligatorioActual.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelObligatorioActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelObligatorioActual.setText("*");
+        jPanelInteriorPrincipal.add(jLabelObligatorioActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, 40));
 
         jLabelErrorLoginActual.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jLabelErrorLoginActual.setForeground(new java.awt.Color(255, 0, 0));
         jLabelErrorLoginActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelErrorLoginActual.setText("Error");
+        jPanelInteriorPrincipal.add(jLabelErrorLoginActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
         jLabelNuevoLogin.setBackground(new java.awt.Color(255, 255, 255));
         jLabelNuevoLogin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jLabelNuevoLogin.setForeground(new java.awt.Color(0, 0, 0));
         jLabelNuevoLogin.setText("Nuevo Login:");
+        jPanelInteriorPrincipal.add(jLabelNuevoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
 
         jLabelErrorNuevoLogin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jLabelErrorNuevoLogin.setForeground(new java.awt.Color(255, 0, 0));
         jLabelErrorNuevoLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelErrorNuevoLogin.setText("Error");
+        jPanelInteriorPrincipal.add(jLabelErrorNuevoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
 
         jLabelConfirmarNuevoLogin.setBackground(new java.awt.Color(255, 255, 255));
         jLabelConfirmarNuevoLogin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jLabelConfirmarNuevoLogin.setForeground(new java.awt.Color(0, 0, 0));
         jLabelConfirmarNuevoLogin.setText("Confirmar Nuevo Login:");
+        jPanelInteriorPrincipal.add(jLabelConfirmarNuevoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 199, -1));
 
         jLabelErrorConfirmarNuevoLogin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jLabelErrorConfirmarNuevoLogin.setForeground(new java.awt.Color(255, 0, 0));
         jLabelErrorConfirmarNuevoLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelErrorConfirmarNuevoLogin.setText("Error");
+        jPanelInteriorPrincipal.add(jLabelErrorConfirmarNuevoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
 
         jButtonGuardar.setBackground(new java.awt.Color(204, 0, 0));
         jButtonGuardar.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
@@ -233,105 +246,40 @@ public class VtnModificarLogin extends javax.swing.JFrame {
                 jButtonGuardarActionPerformed(evt);
             }
         });
+        jPanelInteriorPrincipal.add(jButtonGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 217, 141, 49));
 
-        jLabelObligatorio2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 36)); // NOI18N
-        jLabelObligatorio2.setForeground(new java.awt.Color(255, 0, 0));
-        jLabelObligatorio2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelObligatorio2.setText("*");
+        jLabelObligatorioNuevo.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 36)); // NOI18N
+        jLabelObligatorioNuevo.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelObligatorioNuevo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelObligatorioNuevo.setText("*");
+        jPanelInteriorPrincipal.add(jLabelObligatorioNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, 40));
 
-        jLabelObligatorio3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 36)); // NOI18N
-        jLabelObligatorio3.setForeground(new java.awt.Color(255, 0, 0));
-        jLabelObligatorio3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelObligatorio3.setText("*");
+        jLabelObligatorioConfirmar.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 36)); // NOI18N
+        jLabelObligatorioConfirmar.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelObligatorioConfirmar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelObligatorioConfirmar.setText("*");
+        jPanelInteriorPrincipal.add(jLabelObligatorioConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, 40));
 
-        jLabelCamposObligatorios.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
+        jLabelCamposObligatorios.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabelCamposObligatorios.setForeground(new java.awt.Color(255, 0, 0));
         jLabelCamposObligatorios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCamposObligatorios.setText("* Campos Obligatorios");
+        jPanelInteriorPrincipal.add(jLabelCamposObligatorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, -1, -1));
 
-        javax.swing.GroupLayout jPanelInteriorPrincipalLayout = new javax.swing.GroupLayout(jPanelInteriorPrincipal);
-        jPanelInteriorPrincipal.setLayout(jPanelInteriorPrincipalLayout);
-        jPanelInteriorPrincipalLayout.setHorizontalGroup(
-            jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInteriorPrincipalLayout.createSequentialGroup()
-                .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabelLoginActual))
-                    .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelObligatorio1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldLoginActual, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelErrorLoginActual)))
-                    .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabelNuevoLogin))
-                    .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelObligatorio2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabelErrorNuevoLogin))
-                            .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldNuevoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelObligatorio3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelErrorConfirmarNuevoLogin)
-                            .addComponent(jTextFieldConfirmarNuevoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabelConfirmarNuevoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelCamposObligatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22))
-        );
-        jPanelInteriorPrincipalLayout.setVerticalGroup(
-            jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabelLoginActual)
-                .addGap(6, 6, 6)
-                .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelObligatorio1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                        .addComponent(jTextFieldLoginActual, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelErrorLoginActual)))
-                .addGap(7, 7, 7)
-                .addComponent(jLabelNuevoLogin)
-                .addGap(6, 6, 6)
-                .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelObligatorio2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                        .addComponent(jTextFieldNuevoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelErrorNuevoLogin)))
-                .addGap(7, 7, 7)
-                .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelConfirmarNuevoLogin)
-                    .addComponent(jLabelCamposObligatorios))
-                .addGap(6, 6, 6)
-                .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelObligatorio3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                        .addComponent(jTextFieldConfirmarNuevoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelErrorConfirmarNuevoLogin))
-                    .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
+        jTextFieldLoginActual.setBackground(new java.awt.Color(255, 255, 255));
+        jTextFieldLoginActual.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jTextFieldLoginActual.setForeground(new java.awt.Color(0, 0, 0));
+        jPanelInteriorPrincipal.add(jTextFieldLoginActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 42, 201, 26));
+
+        jTextFieldNuevoLogin.setBackground(new java.awt.Color(255, 255, 255));
+        jTextFieldNuevoLogin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jTextFieldNuevoLogin.setForeground(new java.awt.Color(0, 0, 0));
+        jPanelInteriorPrincipal.add(jTextFieldNuevoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 132, 201, 26));
+
+        jTextFieldConfirmarNuevoLogin.setBackground(new java.awt.Color(255, 255, 255));
+        jTextFieldConfirmarNuevoLogin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jTextFieldConfirmarNuevoLogin.setForeground(new java.awt.Color(0, 0, 0));
+        jPanelInteriorPrincipal.add(jTextFieldConfirmarNuevoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 222, 199, 26));
 
         javax.swing.GroupLayout jPanelInteriorLayout = new javax.swing.GroupLayout(jPanelInterior);
         jPanelInterior.setLayout(jPanelInteriorLayout);
@@ -391,12 +339,14 @@ public class VtnModificarLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
-        VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador(this.objCliente, this.nombrePerfil);
-        objVtnPrincipalAdministrador.setVisible(true);
+        //Falta emergente (posibles perdidas)
+        VtnPrincipalAdmin objVtnPrincipalAdmin = new VtnPrincipalAdmin(this.objCliente, this.nombrePerfil);
+        objVtnPrincipalAdmin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
     private void jComboBoxPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPerfilActionPerformed
+        //faltan emergentes posibles perdidas
         switch (jComboBoxPerfil.getSelectedIndex()) {
             case 1:
                 this.jComboBoxPerfil.setSelectedIndex(0);
@@ -414,6 +364,7 @@ public class VtnModificarLogin extends javax.swing.JFrame {
             default:
             break;   
         }
+        
     }//GEN-LAST:event_jComboBoxPerfilActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
@@ -422,30 +373,40 @@ public class VtnModificarLogin extends javax.swing.JFrame {
         jLabelErrorNuevoLogin.setVisible(false);
         jLabelErrorConfirmarNuevoLogin.setVisible(false);
         
-        boolean comprobacion1 = verificarCamposVacios();
-        boolean comprobacion2 = verificarLoginNuevo();
-        if(comprobacion1 == true && comprobacion2 == true){
+        boolean camposVacios = verificarCamposVacios();
+        boolean confirmarLogin = verificarLoginNuevo();        
+        
+        if(camposVacios == false && confirmarLogin == false){
+            
             try {
+                
                 objCliente.crearConexion();
+                
                 Gson objConvertidor = new Gson();
                 ClsPeticion objPeticion = new ClsPeticion();
+                
                 String argumentos = jTextFieldLoginActual.getText()+","+jTextFieldNuevoLogin.getText();
                 objPeticion.setAccion("modificarLogin");
                 objPeticion.setArgumentos(argumentos);
                 String JSON = objConvertidor.toJson(objPeticion);
+                
                 String respuestaJSON = objCliente.enviarPeticion(JSON);
                 ClsResultado objResultado = objConvertidor.fromJson(respuestaJSON, ClsResultado.class);
+                
                 objCliente.cerrarConexion();
+                
                 if(objResultado.getCodigoResultado() == 1)
                 {
-                    //MOSTRAR EMERGENTE DE EXITO
+                    Utilidades.mensajeExito("Cambio de login exitoso", "Acción realizada con éxito");
                     this.nombrePerfil = jTextFieldNuevoLogin.getText();
-                    VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador(this.objCliente,nombrePerfil);
-                    objVtnPrincipalAdministrador.setVisible(true);
+                    VtnPrincipalAdmin objVtnPrincipalAdmin = new VtnPrincipalAdmin(this.objCliente,nombrePerfil);
+                    objVtnPrincipalAdmin.setVisible(true);
                     this.dispose();
                 }
                 else
                 {
+                    jLabelErrorLoginActual.setText("Login actual no coincide");
+                    jLabelErrorLoginActual.setVisible(true);
                     Utilidades.mensajeAdvertencia("Administrador no encontrado", "Atención");
                 }
 
@@ -453,50 +414,48 @@ public class VtnModificarLogin extends javax.swing.JFrame {
                 Logger.getLogger(VtnIniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else{
-            Utilidades.mensajeAdvertencia("Ha ocurrido un error en el formulario", "Error");
+            if(confirmarLogin == true)
+                Utilidades.mensajeAdvertencia("Confirmación del nuevo login no coincide", "Confirmación fallida");
+            if(camposVacios == true)
+                Utilidades.mensajeAdvertencia("Hay campos obligatorios sin rellenar", "Error");
         }
     }//GEN-LAST:event_jButtonGuardarActionPerformed
     
     private boolean verificarCamposVacios() {
-        boolean banderaFinal = true;
-        boolean bandera1 = true;
-        boolean bandera2 = true;
-        boolean bandera3 = true;
+        
+        boolean bandera = false;
+        
         if(this.jTextFieldLoginActual.getText().equals(""))
         {
-            mostrarError(jLabelErrorLoginActual, "Error. Digite login actual");
-            bandera1=false;
+            mostrarError(jLabelErrorLoginActual, "Rellenar este campo");
+            bandera=true;
         }
+        
         if(this.jTextFieldNuevoLogin.getText().equals(""))
         {
-            mostrarError(jLabelErrorNuevoLogin, "Error. Digite nuevo login");
-            bandera2=false;
+            mostrarError(jLabelErrorNuevoLogin, "Rellenar este campo");
+            bandera=true;
         }
+        
         if(this.jTextFieldConfirmarNuevoLogin.getText().equals(""))
         {
-            mostrarError(jLabelErrorConfirmarNuevoLogin, "Error. Digite nuevo login");
-            bandera3=false;
+            mostrarError(jLabelErrorConfirmarNuevoLogin, "Rellenar este campo");
+            bandera=true;
         }
-        if(bandera1==false || bandera2==false || bandera3==false)
-        {
-            banderaFinal=false;
-        }
-        return banderaFinal;
+                
+        return bandera;
     }
     
     private boolean verificarLoginNuevo(){
-        boolean banderaFinal = true;
-        if(jTextFieldNuevoLogin.getText().equals(jTextFieldConfirmarNuevoLogin.getText()))
+        
+        boolean bandera = false;
+        
+        if(!jTextFieldNuevoLogin.getText().equals(jTextFieldConfirmarNuevoLogin.getText()))
         {
-            banderaFinal = true;
+            bandera = true;
+            mostrarError(jLabelErrorConfirmarNuevoLogin, "El login ingresado no coincidente");
         }
-        else
-        {
-            banderaFinal = false;
-            mostrarError(jLabelErrorNuevoLogin, "Error. Login no coincidente");
-            mostrarError(jLabelErrorConfirmarNuevoLogin, "Error. Login no coincidente");
-        }
-        return banderaFinal;
+        return bandera;
     }
     
     private void mostrarError(JLabel notificacion, String error){
@@ -520,9 +479,9 @@ public class VtnModificarLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelErrorNuevoLogin;
     private javax.swing.JLabel jLabelLoginActual;
     private javax.swing.JLabel jLabelNuevoLogin;
-    private javax.swing.JLabel jLabelObligatorio1;
-    private javax.swing.JLabel jLabelObligatorio2;
-    private javax.swing.JLabel jLabelObligatorio3;
+    private javax.swing.JLabel jLabelObligatorioActual;
+    private javax.swing.JLabel jLabelObligatorioConfirmar;
+    private javax.swing.JLabel jLabelObligatorioNuevo;
     private javax.swing.JLabel jLabelPerfil;
     private javax.swing.JLabel jLabelPerfil2;
     private javax.swing.JLabel jLabelSIRCA1;

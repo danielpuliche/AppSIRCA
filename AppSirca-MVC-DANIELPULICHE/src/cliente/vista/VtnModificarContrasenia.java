@@ -468,8 +468,8 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
-        VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador(this.objCliente, this.nombrePerfil);
-        objVtnPrincipalAdministrador.setVisible(true);
+        VtnPrincipalAdmin objVtnPrincipalAdmin = new VtnPrincipalAdmin(this.objCliente, this.nombrePerfil);
+        objVtnPrincipalAdmin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
@@ -516,8 +516,8 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
                 if(objResultado.getCodigoResultado() == 1)
                 {
                     //MOSTRAR EMERGENTE DE EXITO
-                    VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador(this.objCliente,nombrePerfil);
-                    objVtnPrincipalAdministrador.setVisible(true);
+                    VtnPrincipalAdmin objVtnPrincipalAdmin = new VtnPrincipalAdmin(this.objCliente,nombrePerfil);
+                    objVtnPrincipalAdmin.setVisible(true);
                     this.dispose();
                 }
                 else

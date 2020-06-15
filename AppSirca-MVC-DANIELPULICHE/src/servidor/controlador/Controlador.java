@@ -1,6 +1,7 @@
 package servidor.controlador;
 
 import com.google.gson.Gson;
+import java.util.ArrayList;
 import modelo.ClsAdministrador;
 import modelo.ClsOrganizacion;
 import modelo.ClsPeticion;
@@ -18,27 +19,30 @@ public class Controlador {
     }
     
     public String decodificarPeticion(String JSONPeticion) {    
-        String accion, argumentosPeticion, resultado;        
+        
+        String accion;
+        String argumentosPeticion;
+        String resultado;     
+        
         ClsPeticion objPeticion= objConvertidor.fromJson(JSONPeticion, ClsPeticion.class); 
         accion=objPeticion.getAccion();
         argumentosPeticion=objPeticion.getArgumentos();
-        resultado=procesarAccion(accion, argumentosPeticion);
+        
+        resultado = procesarAccion(accion, argumentosPeticion);
         return resultado;
     }
 
     private String procesarAccion(String accion, String argumentosPeticion) {
         String resultadoJSON="";
-        ClsResultado objResultado=new ClsResultado();
+        ClsResultado objResultado = new ClsResultado();
         
         switch (accion) {
             
             case "ingresarAlSistema":
-
-                String login;
-                String contrasenia;
+                
                 String datosDePerfil[] = argumentosPeticion.split(",");
-                login = datosDePerfil[0];
-                contrasenia = datosDePerfil[1];
+                String login = datosDePerfil[0];
+                String contrasenia = datosDePerfil[1];
                 
                 ClsAdministrador objAdministrador = this.objOrganizacion.getAdministrador();
                 if(objAdministrador.getLogin().equals(login) && objAdministrador.getConstrasenia().equals(contrasenia)){
@@ -49,43 +53,47 @@ public class Controlador {
                 
             break;
             
+            case "listarTodosLosUsuarios":
+
+                ArrayList<ClsUsuario> lista = objOrganizacion.getListaUsuarios();
+                
+                if(lista.isEmpty()){
+                    objResultado.setCodigoResultado(-1);
+                }else{
+                    objResultado.setCodigoResultado(1);
+                    String respuesta = objConvertidor.toJson(lista);
+                    objResultado.setJSONResultado(respuesta);
+                }
+                
+            break;
+            
             case "modificarLogin":
                 
-//                String loginActual;
-//                String loginNuevo;
-//                String cambioDeLogin[] = argumentosPeticion.split(",");
-//                loginActual = cambioDeLogin[0];
-//                loginNuevo = cambioDeLogin[1];
-//                if(this.objOrganizacion.existeAdministrador(loginActual)==true)
-//                {
-//                    ClsAdministrador objAdministrador = this.objOrganizacion.consultarAdministrador(loginActual);
-//                    objAdministrador.setLogin(loginNuevo);
-//                    objResultado.setCodigoResultado(1);
-//                }                
-//                else
-//                {
-//                    objResultado.setCodigoResultado(-1);
-//                }
+                String cambioDeLogin[] = argumentosPeticion.split(",");
+                String loginActual = cambioDeLogin[0];
+                String loginNuevo = cambioDeLogin[1];
                 
+                if(loginActual.equals(objOrganizacion.getAdministrador().getLogin())){
+                    objOrganizacion.getAdministrador().setLogin(loginNuevo);
+                    objResultado.setCodigoResultado(1);
+                }else
+                    objResultado.setCodigoResultado(-1);
+                                
             break;
             
             case "modificarContrasenia":
                 
-//                String loginAdministrador;
-//                String contraseniaNueva;
-//                String cambioDeContrasenia[] = argumentosPeticion.split(",");
-//                loginAdministrador = cambioDeContrasenia[0];
-//                contraseniaNueva = cambioDeContrasenia[1];
-//                if(this.objOrganizacion.existeAdministrador(loginAdministrador)==true)
-//                {
-//                    ClsAdministrador objAdministrador = this.objOrganizacion.consultarAdministrador(loginAdministrador);
-//                    objAdministrador.setConstrasenia(contraseniaNueva);
-//                    objResultado.setCodigoResultado(1);
-//                }                
-//                else
-//                {
-//                    objResultado.setCodigoResultado(-1);
-//                }
+                String contraseniaActual;
+                String contraseniaNueva;
+                String cambioDeContrasenia[] = argumentosPeticion.split(",");
+                contraseniaActual = cambioDeContrasenia[0];
+                contraseniaNueva = cambioDeContrasenia[1];
+                
+                if(contraseniaActual.equals(objOrganizacion.getAdministrador().getConstrasenia())){
+                    objOrganizacion.getAdministrador().setConstrasenia(contraseniaNueva);
+                    objResultado.setCodigoResultado(1);
+                }else
+                    objResultado.setCodigoResultado(-1);
                 
             break;
             
@@ -105,9 +113,20 @@ public class Controlador {
                 
             break;
             
+            case "eliminarUsuario":
+                  
+                String idEliminar = argumentosPeticion;
+
+                if(objOrganizacion.eliminarUsuario(idEliminar))
+                    objResultado.setCodigoResultado(1);
+                else
+                    objResultado.setCodigoResultado(-1);                
+                
+            break;
+            
         }
         
-        resultadoJSON=objConvertidor.toJson(objResultado);
+        resultadoJSON = objConvertidor.toJson(objResultado);
         return resultadoJSON;
     }
     

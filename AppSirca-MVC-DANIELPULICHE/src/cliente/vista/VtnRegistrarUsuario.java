@@ -2,10 +2,7 @@ package cliente.vista;
 
 import cliente.servicios.cliente;
 import com.google.gson.Gson;
-import excepciones.ExcepcionCampoVacio;
-import excepciones.ExcepcionCaracterNoValido;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -20,9 +17,7 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
     private cliente objCliente;
     
     public VtnRegistrarUsuario(cliente objCliente, String nombrePerfil) {
-        initComponents();
-        Image icon = Toolkit.getDefaultToolkit().getImage("./src/Recursos/logo.png");
-        this.setIconImage(icon);
+        initComponents();           
         this.objCliente = objCliente;
         this.nombrePerfil = nombrePerfil;
         jLabelErrorCodigo.setVisible(false);
@@ -58,6 +53,7 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         jPanelInteriorPrincipal = new javax.swing.JPanel();
         jPanelRegistrar = new javax.swing.JPanel();
         jButtonRegistrar1 = new javax.swing.JButton();
+        jLabelObligatorio = new javax.swing.JLabel();
         jLabelCodigo = new javax.swing.JLabel();
         jLabelNombres = new javax.swing.JLabel();
         jLabelApellidos = new javax.swing.JLabel();
@@ -72,6 +68,10 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         jTextFieldNombres = new javax.swing.JTextField();
         jLabelErrorCodigo = new javax.swing.JLabel();
         jTextFieldCodigo = new javax.swing.JTextField();
+        jAsteriskCodigo = new javax.swing.JLabel();
+        jAsteriskNombres = new javax.swing.JLabel();
+        jAsteriskApellidos = new javax.swing.JLabel();
+        jAsteriskGenero = new javax.swing.JLabel();
         jPanelRegresar = new javax.swing.JPanel();
         jButtonRegresar = new javax.swing.JButton();
 
@@ -87,6 +87,7 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         jPanelInferior.setPreferredSize(new java.awt.Dimension(700, 30));
 
         jLabelDesarrolladores.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelDesarrolladores.setForeground(new java.awt.Color(0, 0, 0));
         jLabelDesarrolladores.setText("F&P Software Development || www.fypsoftwaredevelopment.com || 2020");
         jPanelInferior.add(jLabelDesarrolladores);
 
@@ -204,7 +205,7 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         jPanelInteriorPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelRegistrar.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelRegistrar.setLayout(new java.awt.GridBagLayout());
+        jPanelRegistrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButtonRegistrar1.setBackground(new java.awt.Color(204, 0, 0));
         jButtonRegistrar1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
@@ -216,31 +217,53 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
                 jButtonRegistrar1ActionPerformed(evt);
             }
         });
-        jPanelRegistrar.add(jButtonRegistrar1, new java.awt.GridBagConstraints());
+        jButtonRegistrar1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonRegistrar1KeyPressed(evt);
+            }
+        });
+        jPanelRegistrar.add(jButtonRegistrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, -1, -1));
+
+        jLabelObligatorio.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        jLabelObligatorio.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelObligatorio.setText("* Campos obligatorios");
+        jPanelRegistrar.add(jLabelObligatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
 
         jPanelInteriorPrincipal.add(jPanelRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 278, 340, 77));
 
+        jLabelCodigo.setBackground(new java.awt.Color(255, 255, 255));
         jLabelCodigo.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jLabelCodigo.setForeground(new java.awt.Color(0, 0, 0));
         jLabelCodigo.setText("Código:");
-        jPanelInteriorPrincipal.add(jLabelCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 60, -1));
+        jPanelInteriorPrincipal.add(jLabelCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 26, -1, -1));
 
+        jLabelNombres.setBackground(new java.awt.Color(255, 255, 255));
         jLabelNombres.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jLabelNombres.setForeground(new java.awt.Color(0, 0, 0));
         jLabelNombres.setText("Nombres:");
-        jPanelInteriorPrincipal.add(jLabelNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, 26));
+        jPanelInteriorPrincipal.add(jLabelNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
+        jLabelApellidos.setBackground(new java.awt.Color(255, 255, 255));
         jLabelApellidos.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jLabelApellidos.setForeground(new java.awt.Color(0, 0, 0));
         jLabelApellidos.setText("Apellidos:");
-        jPanelInteriorPrincipal.add(jLabelApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 26));
+        jPanelInteriorPrincipal.add(jLabelApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 136, -1, -1));
 
+        jLabelGenero.setBackground(new java.awt.Color(255, 255, 255));
         jLabelGenero.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jLabelGenero.setForeground(new java.awt.Color(0, 0, 0));
         jLabelGenero.setText("Género:");
-        jPanelInteriorPrincipal.add(jLabelGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 61, 26));
+        jPanelInteriorPrincipal.add(jLabelGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 192, -1, -1));
 
+        jLabelRol.setBackground(new java.awt.Color(255, 255, 255));
         jLabelRol.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jLabelRol.setForeground(new java.awt.Color(0, 0, 0));
         jLabelRol.setText("Rol:");
-        jPanelInteriorPrincipal.add(jLabelRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 61, 26));
+        jPanelInteriorPrincipal.add(jLabelRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 246, -1, -1));
 
+        jComboBoxRol.setBackground(new java.awt.Color(255, 255, 255));
         jComboBoxRol.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jComboBoxRol.setForeground(new java.awt.Color(0, 0, 0));
         jComboBoxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No asignado", "Estudiante", "Administrativo", "Docente" }));
         jComboBoxRol.setMaximumSize(new java.awt.Dimension(6, 26));
         jComboBoxRol.setMinimumSize(new java.awt.Dimension(6, 26));
@@ -251,9 +274,11 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         jLabelErrorGenero.setForeground(new java.awt.Color(255, 0, 0));
         jLabelErrorGenero.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelErrorGenero.setText("Error");
-        jPanelInteriorPrincipal.add(jLabelErrorGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 224, -1, -1));
+        jPanelInteriorPrincipal.add(jLabelErrorGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 216, -1, -1));
 
+        jComboBoxGenero.setBackground(new java.awt.Color(255, 255, 255));
         jComboBoxGenero.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jComboBoxGenero.setForeground(new java.awt.Color(0, 0, 0));
         jComboBoxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Masculino", "Femenino", "Otro" }));
         jComboBoxGenero.setMaximumSize(new java.awt.Dimension(6, 26));
         jComboBoxGenero.setMinimumSize(new java.awt.Dimension(6, 26));
@@ -264,31 +289,72 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         jLabelErrorApellidos.setForeground(new java.awt.Color(255, 0, 0));
         jLabelErrorApellidos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelErrorApellidos.setText("Error");
-        jPanelInteriorPrincipal.add(jLabelErrorApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 168, -1, -1));
+        jPanelInteriorPrincipal.add(jLabelErrorApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 160, -1, -1));
 
+        jTextFieldApellidos.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldApellidos.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jTextFieldApellidos.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldApellidos.setMaximumSize(new java.awt.Dimension(6, 26));
+        jTextFieldApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldApellidosKeyPressed(evt);
+            }
+        });
         jPanelInteriorPrincipal.add(jTextFieldApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 136, 160, -1));
 
         jLabelErrorNombres.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jLabelErrorNombres.setForeground(new java.awt.Color(255, 0, 0));
         jLabelErrorNombres.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelErrorNombres.setText("Error");
-        jPanelInteriorPrincipal.add(jLabelErrorNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 112, -1, -1));
+        jPanelInteriorPrincipal.add(jLabelErrorNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 104, -1, -1));
 
+        jTextFieldNombres.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldNombres.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jTextFieldNombres.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldNombres.setMaximumSize(new java.awt.Dimension(6, 26));
+        jTextFieldNombres.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldNombresKeyPressed(evt);
+            }
+        });
         jPanelInteriorPrincipal.add(jTextFieldNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 80, 160, -1));
 
         jLabelErrorCodigo.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jLabelErrorCodigo.setForeground(new java.awt.Color(255, 0, 0));
         jLabelErrorCodigo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelErrorCodigo.setText("Error");
-        jPanelInteriorPrincipal.add(jLabelErrorCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 58, -1, -1));
+        jPanelInteriorPrincipal.add(jLabelErrorCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 50, -1, -1));
 
+        jTextFieldCodigo.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldCodigo.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jTextFieldCodigo.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldCodigo.setMaximumSize(new java.awt.Dimension(6, 26));
+        jTextFieldCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldCodigoKeyPressed(evt);
+            }
+        });
         jPanelInteriorPrincipal.add(jTextFieldCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 26, 160, -1));
+
+        jAsteriskCodigo.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jAsteriskCodigo.setForeground(new java.awt.Color(255, 0, 0));
+        jAsteriskCodigo.setText("*");
+        jPanelInteriorPrincipal.add(jAsteriskCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, -1));
+
+        jAsteriskNombres.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jAsteriskNombres.setForeground(new java.awt.Color(255, 0, 0));
+        jAsteriskNombres.setText("*");
+        jPanelInteriorPrincipal.add(jAsteriskNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, 20));
+
+        jAsteriskApellidos.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jAsteriskApellidos.setForeground(new java.awt.Color(255, 0, 0));
+        jAsteriskApellidos.setText("*");
+        jPanelInteriorPrincipal.add(jAsteriskApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, -1, -1));
+
+        jAsteriskGenero.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jAsteriskGenero.setForeground(new java.awt.Color(255, 0, 0));
+        jAsteriskGenero.setText("*");
+        jPanelInteriorPrincipal.add(jAsteriskGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, -1, 40));
 
         jPanelInterior.add(jPanelInteriorPrincipal, java.awt.BorderLayout.CENTER);
 
@@ -335,8 +401,8 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
 
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
         //FALTA AGREGAR VENTANA QUE PREGUNTA SI ESTA SEGURO QUE DESEA REGRESAR
-        VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador(this.objCliente, this.nombrePerfil);
-        objVtnPrincipalAdministrador.setVisible(true);
+        VtnPrincipalAdmin objVtnPrincipalAdmin = new VtnPrincipalAdmin(this.objCliente, this.nombrePerfil);
+        objVtnPrincipalAdmin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
@@ -347,10 +413,11 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         jLabelErrorApellidos.setVisible(false);
         jLabelErrorGenero.setVisible(false);
         
-        boolean comprobacion2=verificarCamposValidos();
-        boolean comprobacion1=verificarCamposVacios();
+        boolean cantidadCaracteresCodigo = validarCantidadDeCaracteresCodigo();
+        boolean camposValidos = verificarCamposValidos();
+        boolean camposVacios = verificarCamposVacios();
         
-        if(comprobacion1==false && comprobacion2==false){
+        if(camposVacios == false && camposValidos == false && cantidadCaracteresCodigo == false){
             
             try {
                 this.objCliente.crearConexion();
@@ -382,11 +449,11 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
 
                 if(objResultado.getCodigoResultado()==1){
                     utilidades.Utilidades.mensajeExito("Registro exitoso del usuario", "Registro exitoso");
-                    VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador(objCliente, nombrePerfil);
-                    objVtnPrincipalAdministrador.setVisible(true);
+                    VtnPrincipalAdmin objVtnPrincipalAdmin = new VtnPrincipalAdmin(objCliente, nombrePerfil);
+                    objVtnPrincipalAdmin.setVisible(true);
                     this.dispose();
                 }else{
-                    utilidades.Utilidades.mensajeAdvertencia("El usuario ya se encuentra registrado en el sistema", "Error en el registro");
+                    utilidades.Utilidades.mensajeAdvertencia("El usuario con código: "+jTextFieldCodigo.getText()+" se encuentra registrado en el sistema", "Error en el registro");
                 }
 
                 this.objCliente.cerrarConexion();
@@ -396,71 +463,81 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
                 //FALTA VENTANA EMERGENTE
             }
 
-            }else{
-                Utilidades.mensajeAdvertencia("Hay campos obligatorios sin llenar", "Error");
-            }                 
+        }else{
+            if(camposVacios == true)
+                Utilidades.mensajeAdvertencia("Hay campos obligatorios sin rellenar", "Error");
+            else 
+                Utilidades.mensajeAdvertencia("Hay campos no válidos", "Error");
+        }
     }//GEN-LAST:event_jButtonRegistrar1ActionPerformed
     
     private boolean verificarCamposVacios() {
-        boolean banderaFinal = false;
-        boolean bandera1 = false;
-        boolean bandera2 = false;
-        boolean bandera3 = false;
-        boolean bandera4 = false;
+        
+        boolean bandera = false; // false = campos no vacios
+        
         if(this.jTextFieldCodigo.getText().equals(""))
         {
-            mostrarError(jLabelErrorCodigo, "Error. Digite código");
-            bandera1=true;
+            mostrarError(jLabelErrorCodigo, "Rellenar este campo");
+            bandera=true;
         }
+        
         if(this.jTextFieldNombres.getText().equals(""))
         {
-            mostrarError(jLabelErrorNombres, "Error. Digite nombres");
-            bandera2=true;
+            mostrarError(jLabelErrorNombres, "Rellenar este campo");
+            bandera=true;
         }
+        
         if(this.jTextFieldApellidos.getText().equals(""))
         {
-            mostrarError(jLabelErrorApellidos, "Error. Digite apellidos");
-            bandera3=true;
+            mostrarError(jLabelErrorApellidos, "Rellenar este campo");
+            bandera=true;
         }
+        
         if(jComboBoxGenero.getSelectedIndex()==0)
         {
-            mostrarError(jLabelErrorGenero, "Error. Seleccione un género");
-            bandera4=true;
+            mostrarError(jLabelErrorGenero, "Seleccionar genero");
+            bandera=true;
         }
-        if(bandera1 || bandera2 || bandera3 || bandera4)
-        {
-            banderaFinal=true;
-        }
-        return banderaFinal;
+        
+        return bandera;
     }
     
     private boolean verificarCamposValidos(){
-        boolean banderaFinal = false;
-        boolean bandera1 = false;
-        boolean bandera2 = false;
-        char[] caracteresNoValidos = {'!','#','$','%','&','/','(',')','=','?','¿',
-                                        '@','*',';',',',':','.','-','_','1','2','3',    ///FALTAN POR AGREGAR
-                                        '4','5','6','7','8','9','0'};
-        if(verificarCaracteresValidos(jTextFieldNombres, caracteresNoValidos)==true)
+        
+        boolean bandera = false; // false = campos validos        
+                
+        if(verificarCaracteresValidos(jTextFieldNombres) == true)
         {
-            mostrarError(jLabelErrorNombres, "Error. Nombres no válidos");
-            bandera1=true;
-        }
-        if(verificarCaracteresValidos(jTextFieldApellidos, caracteresNoValidos)==true)
+            mostrarError(jLabelErrorNombres, "Carácter ingresado no válido");
+            bandera=true;
+        }else
+            jLabelErrorNombres.setVisible(false);
+        
+        if(verificarCaracteresValidos(jTextFieldApellidos) == true)
         {
-            mostrarError(jLabelErrorApellidos, "Error. Apellidos no válidos");
-            bandera2=true;
-        }
-        if(bandera1 || bandera2)
-        {
-            banderaFinal=true;
-        }
-        return banderaFinal;
+            mostrarError(jLabelErrorApellidos, "Carácter ingresado no válido");
+            bandera=true;
+        }else
+            jLabelErrorApellidos.setVisible(false);
+        
+        if(verificarCaracteresCodigo(jTextFieldCodigo) == true){
+            mostrarError(jLabelErrorCodigo, "Carácter ingresado no válido");
+            bandera=true;
+        } 
+        
+        return bandera;
     }
     
-    private boolean verificarCaracteresValidos(JTextField campo,char[] caracteresNoValidos) {
+    private boolean verificarCaracteresValidos(JTextField campo) {
+        
+        char[] caracteresNoValidos = {'!','#','$','%','&','/','(',')','=','?','¿',
+                                      '@','*',';',',',':','.','-','_','1','2','3',    ///FALTAN POR AGREGAR
+                                      '4','5','6','7','8','9','0'};
+        
         boolean bandera=false;
+        
         char[] letrasEnCampo = campo.getText().toCharArray();
+        
         for(int j=0;j<caracteresNoValidos.length;j++){
             String letraNoValida = String.valueOf(caracteresNoValidos[j]);
             for(int i=0;i<letrasEnCampo.length;i++){
@@ -473,12 +550,59 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         }
         return bandera;
     }
+    
+    private boolean verificarCaracteresCodigo(JTextField campo) {
+        
+        char[] caracteresValidos = {'1','2','3','4','5','6','7','8','9','0'};
+        boolean bandera=false; // false = correcto             
+        char[] caracteresEnCampo = campo.getText().toCharArray();
+
+        for(int i=0; i<caracteresEnCampo.length; i++){
+
+            String caracterCampo = String.valueOf(caracteresEnCampo[i]);
+            boolean banderaInterna = false; // false = caracter incorrecto
+
+            for(int j=0;j<caracteresValidos.length;j++){
+
+                String caracterValido = String.valueOf(caracteresValidos[j]);
+
+                if(caracterCampo.equalsIgnoreCase(caracterValido))
+                {
+                    banderaInterna=true;
+                    break;
+                }
+
+            }
+
+            if(banderaInterna == false){
+                bandera = true;
+                break;
+            }
+        }       
+               
+        return bandera;
+    }
         
     private void mostrarError(JLabel notificacion, String error){
-            notificacion.setText(error);
-            notificacion.setVisible(true);
+        notificacion.setText(error);
+        notificacion.setVisible(true);
     }
      
+    private boolean validarCantidadDeCaracteresCodigo(){
+        
+        char[] caracteresCodigo = this.jLabelCodigo.getText().toCharArray();
+        boolean bandera = false; // false = correcto
+        
+        if(caracteresCodigo.length!=7){ // como carajos 7, no sé
+            bandera = true;
+            mostrarError(jLabelErrorCodigo, "El código debe poseer 8 digitos");            
+        }else{
+            this.jLabelErrorCodigo.setVisible(false);
+        }
+        
+        return bandera;
+    }
+    
     private void jComboBoxPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPerfilActionPerformed
         switch (jComboBoxPerfil.getSelectedIndex()) {
             case 1:
@@ -501,10 +625,38 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBoxPerfilActionPerformed
 
+    private void jTextFieldCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCodigoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jButtonRegistrar1ActionPerformed(null);
+        }
+    }//GEN-LAST:event_jTextFieldCodigoKeyPressed
+
+    private void jTextFieldNombresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombresKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jButtonRegistrar1ActionPerformed(null);
+        }
+    }//GEN-LAST:event_jTextFieldNombresKeyPressed
+
+    private void jTextFieldApellidosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldApellidosKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jButtonRegistrar1ActionPerformed(null);
+        }
+    }//GEN-LAST:event_jTextFieldApellidosKeyPressed
+
+    private void jButtonRegistrar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonRegistrar1KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jButtonRegistrar1ActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonRegistrar1KeyPressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Barra;
     private javax.swing.JLabel IconoUniversidad;
     private javax.swing.JPanel PanelPrincipal;
+    private javax.swing.JLabel jAsteriskApellidos;
+    private javax.swing.JLabel jAsteriskCodigo;
+    private javax.swing.JLabel jAsteriskGenero;
+    private javax.swing.JLabel jAsteriskNombres;
     private javax.swing.JButton jButtonRegistrar1;
     private javax.swing.JButton jButtonRegresar;
     private javax.swing.JComboBox<String> jComboBoxGenero;
@@ -520,6 +672,7 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelErrorNombres;
     private javax.swing.JLabel jLabelGenero;
     private javax.swing.JLabel jLabelNombres;
+    private javax.swing.JLabel jLabelObligatorio;
     private javax.swing.JLabel jLabelPerfil;
     private javax.swing.JLabel jLabelPerfil2;
     private javax.swing.JLabel jLabelRol;

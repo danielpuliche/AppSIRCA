@@ -1,12 +1,40 @@
 package cliente.vista;
 
+import cliente.servicios.cliente;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.awt.Color;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import modelo.ClsPeticion;
+import modelo.ClsResultado;
+import modelo.ClsUsuario;
+import utilidades.Utilidades;
 
-public class VtnModelo extends javax.swing.JFrame {
+public class VtnPrincipalAdmin extends javax.swing.JFrame {
 
-    public VtnModelo() {
+    private cliente objCliente;
+    private String nombrePerfil;
+    
+    public VtnPrincipalAdmin(cliente objCliente, String login) {
         initComponents();
         estiloTablas();
+        jLabelErrorDigiteCodigo.setVisible(false);
+        this.objCliente = objCliente;
+        this.nombrePerfil = login;
+        this.jComboBoxPerfil.insertItemAt(this.nombrePerfil, 0);
+        this.jComboBoxPerfil.setSelectedIndex(0);
+        this.jRadioButtonTodos.setSelected(true);
+        llenarTablas();
     }
 
     @SuppressWarnings("unchecked")
@@ -44,12 +72,12 @@ public class VtnModelo extends javax.swing.JFrame {
         jToggleButtonAyuda = new javax.swing.JToggleButton();
         jLabelErrorDigiteCodigo = new javax.swing.JLabel();
         jPanelContenedorTablas = new javax.swing.JPanel();
-        jScrollPaneTablaUsuariosTodos = new javax.swing.JScrollPane();
-        jTableUsuariosTodos = new javax.swing.JTable();
         jScrollPaneTablaUsuariosDentro = new javax.swing.JScrollPane();
         jTableUsuariosDentro = new javax.swing.JTable();
         jScrollPaneTablaUsuariosFuera = new javax.swing.JScrollPane();
         jTableUsuariosFuera = new javax.swing.JTable();
+        jScrollPaneTablaUsuariosTodos = new javax.swing.JScrollPane();
+        jTableUsuariosTodos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SIRCA - Admin Interface");
@@ -72,6 +100,7 @@ public class VtnModelo extends javax.swing.JFrame {
         jPanelSuperior.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanelSuperior.setMaximumSize(new java.awt.Dimension(700, 140));
         jPanelSuperior.setMinimumSize(new java.awt.Dimension(700, 140));
+        jPanelSuperior.setPreferredSize(new java.awt.Dimension(880, 140));
         jPanelSuperior.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         IconoUniversidad.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
@@ -103,25 +132,25 @@ public class VtnModelo extends javax.swing.JFrame {
             .addGap(0, 85, Short.MAX_VALUE)
         );
 
-        jPanelSuperior.add(Barra, new org.netbeans.lib.awtextra.AbsoluteConstraints(422, 32, 2, 85));
+        jPanelSuperior.add(Barra, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 30, 2, 85));
 
         jLabelSIRCA1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 24)); // NOI18N
         jLabelSIRCA1.setForeground(new java.awt.Color(255, 255, 255));
         jLabelSIRCA1.setText("Sistema Integrado de");
         jLabelSIRCA1.setAlignmentY(0.0F);
-        jPanelSuperior.add(jLabelSIRCA1, new org.netbeans.lib.awtextra.AbsoluteConstraints(499, 19, -1, -1));
+        jPanelSuperior.add(jLabelSIRCA1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 30, -1, -1));
 
         jLabelSIRCA2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 24)); // NOI18N
         jLabelSIRCA2.setForeground(new java.awt.Color(255, 255, 255));
         jLabelSIRCA2.setText("Registro y Control");
         jLabelSIRCA2.setAlignmentY(0.0F);
-        jPanelSuperior.add(jLabelSIRCA2, new org.netbeans.lib.awtextra.AbsoluteConstraints(517, 44, -1, -1));
+        jPanelSuperior.add(jLabelSIRCA2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 55, -1, -1));
 
         jLabelSIRCA3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 24)); // NOI18N
         jLabelSIRCA3.setForeground(new java.awt.Color(255, 255, 255));
         jLabelSIRCA3.setText("de Acceso");
         jLabelSIRCA3.setAlignmentY(0.0F);
-        jPanelSuperior.add(jLabelSIRCA3, new org.netbeans.lib.awtextra.AbsoluteConstraints(561, 69, -1, -1));
+        jPanelSuperior.add(jLabelSIRCA3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, -1, -1));
 
         jLabelPerfil.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         jLabelPerfil.setForeground(new java.awt.Color(255, 255, 255));
@@ -130,18 +159,20 @@ public class VtnModelo extends javax.swing.JFrame {
         jLabelPerfil2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         jLabelPerfil2.setForeground(new java.awt.Color(255, 255, 255));
         jLabelPerfil2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/user-32.png"))); // NOI18N
-        jPanelSuperior.add(jLabelPerfil2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 110, -1, -1));
+        jPanelSuperior.add(jLabelPerfil2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 105, -1, -1));
 
         jComboBoxPerfil.setBackground(new java.awt.Color(204, 0, 0));
         jComboBoxPerfil.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jComboBoxPerfil.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBoxPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador12", "Modificar Login", "Modificar Contraseña", "Cerrar Sesión" }));
+        jComboBoxPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Modificar Login", "Modificar Contraseña", "Cerrar Sesión" }));
+        jComboBoxPerfil.setSelectedIndex(-1);
+        jComboBoxPerfil.setBorder(null);
         jComboBoxPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxPerfilActionPerformed(evt);
             }
         });
-        jPanelSuperior.add(jComboBoxPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 110, -1, -1));
+        jPanelSuperior.add(jComboBoxPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 110, 130, 25));
 
         getContentPane().add(jPanelSuperior, java.awt.BorderLayout.PAGE_START);
 
@@ -149,7 +180,8 @@ public class VtnModelo extends javax.swing.JFrame {
         jPanelCentral.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanelCentral.setMaximumSize(new java.awt.Dimension(700, 510));
         jPanelCentral.setMinimumSize(new java.awt.Dimension(700, 510));
-        jPanelCentral.setPreferredSize(new java.awt.Dimension(700, 510));
+        jPanelCentral.setPreferredSize(new java.awt.Dimension(900, 510));
+        jPanelCentral.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelCriterios.setBackground(new java.awt.Color(255, 255, 255));
         jPanelCriterios.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -164,7 +196,6 @@ public class VtnModelo extends javax.swing.JFrame {
 
         jRadioButtonTodos.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroupCriteriosBusqueda.add(jRadioButtonTodos);
-        jRadioButtonTodos.setSelected(true);
         jRadioButtonTodos.setText("Todos");
         jRadioButtonTodos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jRadioButtonTodos.addActionListener(new java.awt.event.ActionListener() {
@@ -216,14 +247,17 @@ public class VtnModelo extends javax.swing.JFrame {
                 .addComponent(jRadioButtonFuera))
         );
 
+        jPanelCentral.add(jPanelCriterios, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 59, -1, -1));
+
         jButtonBuscar.setBackground(new java.awt.Color(204, 0, 0));
         jButtonBuscar.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         jButtonBuscar.setForeground(new java.awt.Color(255, 255, 255));
         jButtonBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/search-13-16.png"))); // NOI18N
         jButtonBuscar.setText("Buscar");
+        jPanelCentral.add(jButtonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(722, 97, 110, 30));
 
         jTextFieldDigiteCodigo.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jTextFieldDigiteCodigo.setForeground(new java.awt.Color(153, 153, 153));
+        jTextFieldDigiteCodigo.setForeground(new java.awt.Color(102, 102, 102));
         jTextFieldDigiteCodigo.setText("Digite Código");
         jTextFieldDigiteCodigo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -233,6 +267,7 @@ public class VtnModelo extends javax.swing.JFrame {
                 jTextFieldDigiteCodigoFocusLost(evt);
             }
         });
+        jPanelCentral.add(jTextFieldDigiteCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(363, 97, 280, 30));
 
         jButtonRegistrarUsuario.setBackground(new java.awt.Color(204, 0, 0));
         jButtonRegistrarUsuario.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
@@ -244,6 +279,7 @@ public class VtnModelo extends javax.swing.JFrame {
                 jButtonRegistrarUsuarioActionPerformed(evt);
             }
         });
+        jPanelCentral.add(jButtonRegistrarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 460, 166, 35));
 
         jPanelMenu.setBackground(new java.awt.Color(0, 0, 102));
 
@@ -256,11 +292,6 @@ public class VtnModelo extends javax.swing.JFrame {
         jToggleButtonGestionarUsuarios.setMaximumSize(new java.awt.Dimension(210, 29));
         jToggleButtonGestionarUsuarios.setMinimumSize(new java.awt.Dimension(210, 29));
         jToggleButtonGestionarUsuarios.setPreferredSize(new java.awt.Dimension(270, 29));
-        jToggleButtonGestionarUsuarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButtonGestionarUsuariosActionPerformed(evt);
-            }
-        });
         jPanelMenu.add(jToggleButtonGestionarUsuarios);
 
         jToggleButtonAsignacionMasivaRoles.setBackground(new java.awt.Color(255, 255, 255));
@@ -271,11 +302,6 @@ public class VtnModelo extends javax.swing.JFrame {
         jToggleButtonAsignacionMasivaRoles.setMaximumSize(new java.awt.Dimension(210, 29));
         jToggleButtonAsignacionMasivaRoles.setMinimumSize(new java.awt.Dimension(210, 29));
         jToggleButtonAsignacionMasivaRoles.setPreferredSize(new java.awt.Dimension(270, 29));
-        jToggleButtonAsignacionMasivaRoles.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButtonAsignacionMasivaRolesActionPerformed(evt);
-            }
-        });
         jPanelMenu.add(jToggleButtonAsignacionMasivaRoles);
 
         jToggleButtonAyuda.setBackground(new java.awt.Color(255, 255, 255));
@@ -288,69 +314,15 @@ public class VtnModelo extends javax.swing.JFrame {
         jToggleButtonAyuda.setPreferredSize(new java.awt.Dimension(270, 29));
         jPanelMenu.add(jToggleButtonAyuda);
 
+        jPanelCentral.add(jPanelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 896, -1));
+
         jLabelErrorDigiteCodigo.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jLabelErrorDigiteCodigo.setForeground(new java.awt.Color(255, 0, 0));
         jLabelErrorDigiteCodigo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelErrorDigiteCodigo.setText("Error");
+        jPanelCentral.add(jLabelErrorDigiteCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(363, 133, -1, -1));
 
         jPanelContenedorTablas.setLayout(new java.awt.CardLayout());
-
-        jScrollPaneTablaUsuariosTodos.setMaximumSize(new java.awt.Dimension(585, 272));
-        jScrollPaneTablaUsuariosTodos.setMinimumSize(new java.awt.Dimension(585, 272));
-        jScrollPaneTablaUsuariosTodos.setPreferredSize(new java.awt.Dimension(585, 272));
-
-        jTableUsuariosTodos.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jTableUsuariosTodos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Código", "Apellidos", "Nombres", "Rol", "Genero", "Opciones"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                true, true, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTableUsuariosTodos.setGridColor(new java.awt.Color(204, 204, 204));
-        jScrollPaneTablaUsuariosTodos.setViewportView(jTableUsuariosTodos);
-        if (jTableUsuariosTodos.getColumnModel().getColumnCount() > 0) {
-            jTableUsuariosTodos.getColumnModel().getColumn(3).setResizable(false);
-            jTableUsuariosTodos.getColumnModel().getColumn(4).setResizable(false);
-            jTableUsuariosTodos.getColumnModel().getColumn(5).setResizable(false);
-        }
-
-        jPanelContenedorTablas.add(jScrollPaneTablaUsuariosTodos, "card2");
 
         jScrollPaneTablaUsuariosDentro.setMaximumSize(new java.awt.Dimension(585, 272));
         jScrollPaneTablaUsuariosDentro.setMinimumSize(new java.awt.Dimension(585, 272));
@@ -454,48 +426,72 @@ public class VtnModelo extends javax.swing.JFrame {
 
         jPanelContenedorTablas.add(jScrollPaneTablaUsuariosFuera, "card2");
 
-        javax.swing.GroupLayout jPanelCentralLayout = new javax.swing.GroupLayout(jPanelCentral);
-        jPanelCentral.setLayout(jPanelCentralLayout);
-        jPanelCentralLayout.setHorizontalGroup(
-            jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanelCentralLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonRegistrarUsuario)
-                    .addGroup(jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanelContenedorTablas, javax.swing.GroupLayout.PREFERRED_SIZE, 808, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCentralLayout.createSequentialGroup()
-                            .addComponent(jPanelCriterios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanelCentralLayout.createSequentialGroup()
-                                    .addComponent(jTextFieldDigiteCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(85, 85, 85)
-                                    .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabelErrorDigiteCodigo)))))
-                .addContainerGap(46, Short.MAX_VALUE))
-        );
-        jPanelCentralLayout.setVerticalGroup(
-            jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCentralLayout.createSequentialGroup()
-                .addComponent(jPanelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelCriterios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelCentralLayout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(jPanelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldDigiteCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelErrorDigiteCodigo)))
-                .addGap(18, 18, 18)
-                .addComponent(jPanelContenedorTablas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonRegistrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        jScrollPaneTablaUsuariosTodos.setMaximumSize(new java.awt.Dimension(585, 272));
+        jScrollPaneTablaUsuariosTodos.setMinimumSize(new java.awt.Dimension(585, 272));
+        jScrollPaneTablaUsuariosTodos.setPreferredSize(new java.awt.Dimension(585, 272));
+
+        jTableUsuariosTodos.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jTableUsuariosTodos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Código", "Apellidos", "Nombres", "Rol", "Genero", "Editar", "Eliminar"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, false, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableUsuariosTodos.setGridColor(new java.awt.Color(204, 204, 204));
+        jTableUsuariosTodos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableUsuariosTodosMouseClicked(evt);
+            }
+        });
+        jScrollPaneTablaUsuariosTodos.setViewportView(jTableUsuariosTodos);
+        if (jTableUsuariosTodos.getColumnModel().getColumnCount() > 0) {
+            jTableUsuariosTodos.getColumnModel().getColumn(3).setResizable(false);
+            jTableUsuariosTodos.getColumnModel().getColumn(4).setResizable(false);
+            jTableUsuariosTodos.getColumnModel().getColumn(5).setMinWidth(10);
+            jTableUsuariosTodos.getColumnModel().getColumn(5).setPreferredWidth(10);
+            jTableUsuariosTodos.getColumnModel().getColumn(6).setMinWidth(10);
+            jTableUsuariosTodos.getColumnModel().getColumn(6).setPreferredWidth(10);
+        }
+
+        jPanelContenedorTablas.add(jScrollPaneTablaUsuariosTodos, "card2");
+
+        jPanelCentral.add(jPanelContenedorTablas, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 175, 820, -1));
 
         getContentPane().add(jPanelCentral, java.awt.BorderLayout.CENTER);
 
@@ -511,55 +507,197 @@ public class VtnModelo extends javax.swing.JFrame {
         float red = colores[0];
         float green = colores[1];
         float blue = colores[2];
+        
         jScrollPaneTablaUsuariosTodos.setVisible(true);
         jScrollPaneTablaUsuariosDentro.setVisible(false);
         jScrollPaneTablaUsuariosFuera.setVisible(false);
+        
         jTableUsuariosTodos.getTableHeader().setPreferredSize(new java.awt.Dimension(0,50));
         jTableUsuariosTodos.getTableHeader().setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 16));
         jTableUsuariosTodos.getTableHeader().setForeground(Color.WHITE);
         jTableUsuariosTodos.getTableHeader().setBackground(Color.getHSBColor(red, green, blue));
         jTableUsuariosTodos.setRowHeight(25);
+        jTableUsuariosTodos.setDefaultRenderer(Object.class, new Render());
+        setJComboBoxRol(jTableUsuariosTodos, jTableUsuariosTodos.getColumnModel().getColumn(3));
+        
         jTableUsuariosDentro.getTableHeader().setPreferredSize(new java.awt.Dimension(0,50));
         jTableUsuariosDentro.getTableHeader().setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 16));
         jTableUsuariosDentro.getTableHeader().setForeground(Color.WHITE);
         jTableUsuariosDentro.getTableHeader().setBackground(Color.getHSBColor(red, green, blue));
         jTableUsuariosDentro.setRowHeight(25);
+        jTableUsuariosDentro.setDefaultRenderer(Object.class, new Render());
+        setJComboBoxRol(jTableUsuariosDentro, jTableUsuariosDentro.getColumnModel().getColumn(3));
+        
         jTableUsuariosFuera.getTableHeader().setPreferredSize(new java.awt.Dimension(0,50));
         jTableUsuariosFuera.getTableHeader().setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 16));
         jTableUsuariosFuera.getTableHeader().setForeground(Color.WHITE);
         jTableUsuariosFuera.getTableHeader().setBackground(Color.getHSBColor(red, green, blue));
         jTableUsuariosFuera.setRowHeight(25);
+        jTableUsuariosFuera.setDefaultRenderer(Object.class, new Render());
+        setJComboBoxRol(jTableUsuariosFuera, jTableUsuariosFuera.getColumnModel().getColumn(3));
     }
     
+    private void llenarTablas(){
+        
+        if(jRadioButtonTodos.isSelected()){
+            
+            try {
+                
+                //CONEXION SERVIDOR
+                
+                Gson objConvertidor = new Gson();
+                ClsPeticion objPeticion = new ClsPeticion();
+                
+                objCliente.crearConexion();
+                
+                String argumentos = "";
+                objPeticion.setArgumentos(argumentos);
+                objPeticion.setAccion("listarTodosLosUsuarios");
+                
+                String JSON = objConvertidor.toJson(objPeticion);
+                String respuestaJSON = objCliente.enviarPeticion(JSON);
+                ClsResultado objResultado = objConvertidor.fromJson(respuestaJSON, ClsResultado.class);
+                
+                objCliente.cerrarConexion();
+                
+                //FIN CONEXION
+                
+                if(objResultado.getCodigoResultado() == 1)
+                {
+                    String listaJSON = objResultado.getJSONResultado();
+                    java.lang.reflect.Type listType = new TypeToken<ArrayList<ClsUsuario>>(){}.getType();
+                    ArrayList<ClsUsuario> listaUsuarios = objConvertidor.fromJson(listaJSON, listType);
+                    
+                    DefaultTableModel model = (DefaultTableModel) this.jTableUsuariosTodos.getModel();
+                    limpiarTabla(jTableUsuariosTodos);
+                    
+                    for (int i = 0; i < listaUsuarios.size(); i++) {
+                        ClsUsuario objUser = listaUsuarios.get(i);
+                        
+                        String rol = "";
+                        switch(objUser.getRol()){
+                            case Administrativo:
+                                rol = "Administrativo";
+                            break;
+                            case Docente:
+                                rol = "Docente";
+                            break;
+                            case Estudiante:
+                                rol = "Estudiante";
+                            break;                
+                            case No_Asignado:
+                                rol = "No asignado";
+                            break;
+                            default:
+                                
+                            break;
+                        }    
+                        
+                        JButton JButtonEliminarUsuario = new JButton();
+                        JButtonEliminarUsuario.setName("Eliminar");
+                        JButtonEliminarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/trash-2-24.png")));
+                        
+                        JButton JButtonEditarUsuario = new JButton();
+                        JButtonEditarUsuario.setName("Editar");
+                        JButtonEditarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/edit-24.png")));
+                        
+                        Object [] fila= { objUser.getIdentificacion(),objUser.getApellidos(),objUser.getNombres(),rol,objUser.getGenero()+"",JButtonEditarUsuario,JButtonEliminarUsuario};
+                        model.addRow(fila);
+                    }
+                }
+                else
+                {
+                    Utilidades.mensajeAdvertencia("No hay usuarios registrados", "Error");
+                }
+
+            } catch (IOException ex) {
+                Logger.getLogger(VtnIniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else if(jRadioButtonDentro.isSelected()){
+            
+            // Falta agregar metodos de entrada y salida de usuarios
+            
+        }else if(jRadioButtonFuera.isSelected()){
+            
+            // Falta agregar metodos de entrada y salida de usuarios
+            
+        }
+        
+    }
+    
+    public void setJComboBoxRol(JTable tabla, TableColumn columna){
+        JComboBox jComboBoxRol = new JComboBox();
+        jComboBoxRol.addItem("No asignado"); 
+        jComboBoxRol.addItem("Estudiante");
+        jComboBoxRol.addItem("Administrativo");
+        jComboBoxRol.addItem("Docente");
+        columna.setCellEditor(new DefaultCellEditor(jComboBoxRol));
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+        renderer.setToolTipText("Seleccionar Rol");
+        columna.setCellRenderer(renderer);    
+    }    
+    
     private void jComboBoxPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPerfilActionPerformed
-        // TODO add your handling code here:
+        
+        switch (jComboBoxPerfil.getSelectedIndex()) {
+            
+            case 1:
+                VtnModificarLogin objVtnModificarLogin = new VtnModificarLogin(this.objCliente, this.nombrePerfil);
+                objVtnModificarLogin.setVisible(true);
+                this.dispose();
+            break;
+            case 2:
+                VtnModificarContrasenia objVtnModificarContrasenia = new VtnModificarContrasenia(this.objCliente, this.nombrePerfil);
+                objVtnModificarContrasenia.setVisible(true);
+                this.dispose();
+            break;
+            case 3:
+                VtnIniciarSesion objVtnIniciarSesion = new VtnIniciarSesion(this.objCliente);
+                objVtnIniciarSesion.setVisible(true);
+                this.dispose();
+            break;
+            default:
+            
+            break;
+            
+        }
+        
     }//GEN-LAST:event_jComboBoxPerfilActionPerformed
 
     private void jRadioButtonTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonTodosActionPerformed
+        
         if(jRadioButtonTodos.isSelected())
         {
             jScrollPaneTablaUsuariosTodos.setVisible(true);
             jScrollPaneTablaUsuariosDentro.setVisible(false);
             jScrollPaneTablaUsuariosFuera.setVisible(false);
+            llenarTablas();
         }
+        
     }//GEN-LAST:event_jRadioButtonTodosActionPerformed
 
     private void jRadioButtonDentroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonDentroActionPerformed
+        
         if(jRadioButtonDentro.isSelected())
         {
             jScrollPaneTablaUsuariosTodos.setVisible(false);
             jScrollPaneTablaUsuariosDentro.setVisible(true);
             jScrollPaneTablaUsuariosFuera.setVisible(false);
+            llenarTablas();
         }
+        
     }//GEN-LAST:event_jRadioButtonDentroActionPerformed
 
     private void jRadioButtonFueraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonFueraActionPerformed
+        
         if(jRadioButtonFuera.isSelected())
         {
             jScrollPaneTablaUsuariosTodos.setVisible(false);
             jScrollPaneTablaUsuariosDentro.setVisible(false);
             jScrollPaneTablaUsuariosFuera.setVisible(true);
+            llenarTablas();
         }
+        
     }//GEN-LAST:event_jRadioButtonFueraActionPerformed
 
     private void jTextFieldDigiteCodigoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldDigiteCodigoFocusGained
@@ -577,17 +715,86 @@ public class VtnModelo extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldDigiteCodigoFocusLost
 
     private void jButtonRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarUsuarioActionPerformed
-
+        VtnRegistrarUsuario ObjVtnRegistrarUsuario = new VtnRegistrarUsuario(this.objCliente ,nombrePerfil);
+        ObjVtnRegistrarUsuario.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_jButtonRegistrarUsuarioActionPerformed
 
-    private void jToggleButtonAsignacionMasivaRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonAsignacionMasivaRolesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButtonAsignacionMasivaRolesActionPerformed
+    private void jTableUsuariosTodosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUsuariosTodosMouseClicked
+        
+        int column = jTableUsuariosTodos.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY()/jTableUsuariosTodos.getRowHeight();
+        
+        if(row < jTableUsuariosTodos.getRowCount() && row >= 0 && column < jTableUsuariosTodos.getColumnCount() && column >= 0){
+            Object value = jTableUsuariosTodos.getValueAt(row, column);
+            
+            if(value instanceof JButton){
+                
+                ((JButton)value).doClick();
+                JButton boton = (JButton) value;
+                String identificacionUsuario = jTableUsuariosTodos.getValueAt(row, 0).toString();
+                
+                if(boton.getName().equals("Eliminar")){
+                    try{                        
+                        System.out.println("Eliminar: "+identificacionUsuario);
+                        eliminarUsuario(identificacionUsuario);
+                    }catch(IOException exc){
+                        Utilidades.mensajeError("Error al eliminar usuario", "Error");
+                    }
+                    catch(Exception ex){
+                        System.out.println(ex.getMessage());
+                    }  
+                }else if(boton.getName().equals("Editar")){
+                    try{
+                        System.out.println("Editar: "+identificacionUsuario);
+                    }catch(Exception ex){
+                        System.out.println(ex.getMessage());
+                    }  
+                }
+            }
+        }
+    }//GEN-LAST:event_jTableUsuariosTodosMouseClicked
 
-    private void jToggleButtonGestionarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonGestionarUsuariosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButtonGestionarUsuariosActionPerformed
+    private void eliminarUsuario(String codigo) throws IOException{
+        
+        //CONEXION SERVIDOR
 
+        Gson objConvertidor = new Gson();
+        ClsPeticion objPeticion = new ClsPeticion();
+
+        objCliente.crearConexion();
+
+        String argumentos = codigo;
+        objPeticion.setArgumentos(argumentos);
+        objPeticion.setAccion("eliminarUsuario");
+
+        String JSON = objConvertidor.toJson(objPeticion);
+        String respuestaJSON = objCliente.enviarPeticion(JSON);
+        ClsResultado objResultado = objConvertidor.fromJson(respuestaJSON, ClsResultado.class);
+
+        objCliente.cerrarConexion();
+
+        //FIN CONEXION
+
+        if(objResultado.getCodigoResultado() == 1){
+            Utilidades.mensajeExito("Usuario eliminado con éxito", "Eliminación exitosa");
+            llenarTablas();            
+        }else{
+            Utilidades.mensajeError("No fue posible eliminar al usuario", "Error");
+        }        
+        
+    }
+    
+    public void limpiarTabla(javax.swing.JTable tabla){
+        
+        DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+        int filas = tabla.getRowCount();
+        for (int i = 0;filas>i; i++) {
+            modelo.removeRow(0);
+        }        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Barra;
     private javax.swing.JLabel IconoUniversidad;

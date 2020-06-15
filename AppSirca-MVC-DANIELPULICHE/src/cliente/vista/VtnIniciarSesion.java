@@ -94,19 +94,19 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
         jLabelSIRCA1.setForeground(new java.awt.Color(255, 255, 255));
         jLabelSIRCA1.setText("Sistema Integrado de");
         jLabelSIRCA1.setAlignmentY(0.0F);
-        jPanelSuperior.add(jLabelSIRCA1, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 19, -1, -1));
+        jPanelSuperior.add(jLabelSIRCA1, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 26, -1, -1));
 
         jLabelSIRCA2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 24)); // NOI18N
         jLabelSIRCA2.setForeground(new java.awt.Color(255, 255, 255));
         jLabelSIRCA2.setText("Registro y Control");
         jLabelSIRCA2.setAlignmentY(0.0F);
-        jPanelSuperior.add(jLabelSIRCA2, new org.netbeans.lib.awtextra.AbsoluteConstraints(423, 44, -1, -1));
+        jPanelSuperior.add(jLabelSIRCA2, new org.netbeans.lib.awtextra.AbsoluteConstraints(423, 51, -1, -1));
 
         jLabelSIRCA3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 24)); // NOI18N
         jLabelSIRCA3.setForeground(new java.awt.Color(255, 255, 255));
         jLabelSIRCA3.setText("de Acceso");
         jLabelSIRCA3.setAlignmentY(0.0F);
-        jPanelSuperior.add(jLabelSIRCA3, new org.netbeans.lib.awtextra.AbsoluteConstraints(467, 69, -1, -1));
+        jPanelSuperior.add(jLabelSIRCA3, new org.netbeans.lib.awtextra.AbsoluteConstraints(467, 76, -1, -1));
 
         getContentPane().add(jPanelSuperior, java.awt.BorderLayout.PAGE_START);
 
@@ -130,6 +130,7 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
 
         jPanelPrincipalInterior.setBackground(new java.awt.Color(255, 255, 255));
         jPanelPrincipalInterior.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanelPrincipalInterior.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButtonIngresar.setBackground(new java.awt.Color(204, 0, 0));
         jButtonIngresar.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
@@ -140,8 +141,15 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
                 jButtonIngresarActionPerformed(evt);
             }
         });
+        jButtonIngresar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonIngresarKeyPressed(evt);
+            }
+        });
+        jPanelPrincipalInterior.add(jButtonIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 238, 112, 41));
 
         jLabelIconoUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/user-rojo-32.png"))); // NOI18N
+        jPanelPrincipalInterior.add(jLabelIconoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 40, -1, -1));
 
         jTextFieldLogin.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldLogin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
@@ -163,22 +171,27 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
                 jTextFieldLoginKeyPressed(evt);
             }
         });
+        jPanelPrincipalInterior.add(jTextFieldLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 40, 215, 32));
 
         jLabelRecuperarContrasenia.setFont(new java.awt.Font("Yu Gothic UI Semibold", 2, 12)); // NOI18N
         jLabelRecuperarContrasenia.setForeground(new java.awt.Color(0, 102, 255));
         jLabelRecuperarContrasenia.setText("¿Has olvidado tu login o contraseña?");
+        jPanelPrincipalInterior.add(jLabelRecuperarContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 210, 202, -1));
 
         jLabelIconoContraseña.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/lock-7-32.png"))); // NOI18N
+        jPanelPrincipalInterior.add(jLabelIconoContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 129, -1, -1));
 
         jLabelErrorLogin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jLabelErrorLogin.setForeground(new java.awt.Color(255, 0, 0));
         jLabelErrorLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelErrorLogin.setText("Error");
+        jPanelPrincipalInterior.add(jLabelErrorLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 78, -1, -1));
 
         jLabelErrorContrasenia.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jLabelErrorContrasenia.setForeground(new java.awt.Color(255, 0, 0));
         jLabelErrorContrasenia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelErrorContrasenia.setText("Error");
+        jPanelPrincipalInterior.add(jLabelErrorContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 167, -1, -1));
 
         jPasswordFieldContraseña.setBackground(new java.awt.Color(255, 255, 255));
         jPasswordFieldContraseña.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
@@ -197,53 +210,7 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
                 keyPressedEvent(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanelPrincipalInteriorLayout = new javax.swing.GroupLayout(jPanelPrincipalInterior);
-        jPanelPrincipalInterior.setLayout(jPanelPrincipalInteriorLayout);
-        jPanelPrincipalInteriorLayout.setHorizontalGroup(
-            jPanelPrincipalInteriorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPrincipalInteriorLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButtonIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(135, 135, 135))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPrincipalInteriorLayout.createSequentialGroup()
-                .addContainerGap(106, Short.MAX_VALUE)
-                .addComponent(jLabelRecuperarContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88))
-            .addGroup(jPanelPrincipalInteriorLayout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addGroup(jPanelPrincipalInteriorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelIconoUser)
-                    .addComponent(jLabelIconoContraseña))
-                .addGap(37, 37, 37)
-                .addGroup(jPanelPrincipalInteriorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextFieldLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
-                    .addComponent(jLabelErrorContrasenia)
-                    .addComponent(jLabelErrorLogin)
-                    .addComponent(jPasswordFieldContraseña))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelPrincipalInteriorLayout.setVerticalGroup(
-            jPanelPrincipalInteriorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPrincipalInteriorLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(jPanelPrincipalInteriorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jTextFieldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelIconoUser))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelErrorLogin)
-                .addGap(35, 35, 35)
-                .addGroup(jPanelPrincipalInteriorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabelIconoContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPasswordFieldContraseña))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelErrorContrasenia)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(jLabelRecuperarContrasenia)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
-        );
+        jPanelPrincipalInterior.add(jPasswordFieldContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 129, 215, 32));
 
         jPanelInterior.add(jPanelPrincipalInterior, java.awt.BorderLayout.CENTER);
 
@@ -318,33 +285,39 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
     private void jButtonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIngresarActionPerformed
 
         if(verificarCampos() == true){
+            
             try {
+                Gson objConvertidor = new Gson();
+                ClsPeticion objPeticion = new ClsPeticion();
+                
                 objCliente.crearConexion();
-                Gson objConvertidor= new Gson();
-                ClsPeticion objPeticion= new ClsPeticion();
-                String argumentos=jTextFieldLogin.getText()+","+jPasswordFieldContraseña.getText();
-                objPeticion.setAccion("ingresarAlSistema");
+                
+                String argumentos = jTextFieldLogin.getText()+","+jPasswordFieldContraseña.getText();
                 objPeticion.setArgumentos(argumentos);
+                objPeticion.setAccion("ingresarAlSistema");
+                
                 String JSON = objConvertidor.toJson(objPeticion);
-                String respuestaJSON=objCliente.enviarPeticion(JSON);
-                ClsResultado objResultado= objConvertidor.fromJson(respuestaJSON, ClsResultado.class);
+                String respuestaJSON = objCliente.enviarPeticion(JSON);
+                ClsResultado objResultado = objConvertidor.fromJson(respuestaJSON, ClsResultado.class);
+                
                 objCliente.cerrarConexion();
-                if(objResultado.getCodigoResultado()==1)
+                
+                if(objResultado.getCodigoResultado() == 1)
                 {
-                    VtnPrincipalAdministrador objVtnPrincipalAdministrador = new VtnPrincipalAdministrador(this.objCliente,jTextFieldLogin.getText());
-                    objVtnPrincipalAdministrador.setVisible(true);
+                    VtnPrincipalAdmin objVtnPrincipalAdmin = new VtnPrincipalAdmin(this.objCliente, jTextFieldLogin.getText());
+                    objVtnPrincipalAdmin.setVisible(true);
                     this.dispose();
                 }
                 else
                 {
-                    Utilidades.mensajeAdvertencia("Login o contraseña incorrecta", "Atención");
+                    Utilidades.mensajeAdvertencia("Login o contraseña incorrectos", "Error");
                 }
 
             } catch (IOException ex) {
                 Logger.getLogger(VtnIniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else{
-            Utilidades.mensajeAdvertencia("Hay campos obligatorios sin llenar", "Error");
+            Utilidades.mensajeAdvertencia("Hay campos obligatorios sin rexllenar", "Error");
         }
 
     }//GEN-LAST:event_jButtonIngresarActionPerformed
@@ -355,18 +328,24 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextFieldLoginKeyPressed
 
+    private void jButtonIngresarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonIngresarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jButtonIngresarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonIngresarKeyPressed
+
     private boolean verificarCampos(){
         
         boolean bandera = true; //true = campos correctos
         
         switch (this.jTextFieldLogin.getText()) {
             case "Digite su login":
-                this.jLabelErrorLogin.setText("Error, campo vacío");
+                this.jLabelErrorLogin.setText("Rellene este campo");
                 this.jLabelErrorLogin.setVisible(true);
                 bandera = false;
                 break;
             case "":
-                this.jLabelErrorLogin.setText("Error, campo vacío");
+                this.jLabelErrorLogin.setText("Rellene este campo");
                 this.jLabelErrorLogin.setVisible(true);
                 bandera = false;
                 break;
@@ -377,12 +356,12 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
         
         switch (this.jPasswordFieldContraseña.getText()) {
             case "Password":
-                this.jLabelErrorContrasenia.setText("Error, campo vacío");
+                this.jLabelErrorContrasenia.setText("Rellene este campo");
                 this.jLabelErrorContrasenia.setVisible(true);
                 bandera = false;
                 break;
             case "":
-                this.jLabelErrorContrasenia.setText("Error, campo vacío");
+                this.jLabelErrorContrasenia.setText("Rellene este campo");
                 this.jLabelErrorContrasenia.setVisible(true);
                 bandera = false;
                 break;

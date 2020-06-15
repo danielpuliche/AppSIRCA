@@ -29,8 +29,17 @@ public class ClsOrganizacion {
         return objAdministrador;
     }
     
-    public ClsUsuario consultarUsuario(){
-        return null;        
+    public ClsUsuario consultarUsuario(String id){
+        
+        ClsUsuario objUsuarioRetornar = null;
+        for (int i = 0; i < this.listaUsuarios.size(); i++) {
+            ClsUsuario objUsuarioAComparar = this.listaUsuarios.get(i);
+            if(objUsuarioAComparar.getIdentificacion().equals(id)){
+                objUsuarioRetornar = objUsuarioAComparar;
+                break;
+            }
+        }
+        return objUsuarioRetornar;        
     }
     
     public boolean existeUsuario(String identificacion){        
@@ -44,4 +53,18 @@ public class ClsOrganizacion {
         return bandera;
     }
     
+    public boolean eliminarUsuario(String id){
+        
+        boolean bandera = false;
+        
+        for (int i = 0; i < this.listaUsuarios.size(); i++) {
+            if(this.listaUsuarios.get(i).getIdentificacion().equals(id)){
+                this.listaUsuarios.remove(i);
+                bandera = true;
+                break;
+            }
+        }
+        
+        return bandera;        
+    }
 }
