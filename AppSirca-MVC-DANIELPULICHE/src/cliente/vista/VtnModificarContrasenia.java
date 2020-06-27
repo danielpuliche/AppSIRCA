@@ -4,12 +4,15 @@ import cliente.servicios.cliente;
 import com.google.gson.Gson;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
-import modelo.ClsPeticion;
-import modelo.ClsResultado;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import modelo.DTO.ClsPeticionDTO;
+import modelo.DTO.ClsResultadoDTO;
 import utilidades.Utilidades;
 
 public class VtnModificarContrasenia extends javax.swing.JFrame {
@@ -19,16 +22,12 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
 
     public VtnModificarContrasenia(cliente objCliente, String nombrePerfil) {
         initComponents();
-        Image icon = Toolkit.getDefaultToolkit().getImage("./src/Recursos/logo.png");
+        Image icon = Toolkit.getDefaultToolkit().getImage("./src/Recursos/logo.jpg");
         this.setIconImage(icon);
         this.objCliente = objCliente;
         this.nombrePerfil = nombrePerfil;
-        jLabelErrorContraseniaActual.setVisible(false);
-        jLabelErrorNuevaContrasenia.setVisible(false);
-        jLabelErrorConfirmarNuevaContrasenia.setVisible(false);
-        jLabelInvisibilidadContraseniaActual.setVisible(false);
-        jLabelInvisibilidadNuevaContrasenia.setVisible(false);
-        jLabelInvisibilidadConfirmarNuevaContrasenia.setVisible(false);
+        ocultarErrores();
+        inicializarBotonesVisualizar();
         this.jComboBoxPerfil.insertItemAt(this.nombrePerfil, 0);
         this.jComboBoxPerfil.setSelectedIndex(0);
     }
@@ -48,8 +47,8 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
         jLabelSIRCA2 = new javax.swing.JLabel();
         jLabelSIRCA3 = new javax.swing.JLabel();
         jLabelPerfil = new javax.swing.JLabel();
-        jLabelPerfil2 = new javax.swing.JLabel();
         jComboBoxPerfil = new javax.swing.JComboBox<>();
+        jLabelPerfil2 = new javax.swing.JLabel();
         jPanelCentral = new javax.swing.JPanel();
         PanelPrincipal = new javax.swing.JPanel();
         jPanelInterior = new javax.swing.JPanel();
@@ -71,14 +70,14 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
         jLabelObligatorio3 = new javax.swing.JLabel();
         jLabelCamposObligatorios = new javax.swing.JLabel();
         jPanelVisibilidadContraseniaActual = new javax.swing.JPanel();
-        jLabelInvisibilidadContraseniaActual = new javax.swing.JLabel();
         jLabelVisibilidadContraseniaActual = new javax.swing.JLabel();
+        jLabelInvisibilidadContraseniaActual = new javax.swing.JLabel();
         jPanelVisibilidadNuevaContrasenia = new javax.swing.JPanel();
-        jLabelInvisibilidadNuevaContrasenia = new javax.swing.JLabel();
         jLabelVisibilidadNuevaContrasenia = new javax.swing.JLabel();
+        jLabelInvisibilidadNuevaContrasenia = new javax.swing.JLabel();
         jPanelVisibilidadConfirmarNuevaContrasenia = new javax.swing.JPanel();
-        jLabelInvisibilidadConfirmarNuevaContrasenia = new javax.swing.JLabel();
         jLabelVisibilidadConfirmarNuevaContrasenia = new javax.swing.JLabel();
+        jLabelInvisibilidadConfirmarNuevaContrasenia = new javax.swing.JLabel();
         jPanelRegresar = new javax.swing.JPanel();
         jButtonRegresar = new javax.swing.JButton();
 
@@ -159,23 +158,22 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
         jLabelPerfil.setForeground(new java.awt.Color(255, 255, 255));
         jPanelSuperior.add(jLabelPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(494, 141, -1, -1));
 
-        jLabelPerfil2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
-        jLabelPerfil2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelPerfil2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/user-32.png"))); // NOI18N
-        jPanelSuperior.add(jLabelPerfil2, new org.netbeans.lib.awtextra.AbsoluteConstraints(522, 105, -1, -1));
-
         jComboBoxPerfil.setBackground(new java.awt.Color(204, 0, 0));
         jComboBoxPerfil.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jComboBoxPerfil.setForeground(new java.awt.Color(255, 255, 255));
         jComboBoxPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Modificar Login", "Modificar Contraseña", "Cerrar Sesión" }));
-        jComboBoxPerfil.setSelectedIndex(-1);
-        jComboBoxPerfil.setBorder(null);
+        jComboBoxPerfil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jComboBoxPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxPerfilActionPerformed(evt);
             }
         });
-        jPanelSuperior.add(jComboBoxPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(557, 112, 140, 25));
+        jPanelSuperior.add(jComboBoxPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 108, 160, -1));
+
+        jLabelPerfil2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        jLabelPerfil2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelPerfil2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/user-32.png"))); // NOI18N
+        jPanelSuperior.add(jLabelPerfil2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 105, -1, -1));
 
         getContentPane().add(jPanelSuperior, java.awt.BorderLayout.PAGE_START);
 
@@ -188,14 +186,14 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
         PanelPrincipal.setLayout(new java.awt.GridBagLayout());
 
         jPanelInterior.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelInterior.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanelInterior.setMaximumSize(new java.awt.Dimension(310, 360));
         jPanelInterior.setMinimumSize(new java.awt.Dimension(0, 0));
+        jPanelInterior.setPreferredSize(new java.awt.Dimension(440, 330));
         jPanelInterior.setLayout(new java.awt.BorderLayout());
 
         jPanelCabecera.setBackground(new java.awt.Color(204, 0, 0));
         jPanelCabecera.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanelCabecera.setPreferredSize(new java.awt.Dimension(194, 39));
+        jPanelCabecera.setPreferredSize(new java.awt.Dimension(145, 40));
 
         jLabelTituloModificarLogin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
         jLabelTituloModificarLogin.setForeground(new java.awt.Color(255, 255, 255));
@@ -205,81 +203,112 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
         jPanelInterior.add(jPanelCabecera, java.awt.BorderLayout.PAGE_START);
 
         jPanelInteriorPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelInteriorPrincipal.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanelInteriorPrincipal.setPreferredSize(new java.awt.Dimension(440, 290));
+        jPanelInteriorPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelContraseniaActual.setBackground(new java.awt.Color(255, 255, 255));
         jLabelContraseniaActual.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabelContraseniaActual.setText("Contraseña Actual:");
+        jPanelInteriorPrincipal.add(jLabelContraseniaActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
         jLabelObligatorio1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 36)); // NOI18N
         jLabelObligatorio1.setForeground(new java.awt.Color(255, 0, 0));
         jLabelObligatorio1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelObligatorio1.setText("*");
+        jPanelInteriorPrincipal.add(jLabelObligatorio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, 40));
 
         jLabelErrorContraseniaActual.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jLabelErrorContraseniaActual.setForeground(new java.awt.Color(255, 0, 0));
         jLabelErrorContraseniaActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelErrorContraseniaActual.setText("Error");
+        jPanelInteriorPrincipal.add(jLabelErrorContraseniaActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
         jLabelNuevaContrasenia.setBackground(new java.awt.Color(255, 255, 255));
         jLabelNuevaContrasenia.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabelNuevaContrasenia.setText("Nueva Contraseña:");
+        jPanelInteriorPrincipal.add(jLabelNuevaContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
 
         jLabelErrorNuevaContrasenia.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jLabelErrorNuevaContrasenia.setForeground(new java.awt.Color(255, 0, 0));
         jLabelErrorNuevaContrasenia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelErrorNuevaContrasenia.setText("Error");
+        jPanelInteriorPrincipal.add(jLabelErrorNuevaContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
 
         jLabelConfirmarNuevaContrasenia.setBackground(new java.awt.Color(255, 255, 255));
         jLabelConfirmarNuevaContrasenia.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabelConfirmarNuevaContrasenia.setText("Confirmar Nueva Contraseña:");
+        jPanelInteriorPrincipal.add(jLabelConfirmarNuevaContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
         jLabelErrorConfirmarNuevaContrasenia.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         jLabelErrorConfirmarNuevaContrasenia.setForeground(new java.awt.Color(255, 0, 0));
         jLabelErrorConfirmarNuevaContrasenia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelErrorConfirmarNuevaContrasenia.setText("Error");
+        jPanelInteriorPrincipal.add(jLabelErrorConfirmarNuevaContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
 
         jButtonGuardar.setBackground(new java.awt.Color(204, 0, 0));
         jButtonGuardar.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         jButtonGuardar.setForeground(new java.awt.Color(255, 255, 255));
         jButtonGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/save-32.png"))); // NOI18N
         jButtonGuardar.setText("Guardar");
+        jButtonGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonGuardarActionPerformed(evt);
             }
         });
+        jButtonGuardar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonGuardarKeyPressed(evt);
+            }
+        });
+        jPanelInteriorPrincipal.add(jButtonGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 217, 140, 50));
 
         jPasswordFieldContraseniaActual.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jPasswordFieldContraseniaActual.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPasswordFieldContraseniaActualKeyPressed(evt);
+            }
+        });
+        jPanelInteriorPrincipal.add(jPasswordFieldContraseniaActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 42, 180, 26));
 
         jPasswordFieldNuevaContrasenia.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jPasswordFieldNuevaContrasenia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPasswordFieldNuevaContraseniaKeyPressed(evt);
+            }
+        });
+        jPanelInteriorPrincipal.add(jPasswordFieldNuevaContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 132, 180, 26));
 
         jPasswordFieldConfirmarNuevaContrasenia.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jPasswordFieldConfirmarNuevaContrasenia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPasswordFieldConfirmarNuevaContraseniaKeyPressed(evt);
+            }
+        });
+        jPanelInteriorPrincipal.add(jPasswordFieldConfirmarNuevaContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 222, 180, 26));
 
         jLabelObligatorio2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 36)); // NOI18N
         jLabelObligatorio2.setForeground(new java.awt.Color(255, 0, 0));
         jLabelObligatorio2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelObligatorio2.setText("*");
+        jPanelInteriorPrincipal.add(jLabelObligatorio2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, 40));
 
         jLabelObligatorio3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 36)); // NOI18N
         jLabelObligatorio3.setForeground(new java.awt.Color(255, 0, 0));
         jLabelObligatorio3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelObligatorio3.setText("*");
+        jPanelInteriorPrincipal.add(jLabelObligatorio3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, 40));
 
-        jLabelCamposObligatorios.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
+        jLabelCamposObligatorios.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jLabelCamposObligatorios.setForeground(new java.awt.Color(255, 0, 0));
         jLabelCamposObligatorios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCamposObligatorios.setText("* Campos Obligatorios");
+        jPanelInteriorPrincipal.add(jLabelCamposObligatorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, -1, -1));
 
         jPanelVisibilidadContraseniaActual.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelVisibilidadContraseniaActual.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanelVisibilidadContraseniaActual.setLayout(new java.awt.CardLayout());
-
-        jLabelInvisibilidadContraseniaActual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/eye_slash_visible_hide_hidden_show_icon_145987.png"))); // NOI18N
-        jLabelInvisibilidadContraseniaActual.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabelInvisibilidadContraseniaActualMousePressed(evt);
-            }
-        });
-        jPanelVisibilidadContraseniaActual.add(jLabelInvisibilidadContraseniaActual, "card2");
 
         jLabelVisibilidadContraseniaActual.setBackground(new java.awt.Color(255, 255, 255));
         jLabelVisibilidadContraseniaActual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/eye_visible_hide_hidden_show_icon_145988.png"))); // NOI18N
@@ -290,16 +319,19 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
         });
         jPanelVisibilidadContraseniaActual.add(jLabelVisibilidadContraseniaActual, "card3");
 
-        jPanelVisibilidadNuevaContrasenia.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelVisibilidadNuevaContrasenia.setLayout(new java.awt.CardLayout());
-
-        jLabelInvisibilidadNuevaContrasenia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/eye_slash_visible_hide_hidden_show_icon_145987.png"))); // NOI18N
-        jLabelInvisibilidadNuevaContrasenia.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelInvisibilidadContraseniaActual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/eye_slash_visible_hide_hidden_show_icon_145987.png"))); // NOI18N
+        jLabelInvisibilidadContraseniaActual.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabelInvisibilidadNuevaContraseniaMousePressed(evt);
+                jLabelInvisibilidadContraseniaActualMousePressed(evt);
             }
         });
-        jPanelVisibilidadNuevaContrasenia.add(jLabelInvisibilidadNuevaContrasenia, "card2");
+        jPanelVisibilidadContraseniaActual.add(jLabelInvisibilidadContraseniaActual, "card2");
+
+        jPanelInteriorPrincipal.add(jPanelVisibilidadContraseniaActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
+
+        jPanelVisibilidadNuevaContrasenia.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelVisibilidadNuevaContrasenia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanelVisibilidadNuevaContrasenia.setLayout(new java.awt.CardLayout());
 
         jLabelVisibilidadNuevaContrasenia.setBackground(new java.awt.Color(255, 255, 255));
         jLabelVisibilidadNuevaContrasenia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/eye_visible_hide_hidden_show_icon_145988.png"))); // NOI18N
@@ -310,16 +342,19 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
         });
         jPanelVisibilidadNuevaContrasenia.add(jLabelVisibilidadNuevaContrasenia, "card1");
 
-        jPanelVisibilidadConfirmarNuevaContrasenia.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelVisibilidadConfirmarNuevaContrasenia.setLayout(new java.awt.CardLayout());
-
-        jLabelInvisibilidadConfirmarNuevaContrasenia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/eye_slash_visible_hide_hidden_show_icon_145987.png"))); // NOI18N
-        jLabelInvisibilidadConfirmarNuevaContrasenia.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelInvisibilidadNuevaContrasenia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/eye_slash_visible_hide_hidden_show_icon_145987.png"))); // NOI18N
+        jLabelInvisibilidadNuevaContrasenia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabelInvisibilidadConfirmarNuevaContraseniaMousePressed(evt);
+                jLabelInvisibilidadNuevaContraseniaMousePressed(evt);
             }
         });
-        jPanelVisibilidadConfirmarNuevaContrasenia.add(jLabelInvisibilidadConfirmarNuevaContrasenia, "card2");
+        jPanelVisibilidadNuevaContrasenia.add(jLabelInvisibilidadNuevaContrasenia, "card2");
+
+        jPanelInteriorPrincipal.add(jPanelVisibilidadNuevaContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, -1, -1));
+
+        jPanelVisibilidadConfirmarNuevaContrasenia.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelVisibilidadConfirmarNuevaContrasenia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanelVisibilidadConfirmarNuevaContrasenia.setLayout(new java.awt.CardLayout());
 
         jLabelVisibilidadConfirmarNuevaContrasenia.setBackground(new java.awt.Color(255, 255, 255));
         jLabelVisibilidadConfirmarNuevaContrasenia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/eye_visible_hide_hidden_show_icon_145988.png"))); // NOI18N
@@ -330,99 +365,15 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
         });
         jPanelVisibilidadConfirmarNuevaContrasenia.add(jLabelVisibilidadConfirmarNuevaContrasenia, "card1");
 
-        javax.swing.GroupLayout jPanelInteriorPrincipalLayout = new javax.swing.GroupLayout(jPanelInteriorPrincipal);
-        jPanelInteriorPrincipal.setLayout(jPanelInteriorPrincipalLayout);
-        jPanelInteriorPrincipalLayout.setHorizontalGroup(
-            jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabelContraseniaActual))
-                    .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelObligatorio1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelErrorContraseniaActual)
-                            .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                                .addComponent(jPasswordFieldContraseniaActual, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanelVisibilidadContraseniaActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelObligatorio2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelErrorNuevaContrasenia)
-                            .addComponent(jLabelNuevaContrasenia)
-                            .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                                .addComponent(jPasswordFieldNuevaContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanelVisibilidadNuevaContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInteriorPrincipalLayout.createSequentialGroup()
-                .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelObligatorio3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                                .addComponent(jPasswordFieldConfirmarNuevaContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanelVisibilidadConfirmarNuevaContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabelErrorConfirmarNuevaContrasenia)))
-                    .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabelConfirmarNuevaContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelCamposObligatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29))
-        );
-        jPanelInteriorPrincipalLayout.setVerticalGroup(
-            jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabelContraseniaActual)
-                .addGap(6, 6, 6)
-                .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelObligatorio1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                        .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPasswordFieldContraseniaActual, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanelVisibilidadContraseniaActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelErrorContraseniaActual)))
-                .addGap(7, 7, 7)
-                .addComponent(jLabelNuevaContrasenia)
-                .addGap(6, 6, 6)
-                .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelObligatorio2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                        .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPasswordFieldNuevaContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanelVisibilidadNuevaContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelErrorNuevaContrasenia)))
-                .addGap(7, 7, 7)
-                .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelConfirmarNuevaContrasenia)
-                    .addComponent(jLabelCamposObligatorios))
-                .addGap(6, 6, 6)
-                .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelObligatorio3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelInteriorPrincipalLayout.createSequentialGroup()
-                        .addGroup(jPanelInteriorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPasswordFieldConfirmarNuevaContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanelVisibilidadConfirmarNuevaContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelErrorConfirmarNuevaContrasenia))
-                    .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
-        );
+        jLabelInvisibilidadConfirmarNuevaContrasenia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/eye_slash_visible_hide_hidden_show_icon_145987.png"))); // NOI18N
+        jLabelInvisibilidadConfirmarNuevaContrasenia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabelInvisibilidadConfirmarNuevaContraseniaMousePressed(evt);
+            }
+        });
+        jPanelVisibilidadConfirmarNuevaContrasenia.add(jLabelInvisibilidadConfirmarNuevaContrasenia, "card2");
+
+        jPanelInteriorPrincipal.add(jPanelVisibilidadConfirmarNuevaContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, -1, -1));
 
         jPanelInterior.add(jPanelInteriorPrincipal, java.awt.BorderLayout.CENTER);
 
@@ -439,6 +390,7 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
         jButtonRegresar.setForeground(new java.awt.Color(255, 255, 255));
         jButtonRegresar.setText("< Regresar");
         jButtonRegresar.setBorderPainted(false);
+        jButtonRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRegresarActionPerformed(evt);
@@ -466,73 +418,126 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    // Subflujo REGRESAR
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
-        VtnPrincipalAdmin objVtnPrincipalAdmin = new VtnPrincipalAdmin(this.objCliente, this.nombrePerfil);
-        objVtnPrincipalAdmin.setVisible(true);
-        this.dispose();
+        
+        boolean bandera = camposEscritos();
+        
+        if(bandera == false){
+            VtnPrincipalAdmin objVtnPrincipalAdmin = new VtnPrincipalAdmin(this.objCliente, this.nombrePerfil);
+            objVtnPrincipalAdmin.setVisible(true);
+            this.dispose();
+        }else{
+            if(Utilidades.mensajeConfirmacion("Los cambios no guardados se perderan", "Confirmar retorno") == 0){
+                VtnPrincipalAdmin objVtnPrincipalAdmin = new VtnPrincipalAdmin(this.objCliente, this.nombrePerfil);
+                objVtnPrincipalAdmin.setVisible(true);
+                this.dispose();
+            }
+        } 
+        
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
-    private void jComboBoxPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPerfilActionPerformed
-        switch (jComboBoxPerfil.getSelectedIndex()) {
-            case 1:
-                VtnModificarLogin objVtnModificarLogin = new VtnModificarLogin(this.objCliente, this.nombrePerfil);
-                objVtnModificarLogin.setVisible(true);
-                this.dispose();
-            break;
-            case 2:
-                this.jComboBoxPerfil.setSelectedIndex(0);
-            break;
-            case 3:
-                VtnIniciarSesion objVtnIniciarSesion = new VtnIniciarSesion(this.objCliente);
-                objVtnIniciarSesion.setVisible(true);
-                this.dispose();
-            break;
-            default:
-            break;
-        }
-    }//GEN-LAST:event_jComboBoxPerfilActionPerformed
-
-    private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-        
+    //Funcion para ocultar notificaciones de error
+    private void ocultarErrores(){
         jLabelErrorContraseniaActual.setVisible(false);
         jLabelErrorNuevaContrasenia.setVisible(false);
         jLabelErrorConfirmarNuevaContrasenia.setVisible(false);
+    }
+    
+    //Funcion para inicializar los botones de visualizacion
+    private void inicializarBotonesVisualizar(){
+        jLabelInvisibilidadContraseniaActual.setVisible(false);
+        jLabelInvisibilidadNuevaContrasenia.setVisible(false);
+        jLabelInvisibilidadConfirmarNuevaContrasenia.setVisible(false);
+        jLabelVisibilidadContraseniaActual.setVisible(true);
+        jLabelVisibilidadNuevaContrasenia.setVisible(true);
+        jLabelVisibilidadConfirmarNuevaContrasenia.setVisible(true);
+    }
+    
+    // Validacion SUBFLUJOS
+    private boolean camposEscritos(){
+        boolean bandera = false;
         
-        boolean comprobacion1 = verificarCamposVacios();
-        boolean comprobacion2 = verificarContraseniaNueva();
-        if(comprobacion1 == true && comprobacion2 == true){
-            try {
-                objCliente.crearConexion();
-                Gson objConvertidor = new Gson();
-                ClsPeticion objPeticion = new ClsPeticion();
-                String argumentos = this.nombrePerfil+","+jPasswordFieldNuevaContrasenia;
-                objPeticion.setAccion("modificarContrasenia");
-                objPeticion.setArgumentos(argumentos);
-                String JSON = objConvertidor.toJson(objPeticion);
-                String respuestaJSON = objCliente.enviarPeticion(JSON);
-                ClsResultado objResultado = objConvertidor.fromJson(respuestaJSON, ClsResultado.class);
-                objCliente.cerrarConexion();
-                if(objResultado.getCodigoResultado() == 1)
-                {
-                    //MOSTRAR EMERGENTE DE EXITO
-                    VtnPrincipalAdmin objVtnPrincipalAdmin = new VtnPrincipalAdmin(this.objCliente,nombrePerfil);
-                    objVtnPrincipalAdmin.setVisible(true);
-                    this.dispose();
-                }
-                else
-                {
-                    Utilidades.mensajeAdvertencia("Administrador no encontrado", "Atención");
-                }
+        if(!this.jPasswordFieldContraseniaActual.getText().equals(""))
+            bandera = true;
+        
+        if(!this.jPasswordFieldNuevaContrasenia.getText().equals(""))
+            bandera = true;
+                
+        if(!this.jPasswordFieldConfirmarNuevaContrasenia.getText().equals(""))
+            bandera = true;
+       
+        return bandera;
+    }
+    
+    // Función principal GUARDAR
+    private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
+        
+        ocultarErrores();
+        
+        boolean confirmarContrasenia = verificarContraseniaNueva();
+        boolean camposValidos = verificarCamposValidos();  
+        boolean cantidadCaracteres = validarCantidadDeCaracteresCampos();      
+        boolean camposVacios = verificarCamposVacios();
+        
+        if(camposVacios == false && confirmarContrasenia == false && camposValidos == false && cantidadCaracteres == false){
+        
+            if(Utilidades.mensajeConfirmacion("¿Estás seguro de que quieres guardar los cambios realizados?", "Advertencia") == 0){
+                try {
 
-            } catch (IOException ex) {
-                Logger.getLogger(VtnIniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
+                    //Iniciar conexión servidor
+
+                    objCliente.crearConexion();
+
+                    Gson objConvertidor = new Gson();
+                    ClsPeticionDTO objPeticion = new ClsPeticionDTO();
+
+                    String argumentos = jPasswordFieldContraseniaActual.getText()+","+jPasswordFieldNuevaContrasenia.getText();
+                    objPeticion.setAccion("modificarContraseña");
+                    objPeticion.setArgumentos(argumentos);
+                    String JSON = objConvertidor.toJson(objPeticion);
+
+                    String respuestaJSON = objCliente.enviarPeticion(JSON);
+                    ClsResultadoDTO objResultado = objConvertidor.fromJson(respuestaJSON, ClsResultadoDTO.class);
+
+                    objCliente.cerrarConexion();
+
+                    //Cerrar conexión supervisor
+
+                    if(objResultado.getCodigoResultado() == 1)
+                    {
+                        Utilidades.mensajeExito("Cambio de contraseña exitoso", "Acción realizada con éxito");
+                        VtnPrincipalAdmin objVtnPrincipalAdmin = new VtnPrincipalAdmin(this.objCliente,nombrePerfil);
+                        objVtnPrincipalAdmin.setVisible(true);
+                        this.dispose();
+                    }
+                    else
+                    {
+                        mostrarError(jLabelErrorContraseniaActual,"La contraseña ingresada es incorrecta");
+                        Utilidades.mensajeAdvertencia("Contraseña no válida", "Atención");
+                    }
+
+                } catch (IOException ex) {
+                    Logger.getLogger(VtnIniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }else{
-            Utilidades.mensajeAdvertencia("Ha ocurrido un error en el formulario", "Error");
+            
+            if(camposVacios == true)
+                Utilidades.mensajeAdvertencia("Hay campos obligatorios sin rellenar", "Error");
+            else if(cantidadCaracteres == true)
+                Utilidades.mensajeAdvertencia("Número de caracteres no válido", "Error");
+            else if(camposValidos == true)
+                Utilidades.mensajeAdvertencia("Caracteres ingresados no válidos", "Error");
+            else if(confirmarContrasenia == true)
+                Utilidades.mensajeAdvertencia("Confirmación de la nueva contraseña no coincide", "Confirmación fallida");
         }
     }//GEN-LAST:event_jButtonGuardarActionPerformed
-
+    
+    
+    
+    // Eventos VISIBILIDAD inicio ==============================================
     private void jLabelVisibilidadContraseniaActualMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelVisibilidadContraseniaActualMousePressed
         this.jPasswordFieldContraseniaActual.setEchoChar((char)0);
         this.jLabelVisibilidadContraseniaActual.setVisible(false);
@@ -568,53 +573,205 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
         this.jLabelVisibilidadConfirmarNuevaContrasenia.setVisible(false);
         this.jLabelInvisibilidadConfirmarNuevaContrasenia.setVisible(true);
     }//GEN-LAST:event_jLabelVisibilidadConfirmarNuevaContraseniaMousePressed
+    // Eventos VISIBILIDAD final ===============================================
     
+    
+    
+    // Evento ENTER inicio =====================================================
+    private void jPasswordFieldContraseniaActualKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordFieldContraseniaActualKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jButtonGuardarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jPasswordFieldContraseniaActualKeyPressed
+
+    private void jPasswordFieldNuevaContraseniaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordFieldNuevaContraseniaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jButtonGuardarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jPasswordFieldNuevaContraseniaKeyPressed
+
+    private void jPasswordFieldConfirmarNuevaContraseniaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordFieldConfirmarNuevaContraseniaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jButtonGuardarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jPasswordFieldConfirmarNuevaContraseniaKeyPressed
+
+    private void jButtonGuardarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonGuardarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jButtonGuardarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jButtonGuardarKeyPressed
+    // Evento ENTER final ======================================================
+    
+    
+    
+    // ComboBox PERFIL
+    private void jComboBoxPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPerfilActionPerformed
+
+        switch (jComboBoxPerfil.getSelectedIndex()) {
+
+            case 1:
+                
+                if(camposEscritos() == false){
+                    VtnModificarLogin objVtnModificarLogin = new VtnModificarLogin(this.objCliente, this.nombrePerfil);
+                    objVtnModificarLogin.setVisible(true);
+                    this.dispose();
+                }else{
+                    if(Utilidades.mensajeConfirmacion("Los cambios no guardados se perderan", "Confirmar redirección") == 0){
+                        VtnModificarLogin objVtnModificarLogin = new VtnModificarLogin(this.objCliente, this.nombrePerfil);
+                        objVtnModificarLogin.setVisible(true);
+                        this.dispose();
+                    }
+                } 
+                
+            break;
+            case 2:
+                this.jComboBoxPerfil.setSelectedIndex(0);
+            break;
+            case 3:
+                
+                if(camposEscritos() == false){
+                    VtnIniciarSesion objVtnIniciarSesion = new VtnIniciarSesion(this.objCliente);
+                    objVtnIniciarSesion.setVisible(true);
+                    this.dispose();
+                }else{
+                    if(Utilidades.mensajeConfirmacion("Los cambios no guardados se perderan", "Confirmar redirección") == 0){
+                        VtnIniciarSesion objVtnIniciarSesion = new VtnIniciarSesion(this.objCliente);
+                        objVtnIniciarSesion.setVisible(true);
+                        this.dispose();
+                    }
+                } 
+                
+                
+            break;
+            default:
+
+            break;
+
+        }
+        
+        this.jComboBoxPerfil.setSelectedIndex(0);
+    }//GEN-LAST:event_jComboBoxPerfilActionPerformed
+    
+    
+    
+    // VALIDACIÓN campos inicio ================================================
     private boolean verificarCamposVacios() {
-        boolean banderaFinal = true;
-        boolean bandera1 = true;
-        boolean bandera2 = true;
-        boolean bandera3 = true;
+        
+        boolean bandera = false;
+        
         if(this.jPasswordFieldContraseniaActual.getText().equals(""))
         {
-            mostrarError(jLabelErrorContraseniaActual, "Error. Digite su contraseña actual");
-            bandera1=false;
+            mostrarError(jLabelErrorContraseniaActual, "Rellenar este campo");
+            bandera = true;
         }
         if(this.jPasswordFieldNuevaContrasenia.getText().equals(""))
         {
-            mostrarError(jLabelErrorNuevaContrasenia, "Error. Digite su nueva contraseña");
-            bandera2=false;
+            mostrarError(jLabelErrorNuevaContrasenia, "Rellenar este campo");
+            bandera = true;
         }
         if(this.jPasswordFieldConfirmarNuevaContrasenia.getText().equals(""))
         {
-            mostrarError(jLabelErrorConfirmarNuevaContrasenia, "Error. Digite su nueva contraseña");
-            bandera3=false;
+            mostrarError(jLabelErrorConfirmarNuevaContrasenia, "Rellenar este campo");
+            bandera = true;
         }
-        if(bandera1==false || bandera2==false || bandera3==false)
-        {
-            banderaFinal=false;
-        }
-        return banderaFinal;
+        
+        return bandera;
     }
     
     private boolean verificarContraseniaNueva(){
-        boolean banderaFinal = true;
-        if(jPasswordFieldNuevaContrasenia.getText().equals(jPasswordFieldConfirmarNuevaContrasenia.getText()))
+        
+        boolean bandera = false;
+        
+        if(!jPasswordFieldNuevaContrasenia.getText().equals(jPasswordFieldConfirmarNuevaContrasenia.getText()))
         {
-            banderaFinal = true;
+            bandera = true;
+            mostrarError(jLabelErrorConfirmarNuevaContrasenia, "La contraseña ingresada no coincide");
         }
-        else
-        {
-            banderaFinal = false;
-            mostrarError(jLabelErrorNuevaContrasenia, "Error. Contraseñas no coincidentes");
-            mostrarError(jLabelErrorConfirmarNuevaContrasenia, "Error. Contraseñas no coincidentes");
-        }
-        return banderaFinal;
+        return bandera;
     }
+    
+    private boolean verificarCaracteresValidos(JPasswordField campo) {
+        
+        char[] caracteresNoValidos = {'!','#','$','%','&','/','(',')','=','?','¿','@','*',';',',',':','.','-','_'};    ///FALTAN POR AGREGAR
+                                      
+        boolean bandera=false;
+        
+        char[] letrasEnCampo = campo.getText().toCharArray();
+        
+        for(int j=0;j<caracteresNoValidos.length;j++){
+            String letraNoValida = String.valueOf(caracteresNoValidos[j]);
+            for(int i=0;i<letrasEnCampo.length;i++){
+                String letraCampo = String.valueOf(letrasEnCampo[i]);
+                if(letraCampo.equalsIgnoreCase(letraNoValida))
+                {
+                    bandera=true;
+                }
+            }
+        }
+        return bandera;
+    }
+    
+    private boolean verificarCamposValidos(){
+        
+        boolean bandera = false; // false = campos validos        
+                
+        if(verificarCaracteresValidos(jPasswordFieldContraseniaActual) == true)
+        {
+            mostrarError(jLabelErrorContraseniaActual, "Carácter ingresado no válido");
+            bandera=true;
+        }
+        
+        if(verificarCaracteresValidos(jPasswordFieldNuevaContrasenia) == true)
+        {
+            mostrarError(jLabelErrorNuevaContrasenia, "Carácter ingresado no válido");
+            bandera=true;
+        }
+        
+        if(verificarCaracteresValidos(jPasswordFieldConfirmarNuevaContrasenia) == true)
+        {
+            mostrarError(jLabelErrorConfirmarNuevaContrasenia, "Carácter ingresado no válido");
+            bandera=true;
+        }
+        
+        return bandera;
+    }
+    
+    private boolean validarCantidadDeCaracteresCampos(){
+        
+        boolean bandera = false; // false = valido
+        
+        if(validarCantidadDeCaracteresContrasenia(jPasswordFieldContraseniaActual, jLabelErrorContraseniaActual) == true)
+            bandera = true;
+        if(validarCantidadDeCaracteresContrasenia(jPasswordFieldNuevaContrasenia, jLabelErrorNuevaContrasenia) == true)
+            bandera = true;
+        if(validarCantidadDeCaracteresContrasenia(jPasswordFieldConfirmarNuevaContrasenia, jLabelErrorConfirmarNuevaContrasenia) == true)
+            bandera = true;
+        
+        return bandera;
+    }
+    
+    private boolean validarCantidadDeCaracteresContrasenia(JPasswordField contrasenia, JLabel error){
+        
+        boolean bandera = false; // false = correcto
+        
+        if(contrasenia.getText().length() < 8 || contrasenia.getText().length() > 15){ 
+            bandera = true;
+            mostrarError(error, "La contraseña debe poseer entre 8 y 15 caracteres");            
+        }
+       
+        return bandera;
+    }
+    
+    //FALTA VALIDAR QUE LA CONTRASEÑA SEA LA CORRECTA
     
     private void mostrarError(JLabel notificacion, String error){
             notificacion.setText(error);
             notificacion.setVisible(true);
     }
+    // VALIDACIÓN campos final =================================================
+    
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Barra;

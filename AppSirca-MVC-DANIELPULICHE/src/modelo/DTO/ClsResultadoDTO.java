@@ -1,15 +1,15 @@
-package modelo;
+package modelo.DTO;
 
-public class ClsResultado {
+public class ClsResultadoDTO {
     private int codigoResultado;//1 si se registro el cliente exitosamente, 2 si el cliente ya exite en el servidor
     private String JSONResultado;//los datos correspondientes a un conductor consultado
 
-    public ClsResultado()
+    public ClsResultadoDTO()
     {   
         this.codigoResultado=0;
         this.JSONResultado="";
     }
-    public ClsResultado(int codigoResultado, String JSONResultado) {
+    public ClsResultadoDTO(int codigoResultado, String JSONResultado) {
         this.codigoResultado = codigoResultado;
         this.JSONResultado = JSONResultado;
     }

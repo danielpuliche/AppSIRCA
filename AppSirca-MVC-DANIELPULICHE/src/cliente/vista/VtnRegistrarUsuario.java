@@ -2,13 +2,15 @@ package cliente.vista;
 
 import cliente.servicios.cliente;
 import com.google.gson.Gson;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import modelo.ClsPeticion;
-import modelo.ClsResultado;
-import modelo.ClsUsuario;
+import modelo.DTO.ClsPeticionDTO;
+import modelo.DTO.ClsResultadoDTO;
+import modelo.DTO.ClsUsuarioDTO;
 import utilidades.Utilidades;
 
 public class VtnRegistrarUsuario extends javax.swing.JFrame {
@@ -17,13 +19,12 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
     private cliente objCliente;
     
     public VtnRegistrarUsuario(cliente objCliente, String nombrePerfil) {
-        initComponents();           
+        initComponents();  
+        Image icon = Toolkit.getDefaultToolkit().getImage("./src/Recursos/logo.jpg");
+        this.setIconImage(icon);
         this.objCliente = objCliente;
         this.nombrePerfil = nombrePerfil;
-        jLabelErrorCodigo.setVisible(false);
-        jLabelErrorNombres.setVisible(false);
-        jLabelErrorApellidos.setVisible(false);
-        jLabelErrorGenero.setVisible(false);
+        ocultarErrores();
         this.jComboBoxPerfil.insertItemAt(this.nombrePerfil, 0);
         this.jComboBoxPerfil.setSelectedIndex(0);
     }
@@ -43,8 +44,8 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         jLabelSIRCA2 = new javax.swing.JLabel();
         jLabelSIRCA3 = new javax.swing.JLabel();
         jLabelPerfil = new javax.swing.JLabel();
-        jLabelPerfil2 = new javax.swing.JLabel();
         jComboBoxPerfil = new javax.swing.JComboBox<>();
+        jLabelPerfil2 = new javax.swing.JLabel();
         jPanelCentral = new javax.swing.JPanel();
         PanelPrincipal = new javax.swing.JPanel();
         jPanelInterior = new javax.swing.JPanel();
@@ -52,7 +53,7 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         jLabelTituloIniciarSesion1 = new javax.swing.JLabel();
         jPanelInteriorPrincipal = new javax.swing.JPanel();
         jPanelRegistrar = new javax.swing.JPanel();
-        jButtonRegistrar1 = new javax.swing.JButton();
+        jButtonRegistrar = new javax.swing.JButton();
         jLabelObligatorio = new javax.swing.JLabel();
         jLabelCodigo = new javax.swing.JLabel();
         jLabelNombres = new javax.swing.JLabel();
@@ -87,7 +88,6 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         jPanelInferior.setPreferredSize(new java.awt.Dimension(700, 30));
 
         jLabelDesarrolladores.setBackground(new java.awt.Color(255, 255, 255));
-        jLabelDesarrolladores.setForeground(new java.awt.Color(0, 0, 0));
         jLabelDesarrolladores.setText("F&P Software Development || www.fypsoftwaredevelopment.com || 2020");
         jPanelInferior.add(jLabelDesarrolladores);
 
@@ -153,23 +153,22 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         jLabelPerfil.setForeground(new java.awt.Color(255, 255, 255));
         jPanelSuperior.add(jLabelPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(498, 141, -1, -1));
 
-        jLabelPerfil2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
-        jLabelPerfil2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelPerfil2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/user-32.png"))); // NOI18N
-        jPanelSuperior.add(jLabelPerfil2, new org.netbeans.lib.awtextra.AbsoluteConstraints(522, 105, -1, -1));
-
         jComboBoxPerfil.setBackground(new java.awt.Color(204, 0, 0));
         jComboBoxPerfil.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jComboBoxPerfil.setForeground(new java.awt.Color(255, 255, 255));
         jComboBoxPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Modificar Login", "Modificar Contraseña", "Cerrar Sesión" }));
-        jComboBoxPerfil.setSelectedIndex(-1);
-        jComboBoxPerfil.setBorder(null);
+        jComboBoxPerfil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jComboBoxPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxPerfilActionPerformed(evt);
             }
         });
-        jPanelSuperior.add(jComboBoxPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(557, 112, 140, 25));
+        jPanelSuperior.add(jComboBoxPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 108, 160, -1));
+
+        jLabelPerfil2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        jLabelPerfil2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelPerfil2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/user-32.png"))); // NOI18N
+        jPanelSuperior.add(jLabelPerfil2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 105, -1, -1));
 
         getContentPane().add(jPanelSuperior, java.awt.BorderLayout.PAGE_START);
 
@@ -199,72 +198,89 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         jPanelInterior.add(jPanelCabecera, java.awt.BorderLayout.PAGE_START);
 
         jPanelInteriorPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelInteriorPrincipal.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanelInteriorPrincipal.setMaximumSize(new java.awt.Dimension(410, 335));
         jPanelInteriorPrincipal.setMinimumSize(new java.awt.Dimension(410, 335));
         jPanelInteriorPrincipal.setPreferredSize(new java.awt.Dimension(410, 335));
         jPanelInteriorPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelRegistrar.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelRegistrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanelRegistrar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButtonRegistrar1.setBackground(new java.awt.Color(204, 0, 0));
-        jButtonRegistrar1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
-        jButtonRegistrar1.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonRegistrar1.setText("Registrar");
-        jButtonRegistrar1.setPreferredSize(new java.awt.Dimension(90, 30));
-        jButtonRegistrar1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRegistrar.setBackground(new java.awt.Color(204, 0, 0));
+        jButtonRegistrar.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        jButtonRegistrar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/save-as-24.png"))); // NOI18N
+        jButtonRegistrar.setText("Registrar");
+        jButtonRegistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonRegistrar.setPreferredSize(new java.awt.Dimension(90, 30));
+        jButtonRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRegistrar1ActionPerformed(evt);
+                jButtonRegistrarActionPerformed(evt);
             }
         });
-        jButtonRegistrar1.addKeyListener(new java.awt.event.KeyAdapter() {
+        jButtonRegistrar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButtonRegistrar1KeyPressed(evt);
+                jButtonRegistrarKeyPressed(evt);
             }
         });
-        jPanelRegistrar.add(jButtonRegistrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, -1, -1));
 
         jLabelObligatorio.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
         jLabelObligatorio.setForeground(new java.awt.Color(255, 0, 0));
         jLabelObligatorio.setText("* Campos obligatorios");
-        jPanelRegistrar.add(jLabelObligatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
+
+        javax.swing.GroupLayout jPanelRegistrarLayout = new javax.swing.GroupLayout(jPanelRegistrar);
+        jPanelRegistrar.setLayout(jPanelRegistrarLayout);
+        jPanelRegistrarLayout.setHorizontalGroup(
+            jPanelRegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRegistrarLayout.createSequentialGroup()
+                .addGap(99, 99, 99)
+                .addGroup(jPanelRegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelRegistrarLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jButtonRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelObligatorio))
+                .addGap(98, 98, 98))
+        );
+        jPanelRegistrarLayout.setVerticalGroup(
+            jPanelRegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRegistrarLayout.createSequentialGroup()
+                .addComponent(jLabelObligatorio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         jPanelInteriorPrincipal.add(jPanelRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 278, 340, 77));
 
         jLabelCodigo.setBackground(new java.awt.Color(255, 255, 255));
         jLabelCodigo.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jLabelCodigo.setForeground(new java.awt.Color(0, 0, 0));
         jLabelCodigo.setText("Código:");
         jPanelInteriorPrincipal.add(jLabelCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 26, -1, -1));
 
         jLabelNombres.setBackground(new java.awt.Color(255, 255, 255));
         jLabelNombres.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jLabelNombres.setForeground(new java.awt.Color(0, 0, 0));
         jLabelNombres.setText("Nombres:");
         jPanelInteriorPrincipal.add(jLabelNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         jLabelApellidos.setBackground(new java.awt.Color(255, 255, 255));
         jLabelApellidos.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jLabelApellidos.setForeground(new java.awt.Color(0, 0, 0));
         jLabelApellidos.setText("Apellidos:");
         jPanelInteriorPrincipal.add(jLabelApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 136, -1, -1));
 
         jLabelGenero.setBackground(new java.awt.Color(255, 255, 255));
         jLabelGenero.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jLabelGenero.setForeground(new java.awt.Color(0, 0, 0));
         jLabelGenero.setText("Género:");
         jPanelInteriorPrincipal.add(jLabelGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 192, -1, -1));
 
         jLabelRol.setBackground(new java.awt.Color(255, 255, 255));
         jLabelRol.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jLabelRol.setForeground(new java.awt.Color(0, 0, 0));
         jLabelRol.setText("Rol:");
         jPanelInteriorPrincipal.add(jLabelRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 246, -1, -1));
 
-        jComboBoxRol.setBackground(new java.awt.Color(255, 255, 255));
         jComboBoxRol.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jComboBoxRol.setForeground(new java.awt.Color(0, 0, 0));
         jComboBoxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No asignado", "Estudiante", "Administrativo", "Docente" }));
+        jComboBoxRol.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jComboBoxRol.setMaximumSize(new java.awt.Dimension(6, 26));
         jComboBoxRol.setMinimumSize(new java.awt.Dimension(6, 26));
         jComboBoxRol.setPreferredSize(new java.awt.Dimension(6, 26));
@@ -276,10 +292,9 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         jLabelErrorGenero.setText("Error");
         jPanelInteriorPrincipal.add(jLabelErrorGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 216, -1, -1));
 
-        jComboBoxGenero.setBackground(new java.awt.Color(255, 255, 255));
         jComboBoxGenero.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jComboBoxGenero.setForeground(new java.awt.Color(0, 0, 0));
         jComboBoxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Masculino", "Femenino", "Otro" }));
+        jComboBoxGenero.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jComboBoxGenero.setMaximumSize(new java.awt.Dimension(6, 26));
         jComboBoxGenero.setMinimumSize(new java.awt.Dimension(6, 26));
         jComboBoxGenero.setPreferredSize(new java.awt.Dimension(6, 26));
@@ -291,9 +306,7 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         jLabelErrorApellidos.setText("Error");
         jPanelInteriorPrincipal.add(jLabelErrorApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 160, -1, -1));
 
-        jTextFieldApellidos.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldApellidos.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jTextFieldApellidos.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldApellidos.setMaximumSize(new java.awt.Dimension(6, 26));
         jTextFieldApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -308,9 +321,7 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         jLabelErrorNombres.setText("Error");
         jPanelInteriorPrincipal.add(jLabelErrorNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 104, -1, -1));
 
-        jTextFieldNombres.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldNombres.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jTextFieldNombres.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldNombres.setMaximumSize(new java.awt.Dimension(6, 26));
         jTextFieldNombres.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -325,9 +336,7 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         jLabelErrorCodigo.setText("Error");
         jPanelInteriorPrincipal.add(jLabelErrorCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 50, -1, -1));
 
-        jTextFieldCodigo.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldCodigo.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jTextFieldCodigo.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldCodigo.setMaximumSize(new java.awt.Dimension(6, 26));
         jTextFieldCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -371,6 +380,7 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         jButtonRegresar.setForeground(new java.awt.Color(255, 255, 255));
         jButtonRegresar.setText("< Regresar");
         jButtonRegresar.setBorderPainted(false);
+        jButtonRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRegresarActionPerformed(evt);
@@ -399,19 +409,60 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    // Subflujo REGRESAR
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
-        //FALTA AGREGAR VENTANA QUE PREGUNTA SI ESTA SEGURO QUE DESEA REGRESAR
-        VtnPrincipalAdmin objVtnPrincipalAdmin = new VtnPrincipalAdmin(this.objCliente, this.nombrePerfil);
-        objVtnPrincipalAdmin.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButtonRegresarActionPerformed
-
-    private void jButtonRegistrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrar1ActionPerformed
         
+        boolean bandera = camposEscritos();
+        
+        if(bandera == false){
+            VtnPrincipalAdmin objVtnPrincipalAdmin = new VtnPrincipalAdmin(this.objCliente, this.nombrePerfil);
+            objVtnPrincipalAdmin.setVisible(true);
+            this.dispose();
+        }else{
+            if(Utilidades.mensajeConfirmacion("Los cambios no guardados se perderan", "Confirmar retorno") == 0){
+                VtnPrincipalAdmin objVtnPrincipalAdmin = new VtnPrincipalAdmin(this.objCliente, this.nombrePerfil);
+                objVtnPrincipalAdmin.setVisible(true);
+                this.dispose(); 
+            }
+        }
+        
+    }//GEN-LAST:event_jButtonRegresarActionPerformed
+    
+    // VALIDACION subflujos
+    private boolean camposEscritos(){
+        boolean bandera = false; // false = Campos vacios
+        
+        if(!this.jTextFieldCodigo.getText().equals(""))
+            bandera = true;
+        
+        if(!this.jTextFieldNombres.getText().equals(""))
+            bandera = true;
+                
+        if(!this.jTextFieldApellidos.getText().equals(""))
+            bandera = true;
+        
+        if(jComboBoxGenero.getSelectedIndex()!=0)
+            bandera = true;
+        
+        if(jComboBoxRol.getSelectedIndex()!=0)
+            bandera = true;
+        
+        return bandera;
+    }
+    
+    //Funcion para ocultar notificaciones de error
+    private void ocultarErrores(){
         jLabelErrorCodigo.setVisible(false);
         jLabelErrorNombres.setVisible(false);
         jLabelErrorApellidos.setVisible(false);
         jLabelErrorGenero.setVisible(false);
+    }
+    
+    // Función principal REGISTRAR
+    private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
+        
+        ocultarErrores();
         
         boolean cantidadCaracteresCodigo = validarCantidadDeCaracteresCodigo();
         boolean camposValidos = verificarCamposValidos();
@@ -419,58 +470,72 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
         
         if(camposVacios == false && camposValidos == false && cantidadCaracteresCodigo == false){
             
-            try {
-                this.objCliente.crearConexion();
-                Gson gson= new Gson();
-                ClsPeticion objPeticion= new ClsPeticion();
-                ClsResultado objResultado= new ClsResultado();
+            if(Utilidades.mensajeConfirmacion("¿Estás seguro de que quieres guardar los datos ingresados?", "Confirmar registro") == 0){
+                
+                try {
 
-                String codigo;
-                String nombres;
-                String apellidos;
-                String genero;
-                String rol;
+                    //Iniciar conexión servidor
 
-                codigo = jTextFieldCodigo.getText();                
-                nombres = jTextFieldNombres.getText();
-                apellidos = jTextFieldApellidos.getText();
-                genero = (String) jComboBoxGenero.getSelectedItem();
-                rol = (String) jComboBoxRol.getSelectedItem();
+                    this.objCliente.crearConexion();
+                    Gson gson= new Gson();
+                    ClsPeticionDTO objPeticion= new ClsPeticionDTO();
+                    ClsResultadoDTO objResultado= new ClsResultadoDTO();
 
-                ClsUsuario objUsuario= new ClsUsuario(codigo, nombres, apellidos, genero, rol);
-                String JSONPersona=gson.toJson(objUsuario);
+                    String codigo;
+                    String apellidos;
+                    String nombres;
+                    String genero;
+                    String rol;
 
-                objPeticion.setAccion("registrarUsuario");
-                objPeticion.setArgumentos(JSONPersona);
-                String JSONPeticion=gson.toJson(objPeticion);
-                        
-                String resultado=objCliente.enviarPeticion(JSONPeticion);
-                objResultado=gson.fromJson(resultado, ClsResultado.class);
+                    codigo = jTextFieldCodigo.getText();                
+                    apellidos = jTextFieldApellidos.getText();
+                    nombres = jTextFieldNombres.getText();
+                    genero = (String) jComboBoxGenero.getSelectedItem();
+                    rol = (String) jComboBoxRol.getSelectedItem();
 
-                if(objResultado.getCodigoResultado()==1){
-                    utilidades.Utilidades.mensajeExito("Registro exitoso del usuario", "Registro exitoso");
-                    VtnPrincipalAdmin objVtnPrincipalAdmin = new VtnPrincipalAdmin(objCliente, nombrePerfil);
-                    objVtnPrincipalAdmin.setVisible(true);
-                    this.dispose();
-                }else{
-                    utilidades.Utilidades.mensajeAdvertencia("El usuario con código: "+jTextFieldCodigo.getText()+" se encuentra registrado en el sistema", "Error en el registro");
+                    ClsUsuarioDTO objUsuario = new ClsUsuarioDTO(codigo, apellidos, nombres, genero, rol);
+                    Gson convertidor = new Gson();
+                    String datosUsuario = convertidor.toJson(objUsuario);
+
+                    objPeticion.setAccion("registrarUsuario");
+                    objPeticion.setArgumentos(datosUsuario);
+                    String JSONPeticion=gson.toJson(objPeticion);
+
+                    String resultado=objCliente.enviarPeticion(JSONPeticion);
+                    objResultado=gson.fromJson(resultado, ClsResultadoDTO.class);
+
+                    this.objCliente.cerrarConexion();
+
+                    //Fin Conexión Servidor
+
+                    if(objResultado.getCodigoResultado()==1){
+                        utilidades.Utilidades.mensajeExito("Registro de usuario exitoso", "Registro exitoso");
+                        VtnPrincipalAdmin objVtnPrincipalAdmin = new VtnPrincipalAdmin(objCliente, nombrePerfil);
+                        objVtnPrincipalAdmin.setVisible(true);
+                        this.dispose();
+                    }else{
+                        utilidades.Utilidades.mensajeAdvertencia("El código " +jTextFieldCodigo.getText()+ " se encuentra en uso. \nPor favor ingresar nuevo código", "Error en el registro");
+                    }
+
+                }catch (IOException ex) {
+                    Utilidades.mensajeError("Error en el registro. Intentelo de nuevo más tarde", "Error");
                 }
-
-                this.objCliente.cerrarConexion();
-
-            }catch (IOException ex) {
-                System.out.println("Error al realizar la conexión");
-                //FALTA VENTANA EMERGENTE
+                
             }
-
+            
         }else{
             if(camposVacios == true)
                 Utilidades.mensajeAdvertencia("Hay campos obligatorios sin rellenar", "Error");
-            else 
+            else if(camposValidos == true)
                 Utilidades.mensajeAdvertencia("Hay campos no válidos", "Error");
+            else if(cantidadCaracteresCodigo == true)
+                Utilidades.mensajeAdvertencia("Número de caracteres no válido", "Error");
         }
-    }//GEN-LAST:event_jButtonRegistrar1ActionPerformed
+    }//GEN-LAST:event_jButtonRegistrarActionPerformed
     
+    
+    
+    // VALIDACION campos inicio ================================================
     private boolean verificarCamposVacios() {
         
         boolean bandera = false; // false = campos no vacios
@@ -554,7 +619,7 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
     private boolean verificarCaracteresCodigo(JTextField campo) {
         
         char[] caracteresValidos = {'1','2','3','4','5','6','7','8','9','0'};
-        boolean bandera=false; // false = correcto             
+        boolean bandera=false; // false = caracteres validos            
         char[] caracteresEnCampo = campo.getText().toCharArray();
 
         for(int i=0; i<caracteresEnCampo.length; i++){
@@ -590,64 +655,105 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
      
     private boolean validarCantidadDeCaracteresCodigo(){
         
-        char[] caracteresCodigo = this.jLabelCodigo.getText().toCharArray();
         boolean bandera = false; // false = correcto
         
-        if(caracteresCodigo.length!=7){ // como carajos 7, no sé
+        if(jTextFieldCodigo.getText().length() != 8){ 
             bandera = true;
             mostrarError(jLabelErrorCodigo, "El código debe poseer 8 digitos");            
-        }else{
-            this.jLabelErrorCodigo.setVisible(false);
         }
-        
+               
         return bandera;
     }
+    // VALIDACIÓN campos final =================================================
     
-    private void jComboBoxPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPerfilActionPerformed
-        switch (jComboBoxPerfil.getSelectedIndex()) {
-            case 1:
-                VtnModificarLogin objVtnModificarLogin = new VtnModificarLogin(this.objCliente, this.nombrePerfil);
-                objVtnModificarLogin.setVisible(true);
-                this.dispose();
-            break;
-            case 2:
-                VtnModificarContrasenia objVtnModificarContrasenia = new VtnModificarContrasenia(this.objCliente, this.nombrePerfil);
-                objVtnModificarContrasenia.setVisible(true);
-                this.dispose();
-            break;
-            case 3:
-                VtnIniciarSesion objVtnIniciarSesion = new VtnIniciarSesion(this.objCliente);
-                objVtnIniciarSesion.setVisible(true);
-                this.dispose();
-            break;
-            default:
-            break;
-        }
-    }//GEN-LAST:event_jComboBoxPerfilActionPerformed
-
+    
+    
+    // Eventos ENTER inicio ====================================================
     private void jTextFieldCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCodigoKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            jButtonRegistrar1ActionPerformed(null);
+            jButtonRegistrarActionPerformed(null);
         }
     }//GEN-LAST:event_jTextFieldCodigoKeyPressed
 
     private void jTextFieldNombresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombresKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            jButtonRegistrar1ActionPerformed(null);
+            jButtonRegistrarActionPerformed(null);
         }
     }//GEN-LAST:event_jTextFieldNombresKeyPressed
 
     private void jTextFieldApellidosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldApellidosKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            jButtonRegistrar1ActionPerformed(null);
+            jButtonRegistrarActionPerformed(null);
         }
     }//GEN-LAST:event_jTextFieldApellidosKeyPressed
 
-    private void jButtonRegistrar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonRegistrar1KeyPressed
+    private void jButtonRegistrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonRegistrarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            jButtonRegistrar1ActionPerformed(null);
+            jButtonRegistrarActionPerformed(null);
         }
-    }//GEN-LAST:event_jButtonRegistrar1KeyPressed
+    }//GEN-LAST:event_jButtonRegistrarKeyPressed
+    // Eventos ENTER final =====================================================
+    
+    
+    
+    // COmboBox PERFIL
+    private void jComboBoxPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPerfilActionPerformed
+        
+        boolean bandera = camposEscritos();
+        
+        switch (jComboBoxPerfil.getSelectedIndex()) {
+
+            case 1:
+                
+                if(bandera == false){
+                    VtnModificarLogin objVtnModificarLogin = new VtnModificarLogin(this.objCliente, this.nombrePerfil);
+                    objVtnModificarLogin.setVisible(true);
+                    this.dispose();
+                }else{
+                    if(Utilidades.mensajeConfirmacion("Los cambios no guardados se perderan", "Confirmar retorno") == 0){
+                        VtnModificarLogin objVtnModificarLogin = new VtnModificarLogin(this.objCliente, this.nombrePerfil);
+                        objVtnModificarLogin.setVisible(true);
+                        this.dispose(); 
+                    }
+                }
+                
+            break;
+            case 2:
+                
+                if(bandera == false){
+                    VtnModificarContrasenia objVtnModificarContrasenia = new VtnModificarContrasenia(this.objCliente, this.nombrePerfil);
+                    objVtnModificarContrasenia.setVisible(true);
+                    this.dispose();
+                }else{
+                    if(Utilidades.mensajeConfirmacion("Los cambios no guardados se perderan", "Confirmar retorno") == 0){
+                        VtnModificarContrasenia objVtnModificarContrasenia = new VtnModificarContrasenia(this.objCliente, this.nombrePerfil);
+                        objVtnModificarContrasenia.setVisible(true);
+                        this.dispose();
+                    }
+                }
+                
+            break;
+            case 3:
+                
+                if(bandera == false){
+                    VtnIniciarSesion objVtnIniciarSesion = new VtnIniciarSesion(this.objCliente);
+                    objVtnIniciarSesion.setVisible(true);
+                    this.dispose();
+                }else{
+                    if(Utilidades.mensajeConfirmacion("Los cambios no guardados se perderan", "Confirmar retorno") == 0){
+                        VtnIniciarSesion objVtnIniciarSesion = new VtnIniciarSesion(this.objCliente);
+                        objVtnIniciarSesion.setVisible(true);
+                        this.dispose();
+                    }
+                }
+                
+            break;
+            default:
+            break;
+        }
+        
+        this.jComboBoxPerfil.setSelectedIndex(0);
+    }//GEN-LAST:event_jComboBoxPerfilActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Barra;
@@ -657,7 +763,7 @@ public class VtnRegistrarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jAsteriskCodigo;
     private javax.swing.JLabel jAsteriskGenero;
     private javax.swing.JLabel jAsteriskNombres;
-    private javax.swing.JButton jButtonRegistrar1;
+    private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JButton jButtonRegresar;
     private javax.swing.JComboBox<String> jComboBoxGenero;
     private javax.swing.JComboBox<String> jComboBoxPerfil;

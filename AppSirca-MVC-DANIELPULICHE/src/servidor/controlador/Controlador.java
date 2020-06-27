@@ -4,9 +4,9 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import modelo.ClsAdministrador;
 import modelo.ClsOrganizacion;
-import modelo.ClsPeticion;
-import modelo.ClsResultado;
-import modelo.ClsUsuario;
+import modelo.DTO.ClsPeticionDTO;
+import modelo.DTO.ClsResultadoDTO;
+import modelo.DTO.ClsUsuarioDTO;
 
 public class Controlador {
 
@@ -24,7 +24,7 @@ public class Controlador {
         String argumentosPeticion;
         String resultado;     
         
-        ClsPeticion objPeticion= objConvertidor.fromJson(JSONPeticion, ClsPeticion.class); 
+        ClsPeticionDTO objPeticion= objConvertidor.fromJson(JSONPeticion, ClsPeticionDTO.class); 
         accion=objPeticion.getAccion();
         argumentosPeticion=objPeticion.getArgumentos();
         
@@ -33,8 +33,9 @@ public class Controlador {
     }
 
     private String procesarAccion(String accion, String argumentosPeticion) {
+
         String resultadoJSON="";
-        ClsResultado objResultado = new ClsResultado();
+        ClsResultadoDTO objResultado = new ClsResultadoDTO();
         
         switch (accion) {
             
@@ -55,15 +56,30 @@ public class Controlador {
             
             case "listarTodosLosUsuarios":
 
-                ArrayList<ClsUsuario> lista = objOrganizacion.getListaUsuarios();
+                ArrayList<ClsUsuarioDTO> listaTodos = objOrganizacion.getListaUsuarios();
                 
-                if(lista.isEmpty()){
+                if(listaTodos.isEmpty()){
                     objResultado.setCodigoResultado(-1);
                 }else{
                     objResultado.setCodigoResultado(1);
-                    String respuesta = objConvertidor.toJson(lista);
-                    objResultado.setJSONResultado(respuesta);
+                    String respuestaListaUsuarios = objConvertidor.toJson(listaTodos);
+                    objResultado.setJSONResultado(respuestaListaUsuarios);
                 }
+                
+            break;
+            
+            case "buscarUsuarios":
+
+                String codigoPorBuscar = argumentosPeticion;
+                ArrayList<ClsUsuarioDTO> listaCoincidentes = objOrganizacion.buscarUsuariosCoincidentes(codigoPorBuscar);
+                
+                if(listaCoincidentes.isEmpty()){
+                    objResultado.setCodigoResultado(-1);
+                }else{
+                    objResultado.setCodigoResultado(1);
+                    String respuestaListaCoincidentes = objConvertidor.toJson(listaCoincidentes);
+                    objResultado.setJSONResultado(respuestaListaCoincidentes);
+                }               
                 
             break;
             
@@ -81,13 +97,11 @@ public class Controlador {
                                 
             break;
             
-            case "modificarContrasenia":
+            case "modificarContraseña":
                 
-                String contraseniaActual;
-                String contraseniaNueva;
                 String cambioDeContrasenia[] = argumentosPeticion.split(",");
-                contraseniaActual = cambioDeContrasenia[0];
-                contraseniaNueva = cambioDeContrasenia[1];
+                String contraseniaActual = cambioDeContrasenia[0];
+                String contraseniaNueva = cambioDeContrasenia[1];
                 
                 if(contraseniaActual.equals(objOrganizacion.getAdministrador().getConstrasenia())){
                     objOrganizacion.getAdministrador().setConstrasenia(contraseniaNueva);
@@ -98,12 +112,18 @@ public class Controlador {
             break;
             
             case "registrarUsuario":
+                
+                ClsUsuarioDTO objUsuario = objConvertidor.fromJson(argumentosPeticion, ClsUsuarioDTO.class);
+                    
+                String codigo = objUsuario.getCodigo();
+                String apellidos = objUsuario.getApellidos();
+                String nombres = objUsuario.getNombres();
+                String rol = objUsuario.obtenerRol(objUsuario.getRol());
+                String genero = objUsuario.obtenerGenero(objUsuario.getGenero());
                   
-                ClsUsuario objUsuario = objConvertidor.fromJson(argumentosPeticion, ClsUsuario.class);
-
-                if(this.objOrganizacion.existeUsuario(objUsuario.getIdentificacion()) == false)
+                if(this.objOrganizacion.existeUsuario(codigo) == false)
                 {
-                    this.objOrganizacion.agregarUsuario(objUsuario);
+                    this.objOrganizacion.agregarUsuario(codigo, apellidos, nombres, genero, rol);
                     objResultado.setCodigoResultado(1);
                 }
                 else
@@ -115,15 +135,63 @@ public class Controlador {
             
             case "eliminarUsuario":
                   
-                String idEliminar = argumentosPeticion;
+                String codigoEliminar = argumentosPeticion;
 
-                if(objOrganizacion.eliminarUsuario(idEliminar))
+                if(objOrganizacion.eliminarUsuario(codigoEliminar))
                     objResultado.setCodigoResultado(1);
                 else
                     objResultado.setCodigoResultado(-1);                
                 
             break;
             
+            case "asignarRol":
+                
+                String datosDeAsignacionRol[] = argumentosPeticion.split(",");
+                String codigoAsignarRol = datosDeAsignacionRol[0];
+                String nuevoRol = datosDeAsignacionRol[1];
+                System.out.println(codigoAsignarRol);
+
+                if(objOrganizacion.existeUsuario(codigoAsignarRol)){
+                    objOrganizacion.asignarRol(codigoAsignarRol, nuevoRol);
+                    objResultado.setCodigoResultado(1);
+                }else{
+                    objResultado.setCodigoResultado(-1);                
+                }
+    
+            break;
+            
+            case "editarUsuario":
+                
+                String datosDeUsuarioAEditar[] = argumentosPeticion.split("/");
+                String codigoOriginal = datosDeUsuarioAEditar[0];
+                ClsUsuarioDTO objUsuarioEditado = this.objConvertidor.fromJson(datosDeUsuarioAEditar[1], ClsUsuarioDTO.class); 
+                
+                String codigoEditado = objUsuarioEditado.getCodigo();
+                String nombresEditado = objUsuarioEditado.getNombres();
+                String apellidosEditado = objUsuarioEditado.getApellidos();
+                String generoEditado = objUsuarioEditado.obtenerGenero(objUsuarioEditado.getGenero());
+                String rolEditado = objUsuarioEditado.obtenerRol(objUsuarioEditado.getRol());
+                
+                if(this.objOrganizacion.existeUsuario(codigoOriginal) == true)
+                {
+                    if(codigoOriginal.equals(codigoEditado)){
+                        this.objOrganizacion.editarUsuario(codigoOriginal, codigoEditado, apellidosEditado, nombresEditado, generoEditado, rolEditado);
+                        objResultado.setCodigoResultado(1);
+                    }else{ 
+                        if(this.objOrganizacion.existeUsuario(codigoEditado) == false){
+                            this.objOrganizacion.editarUsuario(codigoOriginal, codigoEditado, apellidosEditado, nombresEditado, generoEditado, rolEditado);
+                            objResultado.setCodigoResultado(1);
+                        }else
+                            objResultado.setCodigoResultado(-2);
+                    }
+                }
+                else
+                {
+                    objResultado.setCodigoResultado(-1);
+                }
+                
+            break;
+           
         }
         
         resultadoJSON = objConvertidor.toJson(objResultado);

@@ -22,7 +22,7 @@ public class Utilidades {
      * @param titulo título de la ventana
      */
     public static void mensajeError(String mns, String titulo) {
-        JOptionPane.showMessageDialog(null, mns, titulo, JOptionPane.DEFAULT_OPTION, new ImageIcon("./src/recursos/warning.png"));
+        JOptionPane.showMessageDialog(null, mns, titulo, JOptionPane.DEFAULT_OPTION, new ImageIcon("./src/recursos/error.png"));
     }
 
     /**
@@ -32,7 +32,7 @@ public class Utilidades {
      * @param titulo título de la ventana
      */
     public static void mensajeExito(String mns, String titulo) {
-        JOptionPane.showMessageDialog(null, mns, titulo, JOptionPane.DEFAULT_OPTION, new ImageIcon("./src/recursos/exitoso.png"));
+        JOptionPane.showMessageDialog(null, mns, titulo, JOptionPane.DEFAULT_OPTION, new ImageIcon("./src/recursos/exito.png"));
     }
 
     /**
@@ -43,7 +43,7 @@ public class Utilidades {
      * @return Si ó No
      */
     public static int mensajeConfirmacion(String mns, String titulo) {
-        return JOptionPane.showConfirmDialog(null, mns, titulo, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        return JOptionPane.showConfirmDialog(null, mns, titulo, JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE , new ImageIcon("./src/recursos/information_info.png"));
     }
 
 }
