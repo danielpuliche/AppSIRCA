@@ -50,42 +50,38 @@ public class ClsUsuarioDAO implements InterfazAccesoDatosUsuarioDAO{
     }
     
     @Override
-    public ArrayList<ClsUsuarioDTO> consultarUsuariosDentro() {
+    public ArrayList<ClsUsuarioDTO> consultarUsuariosDentro(ArrayList<String> codigosUsuariosDentro) {
         
         ArrayList<ClsUsuarioDTO> listaUsuariosDentro = new ArrayList();
-        ArrayList<String> codigosRegistros = new ArrayList();
-        
+                
         conexionABaseDeDatos.conectar();        
         try {            
             PreparedStatement sentencia = null;
-            String consulta = "SELECT * from registros GROUP by registros.codigoUsuario";
-            sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);            
-            
-            ResultSet res = sentencia.executeQuery();
-            
-            while(res.next()){
-                codigosRegistros.add(res.getString("codigoUsuario"));
-            } 
+            for (int i = 0; i < codigosUsuariosDentro.size(); i++) {
+                String codigo = codigosUsuariosDentro.get(i);
+                ClsRegistroDTO objRegistroDTO = objRegistroDAO.obtenerUltimoRegistro(codigo);
+                String consulta = "SELECT * from usuarios where usuarios.codigo=?";
+                sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta); 
+                sentencia.setString(1, codigo);
+                ResultSet res = sentencia.executeQuery();
+                
+                while(res.next()){
+                    String codigoUsuario = res.getString("codigo");
+                    String nombres = res.getString("nombres");
+                    String apellidos = res.getString("apellidos");
+                    String genero = res.getString("genero");
+                    String rol = res.getString("rol");
+                    ClsUsuarioDTO objUsuarioDTO = new ClsUsuarioDTO(codigoUsuario, apellidos, nombres, genero, rol);
+                    objUsuarioDTO.asignarRegistro(objRegistroDTO);
+                    listaUsuariosDentro.add(objUsuarioDTO);
+                }
+            }
             
             sentencia.close();
             conexionABaseDeDatos.desconectar();
-            
-            String codigo = "";
-            ClsRegistroDTO objRegistro = new ClsRegistroDTO("","",0);
-            
-            for (int i = 0; i < codigosRegistros.size(); i++) {
-                codigo = codigosRegistros.get(i);
-                
-                ClsUsuarioDTO objUsuario = new ClsUsuarioDTO(codigo, "a", "n", "Otro", "Sin asignar");
-                objUsuario.asignarRegistro(objRegistro);
-                listaUsuariosDentro.add(objUsuario);
-            }
-            
-
+        
         } catch (SQLException e) {
             System.out.println("Error en el listar: "+e.getMessage());         
-        } catch (Exception ex){
-            System.out.println("Error xD");
         }
         
         return listaUsuariosDentro;
@@ -290,31 +286,5 @@ public class ClsUsuarioDAO implements InterfazAccesoDatosUsuarioDAO{
         
     }
 
-    @Override
-    public ArrayList<String> codigosUsuarios() {
-        
-        ArrayList<String> codigosUsuarios = new ArrayList();
-        
-        conexionABaseDeDatos.conectar();        
-        try {            
-            PreparedStatement sentencia = null;
-            String consulta = "SELECT * from usuarios GROUP by usuarios.codigo";
-            sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);            
-            
-            ResultSet res = sentencia.executeQuery();
-            
-            while(res.next()){
-                codigosUsuarios.add(res.getString("codigo"));
-            } 
-            
-            sentencia.close();
-            conexionABaseDeDatos.desconectar();
-
-        } catch (SQLException e) {
-            System.out.println("Error en el listar: "+e.getMessage());         
-        }
-        
-        return codigosUsuarios;
-    }
     
 }

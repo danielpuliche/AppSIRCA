@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.ArrayList;
 import modelo.DTO.ClsRegistroDTO;
 import servidor.conexion.ConexionBD;
 
@@ -94,6 +95,33 @@ public class ClsRegistroDAO implements InterfazAccesoDatosRegistroDAO{
         } 
         
         return objRegistro;
+    }
+    
+    @Override
+    public ArrayList<String> codigosUsuariosFiltrado(int tipoRegistro) {
+        
+        ArrayList<String> codigosUsuarios = new ArrayList();
+        
+        conexionABaseDeDatos.conectar();        
+        try {            
+            PreparedStatement sentencia = null;
+            String consulta = "SELECT * from registros where registros.tipoRegistro=? GROUP by registros.codigoUsuario";
+            sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);            
+            sentencia.setInt(1, tipoRegistro);
+            ResultSet res = sentencia.executeQuery();
+            
+            while(res.next()){
+                codigosUsuarios.add(res.getString("codigo"));
+            } 
+            
+            sentencia.close();
+            conexionABaseDeDatos.desconectar();
+
+        } catch (SQLException e) {
+            System.out.println("Error en el listar: "+e.getMessage());         
+        }
+        
+        return codigosUsuarios;
     }
     
 }

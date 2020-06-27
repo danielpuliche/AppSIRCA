@@ -7,7 +7,7 @@ public interface InterfazAccesoDatosUsuarioDAO {
     
     public ArrayList<ClsUsuarioDTO> consultarUsuarios();
     
-    public ArrayList<ClsUsuarioDTO> consultarUsuariosDentro();
+    public ArrayList<ClsUsuarioDTO> consultarUsuariosDentro(ArrayList<String> codigos);
     
     public ArrayList<ClsUsuarioDTO> consultarUsuariosFuera();
     
@@ -23,6 +23,5 @@ public interface InterfazAccesoDatosUsuarioDAO {
     
     public boolean existeUsuario(String codigoUsuario);
     
-    public ArrayList<String> codigosUsuarios();
     
     }

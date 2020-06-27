@@ -106,7 +106,8 @@ public class Controlador {
             
             case "listarUsuariosDentro":
                 
-                ArrayList<ClsUsuarioDTO> listaUsuariosDentro = objUsuarioDAO.consultarUsuariosDentro();
+                ArrayList<String> codigosUsuariosDentro = objRegistroDAO.codigosUsuariosFiltrado(1);
+                ArrayList<ClsUsuarioDTO> listaUsuariosDentro = new ArrayList();
                 
                 if(listaUsuariosDentro.isEmpty()){
                     objResultado.setCodigoResultado(-1);
