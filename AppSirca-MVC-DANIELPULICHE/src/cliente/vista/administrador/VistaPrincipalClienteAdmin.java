@@ -1,8 +1,8 @@
-package cliente.vista;
+package cliente.vista.administrador;
 
 import cliente.servicios.cliente;
 
-public class vistaPrincipalCliente {
+public class VistaPrincipalClienteAdmin {
     
     public static void main(String[] args) {
        

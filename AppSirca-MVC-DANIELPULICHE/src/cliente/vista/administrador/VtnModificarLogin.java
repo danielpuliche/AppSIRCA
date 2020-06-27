@@ -1,4 +1,4 @@
-package cliente.vista;
+package cliente.vista.administrador;
 
 import cliente.servicios.cliente;
 import com.google.gson.Gson;
@@ -21,7 +21,7 @@ public class VtnModificarLogin extends javax.swing.JFrame {
 
     public VtnModificarLogin(cliente objCliente, String nombrePerfil) {
         initComponents();
-        Image icon = Toolkit.getDefaultToolkit().getImage("./src/Recursos/logo.jpg");
+        Image icon = Toolkit.getDefaultToolkit().getImage("./src/Recursos/logo.png");
         this.setIconImage(icon);
         this.objCliente = objCliente;
         this.nombrePerfil = nombrePerfil;
@@ -82,6 +82,7 @@ public class VtnModificarLogin extends javax.swing.JFrame {
         jPanelInferior.setPreferredSize(new java.awt.Dimension(700, 30));
 
         jLabelDesarrolladores.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelDesarrolladores.setForeground(new java.awt.Color(0, 0, 0));
         jLabelDesarrolladores.setText("F&P Software Development || www.fypsoftwaredevelopment.com || 2020");
         jPanelInferior.add(jLabelDesarrolladores);
 
@@ -199,6 +200,7 @@ public class VtnModificarLogin extends javax.swing.JFrame {
 
         jLabelLoginActual.setBackground(new java.awt.Color(255, 255, 255));
         jLabelLoginActual.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jLabelLoginActual.setForeground(new java.awt.Color(0, 0, 0));
         jLabelLoginActual.setText("Login Actual:");
         jPanelInteriorPrincipal.add(jLabelLoginActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
@@ -216,6 +218,7 @@ public class VtnModificarLogin extends javax.swing.JFrame {
 
         jLabelNuevoLogin.setBackground(new java.awt.Color(255, 255, 255));
         jLabelNuevoLogin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jLabelNuevoLogin.setForeground(new java.awt.Color(0, 0, 0));
         jLabelNuevoLogin.setText("Nuevo Login:");
         jPanelInteriorPrincipal.add(jLabelNuevoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
 
@@ -227,6 +230,7 @@ public class VtnModificarLogin extends javax.swing.JFrame {
 
         jLabelConfirmarNuevoLogin.setBackground(new java.awt.Color(255, 255, 255));
         jLabelConfirmarNuevoLogin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jLabelConfirmarNuevoLogin.setForeground(new java.awt.Color(0, 0, 0));
         jLabelConfirmarNuevoLogin.setText("Confirmar Nuevo Login:");
         jPanelInteriorPrincipal.add(jLabelConfirmarNuevoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 199, -1));
 
@@ -272,7 +276,9 @@ public class VtnModificarLogin extends javax.swing.JFrame {
         jLabelCamposObligatorios.setText("* Campos Obligatorios");
         jPanelInteriorPrincipal.add(jLabelCamposObligatorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, -1, -1));
 
+        jTextFieldLoginActual.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldLoginActual.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jTextFieldLoginActual.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldLoginActual.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextFieldLoginActualKeyPressed(evt);
@@ -280,7 +286,9 @@ public class VtnModificarLogin extends javax.swing.JFrame {
         });
         jPanelInteriorPrincipal.add(jTextFieldLoginActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 42, 200, 26));
 
+        jTextFieldNuevoLogin.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldNuevoLogin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jTextFieldNuevoLogin.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldNuevoLogin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextFieldNuevoLoginKeyPressed(evt);
@@ -288,7 +296,9 @@ public class VtnModificarLogin extends javax.swing.JFrame {
         });
         jPanelInteriorPrincipal.add(jTextFieldNuevoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 132, 200, 26));
 
+        jTextFieldConfirmarNuevoLogin.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldConfirmarNuevoLogin.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jTextFieldConfirmarNuevoLogin.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldConfirmarNuevoLogin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextFieldConfirmarNuevoLoginKeyPressed(evt);
@@ -403,7 +413,7 @@ public class VtnModificarLogin extends javax.swing.JFrame {
                     }
                     else
                     {
-                        mostrarError(jLabelErrorLoginActual,"El login ingresado es incorrecto");
+                        mostrarError(jLabelErrorLoginActual,"El login ingresado es incorrecto",jTextFieldLoginActual);
                         Utilidades.mensajeAdvertencia("Administrador no encontrado", "Atención");
                     }
 
@@ -457,6 +467,9 @@ public class VtnModificarLogin extends javax.swing.JFrame {
         jLabelErrorLoginActual.setVisible(false);
         jLabelErrorNuevoLogin.setVisible(false);
         jLabelErrorConfirmarNuevoLogin.setVisible(false);
+        jTextFieldLoginActual.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextFieldNuevoLogin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextFieldConfirmarNuevoLogin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
     }
     
     // ComboBos PERFIL
@@ -511,19 +524,19 @@ public class VtnModificarLogin extends javax.swing.JFrame {
         
         if(this.jTextFieldLoginActual.getText().equals(""))
         {
-            mostrarError(jLabelErrorLoginActual, "Rellenar este campo");
+            mostrarError(jLabelErrorLoginActual, "Rellenar este campo",jTextFieldLoginActual);
             bandera=true;
         }
         
         if(this.jTextFieldNuevoLogin.getText().equals(""))
         {
-            mostrarError(jLabelErrorNuevoLogin, "Rellenar este campo");
+            mostrarError(jLabelErrorNuevoLogin, "Rellenar este campo",jTextFieldNuevoLogin);
             bandera=true;
         }
         
         if(this.jTextFieldConfirmarNuevoLogin.getText().equals(""))
         {
-            mostrarError(jLabelErrorConfirmarNuevoLogin, "Rellenar este campo");
+            mostrarError(jLabelErrorConfirmarNuevoLogin, "Rellenar este campo",jTextFieldConfirmarNuevoLogin);
             bandera=true;
         }
                 
@@ -536,19 +549,19 @@ public class VtnModificarLogin extends javax.swing.JFrame {
                 
         if(verificarCaracteresValidos(jTextFieldLoginActual) == true)
         {
-            mostrarError(jLabelErrorLoginActual, "Carácter ingresado no válido");
+            mostrarError(jLabelErrorLoginActual, "Carácter ingresado no válido",jTextFieldLoginActual);
             bandera=true;
         }
        
         if(verificarCaracteresValidos(jTextFieldNuevoLogin) == true)
         {
-            mostrarError(jLabelErrorNuevoLogin, "Carácter ingresado no válido");
+            mostrarError(jLabelErrorNuevoLogin, "Carácter ingresado no válido",jTextFieldNuevoLogin);
             bandera=true;
         }
         
         if(verificarCaracteresValidos(jTextFieldConfirmarNuevoLogin) == true)
         {
-            mostrarError(jLabelErrorConfirmarNuevoLogin, "Carácter ingresado no válido");
+            mostrarError(jLabelErrorConfirmarNuevoLogin, "Carácter ingresado no válido",jTextFieldConfirmarNuevoLogin);
             bandera=true;
         }
         
@@ -575,7 +588,7 @@ public class VtnModificarLogin extends javax.swing.JFrame {
         
         if(login.getText().length() < 8 || login.getText().length() > 15){ 
             bandera = true;
-            mostrarError(error, "El login debe poseer entre 8 y 15 caracteres");            
+            mostrarError(error, "El login debe poseer entre 8 y 15 caracteres",login);            
         }
        
         return bandera;
@@ -588,35 +601,47 @@ public class VtnModificarLogin extends javax.swing.JFrame {
         if(!jTextFieldNuevoLogin.getText().equals(jTextFieldConfirmarNuevoLogin.getText()))
         {
             bandera = true;
-            mostrarError(jLabelErrorConfirmarNuevoLogin, "El login ingresado no coincide");
+            mostrarError(jLabelErrorConfirmarNuevoLogin, "El login ingresado no coincide",jTextFieldConfirmarNuevoLogin);
         }
         return bandera;
     }
     
     private boolean verificarCaracteresValidos(JTextField campo) {
         
-        char[] caracteresNoValidos = {'!','#','$','%','&','/','(',')','=','?','¿','@','*',';',',',':','.','-','+',' '};    ///FALTAN POR AGREGAR
+        char[] caracteresValidos = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','r','s','t',
+                                    'u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9'};    ///FALTAN POR AGREGAR
                                       
-        boolean bandera=false;
+        boolean bandera = false; // false = validos
+        char[] caracteresEnCampo = campo.getText().toCharArray();
         
-        char[] letrasEnCampo = campo.getText().toCharArray();
-        
-        for(int j=0;j<caracteresNoValidos.length;j++){
-            String letraNoValida = String.valueOf(caracteresNoValidos[j]);
-            for(int i=0;i<letrasEnCampo.length;i++){
-                String letraCampo = String.valueOf(letrasEnCampo[i]);
-                if(letraCampo.equalsIgnoreCase(letraNoValida))
+        for(int i=0; i<caracteresEnCampo.length; i++){
+            
+            String caracterCampo = String.valueOf(caracteresEnCampo[i]);
+            boolean banderaInterna = false; // caracter incorrecto
+            
+            for(int j=0; j<caracteresValidos.length; j++){
+                
+                String caracterValido = String.valueOf(caracteresValidos[j]);
+                
+                if(caracterCampo.equalsIgnoreCase(caracterValido))
                 {
-                    bandera=true;
+                    banderaInterna = true;
+                    break;
                 }
+            }
+            
+            if(banderaInterna == false){
+                bandera = true;
+                break;
             }
         }
         return bandera;
     }
     
-    private void mostrarError(JLabel notificacion, String error){
+    private void mostrarError(JLabel notificacion, String error,JTextField campo){
             notificacion.setText(error);
             notificacion.setVisible(true);
+            campo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
     }
     // Validación de los CAMPOS final ==========================================
     

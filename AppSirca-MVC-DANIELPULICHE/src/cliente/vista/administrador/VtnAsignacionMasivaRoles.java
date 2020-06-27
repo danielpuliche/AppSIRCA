@@ -1,9 +1,27 @@
-package cliente.vista;
+package cliente.vista.administrador;
 
 import cliente.servicios.cliente;
+import cliente.vista.administrador.VtnIniciarSesion;
+import cliente.vista.administrador.VtnModificarContrasenia;
+import cliente.vista.administrador.VtnModificarLogin;
+import cliente.vista.administrador.VtnPrincipalAdmin;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import modelo.DTO.ClsPeticionDTO;
+import modelo.DTO.ClsResultadoDTO;
+import modelo.DTO.ClsUsuarioDTO;
 import utilidades.Utilidades;
 
 public class VtnAsignacionMasivaRoles extends javax.swing.JFrame {
@@ -13,14 +31,15 @@ public class VtnAsignacionMasivaRoles extends javax.swing.JFrame {
     
     public VtnAsignacionMasivaRoles(cliente objCliente, String login) {
         initComponents();
-        Image icon = Toolkit.getDefaultToolkit().getImage("./src/Recursos/logo.jpg");
+        Image icon = Toolkit.getDefaultToolkit().getImage("./src/Recursos/logo.png");
         this.setIconImage(icon);
         estiloTablas();
         this.objCliente = objCliente;
         this.nombrePerfil = login;
-        jLabelErrorDigiteCodigo.setVisible(false);
+        ocultarErrores();
         this.jComboBoxPerfil.insertItemAt(this.nombrePerfil, 0);
         this.jComboBoxPerfil.setSelectedIndex(0);
+        listarUsuarios();
     }
 
     @SuppressWarnings("unchecked")
@@ -239,6 +258,11 @@ public class VtnAsignacionMasivaRoles extends javax.swing.JFrame {
         jButtonBuscar.setText("Buscar");
         jButtonBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonBuscar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarActionPerformed(evt);
+            }
+        });
 
         jTextFieldDigiteCodigo.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jTextFieldDigiteCodigo.setForeground(new java.awt.Color(153, 153, 153));
@@ -249,6 +273,11 @@ public class VtnAsignacionMasivaRoles extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTextFieldDigiteCodigoFocusLost(evt);
+            }
+        });
+        jTextFieldDigiteCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldDigiteCodigoKeyPressed(evt);
             }
         });
 
@@ -589,9 +618,46 @@ public class VtnAsignacionMasivaRoles extends javax.swing.JFrame {
         jTableAsignacionMasivaRoles.getTableHeader().setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 16));
         jTableAsignacionMasivaRoles.getTableHeader().setForeground(Color.WHITE);
         jTableAsignacionMasivaRoles.getTableHeader().setBackground(Color.getHSBColor(red, green, blue));
-        jTableAsignacionMasivaRoles.setRowHeight(25);
-        jTableAsignacionMasivaRoles.setValueAt((Object)"Romero Núñez", 1, 1);
-        jTableAsignacionMasivaRoles.setValueAt((Object)"Jhon Fredy", 1, 2);   
+        jTableAsignacionMasivaRoles.setRowHeight(25);  
+    }
+    
+    // LISTAR usuarios
+    private void listarUsuarios(){
+            
+            try {
+                
+                //CONEXION SERVIDOR
+                
+                Gson objConvertidor = new Gson();
+                ClsPeticionDTO objPeticion = new ClsPeticionDTO();
+                
+                objCliente.crearConexion();
+                
+                String argumentos = "";
+                objPeticion.setArgumentos(argumentos);
+                objPeticion.setAccion("listarTodosLosUsuarios");
+                
+                String JSON = objConvertidor.toJson(objPeticion);
+                String respuestaJSON = objCliente.enviarPeticion(JSON);
+                ClsResultadoDTO objResultado = objConvertidor.fromJson(respuestaJSON, ClsResultadoDTO.class);
+                
+                objCliente.cerrarConexion();
+                
+                //FIN CONEXION
+                
+                if(objResultado.getCodigoResultado() == 1)
+                {
+                    llenarTablas(objResultado, objConvertidor, jTableAsignacionMasivaRoles);
+                }
+                else
+                {
+                    Utilidades.mensajeAdvertencia("No hay usuarios registrados", "Error");
+                    limpiarTabla(jTableAsignacionMasivaRoles);
+                }
+
+            } catch (IOException ex) {
+                Logger.getLogger(VtnIniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
     
     private void jComboBoxPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPerfilActionPerformed
@@ -643,6 +709,126 @@ public class VtnAsignacionMasivaRoles extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jToggleButtonAsignacionMasivaRolesActionPerformed
 
+    // LLENAR TABLAS
+    private void llenarTablas(ClsResultadoDTO objResultado, Gson objConvertidor, JTable tabla){
+         
+            String listaJSON = objResultado.getJSONResultado();
+            java.lang.reflect.Type listType = new TypeToken<ArrayList<ClsUsuarioDTO>>(){}.getType();
+            ArrayList<ClsUsuarioDTO> listaUsuarios = objConvertidor.fromJson(listaJSON, listType);
+            
+            limpiarTabla(tabla);
+
+            for (int i = 0; i < listaUsuarios.size(); i++) {
+                ClsUsuarioDTO objUsuarioPorListar = listaUsuarios.get(i);
+
+                String rol = "";
+                switch(objUsuarioPorListar.getRol()){
+                    case Administrativo:
+                        rol = "Administrativo";
+                    break;
+                    case Docente:
+                        rol = "Docente";
+                    break;
+                    case Estudiante:
+                        rol = "Estudiante";
+                    break;                
+                    case No_Asignado:
+                        rol = "No asignado";
+                    break;
+                    default:
+
+                    break;
+                }    
+
+                Object [] fila= { false, objUsuarioPorListar.getCodigo(),objUsuarioPorListar.getApellidos(),objUsuarioPorListar.getNombres(),
+                    objUsuarioPorListar.getGenero()+""};
+
+                DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+                model.addRow(fila);
+
+            }
+    }
+    
+    //LIMPIAR tabla
+    public void limpiarTabla(javax.swing.JTable tabla){
+        
+        DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+        int filas = tabla.getRowCount();
+        for (int i = 0;filas>i; i++) {
+            modelo.removeRow(0);
+        }        
+    }
+    
+    // VALIDACION campos inicio ================================================
+    private boolean verificarCamposVacios() {
+        
+        boolean bandera = false; // false = campos no vacios
+        
+        if(this.jTextFieldDigiteCodigo.getText().equals("") || this.jTextFieldDigiteCodigo.getText().equals("Digite Código"))
+        {
+            mostrarError(jLabelErrorDigiteCodigo, "Rellenar este campo",jTextFieldDigiteCodigo);
+            bandera=true;
+        }
+        return bandera;
+    }
+    
+    private boolean verificarCaracteresCodigo(JTextField campo) {
+        
+        char[] caracteresValidos = {'1','2','3','4','5','6','7','8','9','0'};
+        boolean bandera=false; // false = caracteres validos            
+        char[] caracteresEnCampo = campo.getText().toCharArray();
+
+        for(int i=0; i<caracteresEnCampo.length; i++){
+
+            String caracterCampo = String.valueOf(caracteresEnCampo[i]);
+            boolean banderaInterna = false; // false = caracter incorrecto
+
+            for(int j=0;j<caracteresValidos.length;j++){
+
+                String caracterValido = String.valueOf(caracteresValidos[j]);
+
+                if(caracterCampo.equalsIgnoreCase(caracterValido))
+                {
+                    banderaInterna=true;
+                    break;
+                }
+
+            }
+
+            if(banderaInterna == false){
+                bandera = true;
+                mostrarError(jLabelErrorDigiteCodigo, "Caracter ingresado no válido",jTextFieldDigiteCodigo);
+                break;
+            }
+        }       
+               
+        return bandera;
+    }
+    
+    private boolean validarCantidadDeCaracteresCodigo(){
+        
+        boolean bandera = false; // false = correcto
+        
+        if(jTextFieldDigiteCodigo.getText().length() > 8){ 
+            bandera = true;
+            mostrarError(jLabelErrorDigiteCodigo, "Los codigos poseen menos de 9 digitos",jTextFieldDigiteCodigo);            
+        }
+               
+        return bandera;
+    }
+    
+    private void mostrarError(JLabel notificacion, String error, JTextField campo){
+        notificacion.setText(error);
+        notificacion.setVisible(true);
+        campo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+    }
+    
+     private void ocultarErrores(){
+        jLabelErrorDigiteCodigo.setVisible(false);
+        jTextFieldDigiteCodigo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    }
+    // VALIDACIÓN campos final =================================================
+     
     private void jToggleButtonGestionarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonGestionarUsuariosActionPerformed
         VtnPrincipalAdmin objVtnPrincipalAdmin = new VtnPrincipalAdmin(objCliente, nombrePerfil);
         objVtnPrincipalAdmin.setVisible(true);
@@ -677,6 +863,66 @@ public class VtnAsignacionMasivaRoles extends javax.swing.JFrame {
     private void jToggleButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jToggleButton7ActionPerformed
+
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+        limpiarTabla(jTableAsignacionMasivaRoles);
+        
+        ClsResultadoDTO objResultado = new ClsResultadoDTO();
+        Gson objConvertidor = new Gson();
+        
+        ocultarErrores();
+        
+        boolean cantidadCaracteresCodigo = validarCantidadDeCaracteresCodigo();
+        boolean camposValidos = verificarCaracteresCodigo(jTextFieldDigiteCodigo);
+        boolean camposVacios = verificarCamposVacios();
+        
+        if(camposVacios == false && camposValidos == false && cantidadCaracteresCodigo == false){
+        
+            try{
+                //CONEXION SERVIDOR
+
+                ClsPeticionDTO objPeticion = new ClsPeticionDTO();
+
+                objCliente.crearConexion();
+
+                String argumentos = this.jTextFieldDigiteCodigo.getText();
+                objPeticion.setArgumentos(argumentos);
+                objPeticion.setAccion("buscarUsuarios");
+
+                String JSON = objConvertidor.toJson(objPeticion);
+                String respuestaJSON = objCliente.enviarPeticion(JSON);
+                objResultado = objConvertidor.fromJson(respuestaJSON, ClsResultadoDTO.class);
+
+                objCliente.cerrarConexion();
+
+                //FIN CONEXION
+            }catch(IOException ex){
+                Utilidades.mensajeError("Error al buscar el usuario. Intentelo más tarde", "Error");
+            }
+        
+            if(objResultado.getCodigoResultado() == 1){
+                llenarTablas(objResultado, objConvertidor, jTableAsignacionMasivaRoles);                
+            }else{
+                Utilidades.mensajeError("No se encontraron coincidencias", "Error");
+            }
+        
+        }else{
+            if(camposVacios == true){
+                Utilidades.mensajeAdvertencia("El campo busqueda esta vacío", "Error");
+            }else if(camposValidos == true)
+                Utilidades.mensajeAdvertencia("Caracter ingresado no válido", "Error");
+            else if(cantidadCaracteresCodigo == true)
+                Utilidades.mensajeAdvertencia("Número de caracteres no válido", "Error");
+        }
+        
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
+
+    // EVENTO ENTER
+    private void jTextFieldDigiteCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldDigiteCodigoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jButtonBuscarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jTextFieldDigiteCodigoKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Barra;

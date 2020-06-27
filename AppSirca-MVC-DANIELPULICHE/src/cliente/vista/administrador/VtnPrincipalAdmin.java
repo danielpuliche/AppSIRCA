@@ -1,4 +1,4 @@
-package cliente.vista;
+package cliente.vista.administrador;
 
 import cliente.servicios.cliente;
 import com.google.gson.Gson;
@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import modelo.DTO.ClsPeticionDTO;
+import modelo.DTO.ClsRegistroDTO;
 import modelo.DTO.ClsResultadoDTO;
 import modelo.DTO.ClsUsuarioDTO;
 import utilidades.Utilidades;
@@ -38,7 +39,7 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
     
     public VtnPrincipalAdmin(cliente objCliente, String login) {
         initComponents();
-        Image icon = Toolkit.getDefaultToolkit().getImage("./src/Recursos/logo.jpg");
+        Image icon = Toolkit.getDefaultToolkit().getImage("./src/Recursos/logo.png");
         this.setIconImage(icon);
         estiloTablas();
         this.objCliente = objCliente;
@@ -85,12 +86,12 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
         jToggleButtonAyuda = new javax.swing.JToggleButton();
         jLabelErrorDigiteCodigo = new javax.swing.JLabel();
         jPanelContenedorTablas = new javax.swing.JPanel();
-        jScrollPaneTablaUsuariosDentro = new javax.swing.JScrollPane();
-        jTableUsuariosDentro = new javax.swing.JTable();
         jScrollPaneTablaUsuariosFuera = new javax.swing.JScrollPane();
         jTableUsuariosFuera = new javax.swing.JTable();
         jScrollPaneTablaUsuariosTodos = new javax.swing.JScrollPane();
         jTableUsuariosTodos = new javax.swing.JTable();
+        jScrollPaneTablaUsuariosDentro = new javax.swing.JScrollPane();
+        jTableUsuariosDentro = new javax.swing.JTable();
         jButtonBuscar = new javax.swing.JButton();
         jPanelPaginacion = new javax.swing.JPanel();
         jButtonPagAnterior = new javax.swing.JButton();
@@ -104,7 +105,6 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SIRCA - Admin Interface");
-        setMaximumSize(new java.awt.Dimension(700, 680));
         setMinimumSize(new java.awt.Dimension(700, 680));
         setResizable(false);
 
@@ -284,7 +284,7 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
         jPanelCriterios.add(jPanelRadios, java.awt.BorderLayout.CENTER);
 
         jTextFieldDigiteCodigo.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jTextFieldDigiteCodigo.setForeground(new java.awt.Color(153, 153, 153));
+        jTextFieldDigiteCodigo.setForeground(new java.awt.Color(102, 102, 102));
         jTextFieldDigiteCodigo.setText("Digite Código");
         jTextFieldDigiteCodigo.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jTextFieldDigiteCodigo.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -367,58 +367,6 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
         jPanelContenedorTablas.setBackground(new java.awt.Color(255, 255, 255));
         jPanelContenedorTablas.setLayout(new java.awt.CardLayout());
 
-        jScrollPaneTablaUsuariosDentro.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPaneTablaUsuariosDentro.setMaximumSize(new java.awt.Dimension(585, 272));
-        jScrollPaneTablaUsuariosDentro.setMinimumSize(new java.awt.Dimension(585, 272));
-        jScrollPaneTablaUsuariosDentro.setPreferredSize(new java.awt.Dimension(585, 272));
-
-        jTableUsuariosDentro.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jTableUsuariosDentro.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Código", "Apellidos", "Nombres", "Genero", "Rol", "<html>Fecha de <br> Ingreso</html>", "<html>Hora de <br> Ingreso</html>", "Opciones"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPaneTablaUsuariosDentro.setViewportView(jTableUsuariosDentro);
-
-        jPanelContenedorTablas.add(jScrollPaneTablaUsuariosDentro, "card2");
-
         jScrollPaneTablaUsuariosFuera.setMaximumSize(new java.awt.Dimension(585, 272));
         jScrollPaneTablaUsuariosFuera.setMinimumSize(new java.awt.Dimension(585, 272));
         jScrollPaneTablaUsuariosFuera.setPreferredSize(new java.awt.Dimension(585, 272));
@@ -426,36 +374,36 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
         jTableUsuariosFuera.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jTableUsuariosFuera.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Código", "Apellidos", "Nombres", "Genero", "Rol", "<html>Fecha de <br> Salida</html>", "<html>Hora de <br> Salida</html>", "Opciones"
+                "Código", "Apellidos", "Nombres", "Genero", "Rol", "<html>Fecha de <br> Salida</html>", "<html>Hora de <br> Salida</html>", "Editar", "Eliminar"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, true
+                false, false, false, false, false, false, false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -542,6 +490,58 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
         }
 
         jPanelContenedorTablas.add(jScrollPaneTablaUsuariosTodos, "card2");
+
+        jScrollPaneTablaUsuariosDentro.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPaneTablaUsuariosDentro.setMaximumSize(new java.awt.Dimension(585, 272));
+        jScrollPaneTablaUsuariosDentro.setMinimumSize(new java.awt.Dimension(585, 272));
+        jScrollPaneTablaUsuariosDentro.setPreferredSize(new java.awt.Dimension(585, 272));
+
+        jTableUsuariosDentro.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jTableUsuariosDentro.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Código", "Apellidos", "Nombres", "Genero", "Rol", "<html>Fecha de <br> Ingreso</html>", "<html>Hora de <br> Ingreso</html>", "Editar", "Eliminar"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPaneTablaUsuariosDentro.setViewportView(jTableUsuariosDentro);
+
+        jPanelContenedorTablas.add(jScrollPaneTablaUsuariosDentro, "card2");
 
         jButtonBuscar.setBackground(new java.awt.Color(204, 0, 0));
         jButtonBuscar.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
@@ -705,13 +705,8 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
         jTableUsuariosFuera.setDefaultRenderer(Object.class, new Render());
         setJComboBoxRol(jTableUsuariosFuera.getColumnModel().getColumn(4));
     }
-    
-    //Funcion para ocultar notificaciones de error
-    private void ocultarErrores(){
-        jLabelErrorDigiteCodigo.setVisible(false);
-    }
-    
-    // LLENAR TABLAS
+     
+    // LISTAR usuarios
     private void listarUsuarios(){
         
         if(jRadioButtonTodos.isSelected()){
@@ -750,13 +745,77 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
             } catch (IOException ex) {
                 Logger.getLogger(VtnIniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
         }else if(jRadioButtonDentro.isSelected()){
             
-            // Falta agregar metodos de entrada y salida de usuarios
+            try {
+                
+                //CONEXION SERVIDOR
+                
+                Gson objConvertidor = new Gson();
+                ClsPeticionDTO objPeticion = new ClsPeticionDTO();
+                
+                objCliente.crearConexion();
+                
+                String argumentos = "";
+                objPeticion.setArgumentos(argumentos);
+                objPeticion.setAccion("listarUsuariosDentro");
+                
+                String JSON = objConvertidor.toJson(objPeticion);
+                String respuestaJSON = objCliente.enviarPeticion(JSON);
+                ClsResultadoDTO objResultado = objConvertidor.fromJson(respuestaJSON, ClsResultadoDTO.class);
+                
+                objCliente.cerrarConexion();
+                
+                //FIN CONEXION
+                
+                if(objResultado.getCodigoResultado() == 1)
+                    llenarTablas(objResultado, objConvertidor, jTableUsuariosDentro);
+                else{
+                    Utilidades.mensajeAdvertencia("No hay usuarios dentro de la institucion", "Error");
+                    limpiarTabla(jTableUsuariosDentro);
+                }
+
+            } catch (IOException ex) {
+                Logger.getLogger(VtnIniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
         }else if(jRadioButtonFuera.isSelected()){
             
-            // Falta agregar metodos de entrada y salida de usuarios
+            try {
+                
+                //CONEXION SERVIDOR
+                
+                Gson objConvertidor = new Gson();
+                ClsPeticionDTO objPeticion = new ClsPeticionDTO();
+                
+                objCliente.crearConexion();
+                
+                String argumentos = "";
+                objPeticion.setArgumentos(argumentos);
+                objPeticion.setAccion("listarUsuariosFuera");
+                
+                String JSON = objConvertidor.toJson(objPeticion);
+                String respuestaJSON = objCliente.enviarPeticion(JSON);
+                ClsResultadoDTO objResultado = objConvertidor.fromJson(respuestaJSON, ClsResultadoDTO.class);
+                
+                objCliente.cerrarConexion();
+                
+                //FIN CONEXION
+                
+                if(objResultado.getCodigoResultado() == 1)
+                {
+                    llenarTablas(objResultado, objConvertidor, jTableUsuariosFuera);
+                }
+                else
+                {
+                    Utilidades.mensajeAdvertencia("No hay usuarios fuera de la institucion", "Error");
+                    limpiarTabla(jTableUsuariosFuera);
+                }
+
+            } catch (IOException ex) {
+                Logger.getLogger(VtnIniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
         }
         
@@ -769,7 +828,7 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
         
         if(this.jTextFieldDigiteCodigo.getText().equals("") || this.jTextFieldDigiteCodigo.getText().equals("Digite Código"))
         {
-            mostrarError(jLabelErrorDigiteCodigo, "Rellenar este campo");
+            mostrarError(jLabelErrorDigiteCodigo, "Rellenar este campo",jTextFieldDigiteCodigo);
             bandera=true;
         }
         return bandera;
@@ -800,7 +859,7 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
 
             if(banderaInterna == false){
                 bandera = true;
-                mostrarError(jLabelErrorDigiteCodigo, "Caracter ingresado no válido");
+                mostrarError(jLabelErrorDigiteCodigo, "Caracter ingresado no válido",jTextFieldDigiteCodigo);
                 break;
             }
         }       
@@ -814,18 +873,26 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
         
         if(jTextFieldDigiteCodigo.getText().length() > 8){ 
             bandera = true;
-            mostrarError(jLabelErrorDigiteCodigo, "Los codigos poseen menos de 9 digitos");            
+            mostrarError(jLabelErrorDigiteCodigo, "Los codigos poseen máximo 8 digitos",jTextFieldDigiteCodigo);            
         }
                
         return bandera;
     }
     
-    private void mostrarError(JLabel notificacion, String error){
+    private void mostrarError(JLabel notificacion, String error, JTextField campo){
         notificacion.setText(error);
         notificacion.setVisible(true);
+        campo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+    }
+    
+     private void ocultarErrores(){
+        jLabelErrorDigiteCodigo.setVisible(false);
+        jTextFieldDigiteCodigo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
     }
     // VALIDACIÓN campos final =================================================
     
+     
+     
     // Llenar columna con COMBOBOX ROL
     public void setJComboBoxRol(TableColumn columna){
 
@@ -840,17 +907,14 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
         renderer.setToolTipText("Seleccionar Rol");
         columna.setCellRenderer(renderer);
         
-        
         jComboBoxRol.addMouseListener(new MouseAdapter() {
+            
             @Override
             public void mousePressed(MouseEvent evt) {
                 
                 JComboBox comboBoxRol = (JComboBox) evt.getSource();
                 int row = comboBoxRol.getY()/jTableUsuariosTodos.getRowHeight();
                 codigoParaAsignarRol = jTableUsuariosTodos.getValueAt(row, 0).toString();
-                
-                
-                
             }
         });
         
@@ -878,11 +942,10 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
                 }
                 
                 if(codigoParaAsignarRol==null){
-                    //PARA NO LLAMAR A LA FUNCION INNECESARIAMENTE
-                }else{
+                    
+                }else
                     asignarRol(codigoParaAsignarRol, rolNuevo);
-                }
-                
+                                
                 codigoParaAsignarRol=null;
                                     
             }
@@ -897,6 +960,7 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
         Gson objConvertidor = new Gson();
         
         if(Utilidades.mensajeConfirmacion("¿Estás seguro de que quieres guardar los cambios? \nNo será posible recuperar los datos anteriores", "Advertencia") == 0){
+            
             try{
                 //CONEXION SERVIDOR
 
@@ -921,6 +985,8 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
             
             if(objResultado.getCodigoResultado() == 1){
                 Utilidades.mensajeExito("Asignación de rol exitosa", "Acción realizada con éxito");
+                limpiarTabla(jTableUsuariosTodos);
+                listarUsuarios();
             }else{
                 Utilidades.mensajeError("Usuario no encontrado", "Error");
             }
@@ -1056,7 +1122,7 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
         jToggleButtonGestionarUsuarios.setSelected(true);
     }//GEN-LAST:event_jToggleButtonAyudaActionPerformed
 
-    // ¿SIRVE?
+    // Mano click
     private void jTableUsuariosTodosMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUsuariosTodosMouseMoved
         if(jTableUsuariosTodos.columnAtPoint(evt.getPoint())>=4)
         {
@@ -1099,6 +1165,10 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
     // Funcion BUSCAR USUARIO
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         
+        limpiarTabla(jTableUsuariosTodos);
+        limpiarTabla(jTableUsuariosFuera);
+        limpiarTabla(jTableUsuariosDentro);
+        
         ClsResultadoDTO objResultado = new ClsResultadoDTO();
         Gson objConvertidor = new Gson();
         
@@ -1139,10 +1209,10 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
             }
         
         }else{
-            if(camposVacios == true)
+            if(camposVacios == true){
                 Utilidades.mensajeAdvertencia("El campo busqueda esta vacío", "Error");
-            else if(camposValidos == true)
-                Utilidades.mensajeAdvertencia("El código digitado no es válido", "Error");
+            }else if(camposValidos == true)
+                Utilidades.mensajeAdvertencia("Caracter ingresado no válido", "Error");
             else if(cantidadCaracteresCodigo == true)
                 Utilidades.mensajeAdvertencia("Número de caracteres no válido", "Error");
         }
@@ -1153,49 +1223,151 @@ public class VtnPrincipalAdmin extends javax.swing.JFrame {
     // LLENAR TABLAS
     private void llenarTablas(ClsResultadoDTO objResultado, Gson objConvertidor, JTable tabla){
         
-        String listaJSON = objResultado.getJSONResultado();
-        java.lang.reflect.Type listType = new TypeToken<ArrayList<ClsUsuarioDTO>>(){}.getType();
-        ArrayList<ClsUsuarioDTO> listaUsuarios = objConvertidor.fromJson(listaJSON, listType);
-    
-        limpiarTabla(tabla);
-
-        for (int i = 0; i < listaUsuarios.size(); i++) {
-            ClsUsuarioDTO objUsuarioPorListar = listaUsuarios.get(i);
-
-            String rol = "";
-            switch(objUsuarioPorListar.getRol()){
-                case Administrativo:
-                    rol = "Administrativo";
-                break;
-                case Docente:
-                    rol = "Docente";
-                break;
-                case Estudiante:
-                    rol = "Estudiante";
-                break;                
-                case No_Asignado:
-                    rol = "No asignado";
-                break;
-                default:
-
-                break;
-            }    
-
-            JButton JButtonEliminarUsuario = new JButton();
-            JButtonEliminarUsuario.setName("Eliminar");
-            JButtonEliminarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/trash-2-24.png")));
-
-            JButton JButtonEditarUsuario = new JButton();
-            JButtonEditarUsuario.setName("Editar");
-            JButtonEditarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/edit-24.png")));
-
-            Object [] fila= { objUsuarioPorListar.getCodigo(),objUsuarioPorListar.getApellidos(),objUsuarioPorListar.getNombres(),
-                objUsuarioPorListar.getGenero()+"",rol,JButtonEditarUsuario,JButtonEliminarUsuario};
+        if (this.jRadioButtonTodos.isSelected()){ 
+            String listaJSON = objResultado.getJSONResultado();
+            java.lang.reflect.Type listType = new TypeToken<ArrayList<ClsUsuarioDTO>>(){}.getType();
+            ArrayList<ClsUsuarioDTO> listaUsuarios = objConvertidor.fromJson(listaJSON, listType);
             
-            DefaultTableModel model = (DefaultTableModel) tabla.getModel();
-            model.addRow(fila);
-    
-                }
+            limpiarTabla(tabla);
+
+            for (int i = 0; i < listaUsuarios.size(); i++) {
+                ClsUsuarioDTO objUsuarioPorListar = listaUsuarios.get(i);
+
+                String rol = "";
+                switch(objUsuarioPorListar.getRol()){
+                    case Administrativo:
+                        rol = "Administrativo";
+                    break;
+                    case Docente:
+                        rol = "Docente";
+                    break;
+                    case Estudiante:
+                        rol = "Estudiante";
+                    break;                
+                    case No_Asignado:
+                        rol = "No asignado";
+                    break;
+                    default:
+
+                    break;
+                }    
+
+                JButton JButtonEliminarUsuario = new JButton();
+                JButtonEliminarUsuario.setName("Eliminar");
+                JButtonEliminarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/trash-2-24.png")));
+
+                JButton JButtonEditarUsuario = new JButton();
+                JButtonEditarUsuario.setName("Editar");
+                JButtonEditarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/edit-24.png")));
+
+                Object [] fila= { objUsuarioPorListar.getCodigo(),objUsuarioPorListar.getApellidos(),objUsuarioPorListar.getNombres(),
+                    objUsuarioPorListar.getGenero()+"",rol,JButtonEditarUsuario,JButtonEliminarUsuario};
+
+                DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+                model.addRow(fila);
+
+            }
+            
+        }else if(this.jRadioButtonDentro.isSelected()){
+            
+            String listaJSON = objResultado.getJSONResultado();
+            java.lang.reflect.Type listType = new TypeToken<ArrayList<ClsUsuarioDTO>>(){}.getType();
+            ArrayList<ClsUsuarioDTO> listaUsuarios = objConvertidor.fromJson(listaJSON, listType);
+            
+            limpiarTabla(tabla);
+
+            for (int i = 0; i < listaUsuarios.size(); i++) {
+                ClsUsuarioDTO objUsuarioPorListar = listaUsuarios.get(i);
+                ArrayList<ClsRegistroDTO> listaRegistrosUsuario = listaUsuarios.get(i).getRegistros();
+                ClsRegistroDTO objRegistroPorListar = listaRegistrosUsuario.get(listaRegistrosUsuario.size()-1);
+
+                String rol = "";
+                switch(objUsuarioPorListar.getRol()){
+                    case Administrativo:
+                        rol = "Administrativo";
+                    break;
+                    case Docente:
+                        rol = "Docente";
+                    break;
+                    case Estudiante:
+                        rol = "Estudiante";
+                    break;                
+                    case No_Asignado:
+                        rol = "No asignado";
+                    break;
+                    default:
+
+                    break;
+                }    
+
+                JButton JButtonEliminarUsuario = new JButton();
+                JButtonEliminarUsuario.setName("Eliminar");
+                JButtonEliminarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/trash-2-24.png")));
+
+                JButton JButtonEditarUsuario = new JButton();
+                JButtonEditarUsuario.setName("Editar");
+                JButtonEditarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/edit-24.png")));
+
+                Object [] fila= { objUsuarioPorListar.getCodigo(),objUsuarioPorListar.getApellidos(),objUsuarioPorListar.getNombres(),
+                    objUsuarioPorListar.getGenero()+"",rol,objRegistroPorListar.getFecha()+"",objRegistroPorListar.getHora()+"",JButtonEditarUsuario,
+                    JButtonEliminarUsuario};
+
+                DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+                model.addRow(fila);
+
+            }
+            
+        } else if(this.jRadioButtonFuera.isSelected()){
+            
+            String listaJSON = objResultado.getJSONResultado();
+            java.lang.reflect.Type listType = new TypeToken<ArrayList<ClsUsuarioDTO>>(){}.getType();
+            ArrayList<ClsUsuarioDTO> listaUsuarios = objConvertidor.fromJson(listaJSON, listType);
+            
+            limpiarTabla(tabla);
+
+            for (int i = 0; i < listaUsuarios.size(); i++) {
+                ClsUsuarioDTO objUsuarioPorListar = listaUsuarios.get(i);
+                ArrayList<ClsRegistroDTO> listaRegistrosUsuario = listaUsuarios.get(i).getRegistros();
+                ClsRegistroDTO objRegistroPorListar = listaRegistrosUsuario.get(listaRegistrosUsuario.size()-1);
+
+                String rol = "";
+                switch(objUsuarioPorListar.getRol()){
+                    case Administrativo:
+                        rol = "Administrativo";
+                    break;
+                    case Docente:
+                        rol = "Docente";
+                    break;
+                    case Estudiante:
+                        rol = "Estudiante";
+                    break;                
+                    case No_Asignado:
+                        rol = "No asignado";
+                    break;
+                    default:
+
+                    break;
+                }    
+
+                JButton JButtonEliminarUsuario = new JButton();
+                JButtonEliminarUsuario.setName("Eliminar");
+                JButtonEliminarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/trash-2-24.png")));
+
+                JButton JButtonEditarUsuario = new JButton();
+                JButtonEditarUsuario.setName("Editar");
+                JButtonEditarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/edit-24.png")));
+
+                Object [] fila= { objUsuarioPorListar.getCodigo(),objUsuarioPorListar.getApellidos(),objUsuarioPorListar.getNombres(),
+                    objUsuarioPorListar.getGenero()+"",rol,objRegistroPorListar.getFecha()+"",objRegistroPorListar.getHora()+"",JButtonEditarUsuario,
+                    JButtonEliminarUsuario};
+
+                DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+                model.addRow(fila);
+
+            }
+            
+        }    
+        
     }
     
     // Evento ENTER

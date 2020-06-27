@@ -1,4 +1,4 @@
-package cliente.vista;
+package cliente.vista.administrador;
 
 import cliente.servicios.cliente;
 import com.google.gson.Gson;
@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 import modelo.DTO.ClsPeticionDTO;
 import modelo.DTO.ClsResultadoDTO;
 import utilidades.Utilidades;
@@ -22,7 +21,7 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
 
     public VtnModificarContrasenia(cliente objCliente, String nombrePerfil) {
         initComponents();
-        Image icon = Toolkit.getDefaultToolkit().getImage("./src/Recursos/logo.jpg");
+        Image icon = Toolkit.getDefaultToolkit().getImage("./src/Recursos/logo.png");
         this.setIconImage(icon);
         this.objCliente = objCliente;
         this.nombrePerfil = nombrePerfil;
@@ -93,6 +92,7 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
         jPanelInferior.setPreferredSize(new java.awt.Dimension(700, 30));
 
         jLabelDesarrolladores.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelDesarrolladores.setForeground(new java.awt.Color(0, 0, 0));
         jLabelDesarrolladores.setText("F&P Software Development || www.fypsoftwaredevelopment.com || 2020");
         jPanelInferior.add(jLabelDesarrolladores);
 
@@ -207,8 +207,8 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
         jPanelInteriorPrincipal.setPreferredSize(new java.awt.Dimension(440, 290));
         jPanelInteriorPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabelContraseniaActual.setBackground(new java.awt.Color(255, 255, 255));
         jLabelContraseniaActual.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jLabelContraseniaActual.setForeground(new java.awt.Color(0, 0, 0));
         jLabelContraseniaActual.setText("Contraseña Actual:");
         jPanelInteriorPrincipal.add(jLabelContraseniaActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
@@ -224,8 +224,8 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
         jLabelErrorContraseniaActual.setText("Error");
         jPanelInteriorPrincipal.add(jLabelErrorContraseniaActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
-        jLabelNuevaContrasenia.setBackground(new java.awt.Color(255, 255, 255));
         jLabelNuevaContrasenia.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jLabelNuevaContrasenia.setForeground(new java.awt.Color(0, 0, 0));
         jLabelNuevaContrasenia.setText("Nueva Contraseña:");
         jPanelInteriorPrincipal.add(jLabelNuevaContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
 
@@ -235,8 +235,8 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
         jLabelErrorNuevaContrasenia.setText("Error");
         jPanelInteriorPrincipal.add(jLabelErrorNuevaContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
 
-        jLabelConfirmarNuevaContrasenia.setBackground(new java.awt.Color(255, 255, 255));
         jLabelConfirmarNuevaContrasenia.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jLabelConfirmarNuevaContrasenia.setForeground(new java.awt.Color(0, 0, 0));
         jLabelConfirmarNuevaContrasenia.setText("Confirmar Nueva Contraseña:");
         jPanelInteriorPrincipal.add(jLabelConfirmarNuevaContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
@@ -265,6 +265,7 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
         jPanelInteriorPrincipal.add(jButtonGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 217, 140, 50));
 
         jPasswordFieldContraseniaActual.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jPasswordFieldContraseniaActual.setForeground(new java.awt.Color(0, 0, 0));
         jPasswordFieldContraseniaActual.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jPasswordFieldContraseniaActualKeyPressed(evt);
@@ -273,6 +274,7 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
         jPanelInteriorPrincipal.add(jPasswordFieldContraseniaActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 42, 180, 26));
 
         jPasswordFieldNuevaContrasenia.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jPasswordFieldNuevaContrasenia.setForeground(new java.awt.Color(0, 0, 0));
         jPasswordFieldNuevaContrasenia.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jPasswordFieldNuevaContraseniaKeyPressed(evt);
@@ -281,6 +283,7 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
         jPanelInteriorPrincipal.add(jPasswordFieldNuevaContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 132, 180, 26));
 
         jPasswordFieldConfirmarNuevaContrasenia.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        jPasswordFieldConfirmarNuevaContrasenia.setForeground(new java.awt.Color(0, 0, 0));
         jPasswordFieldConfirmarNuevaContrasenia.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jPasswordFieldConfirmarNuevaContraseniaKeyPressed(evt);
@@ -443,6 +446,9 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
         jLabelErrorContraseniaActual.setVisible(false);
         jLabelErrorNuevaContrasenia.setVisible(false);
         jLabelErrorConfirmarNuevaContrasenia.setVisible(false);
+        jPasswordFieldContraseniaActual.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPasswordFieldNuevaContrasenia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPasswordFieldConfirmarNuevaContrasenia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
     }
     
     //Funcion para inicializar los botones de visualizacion
@@ -514,7 +520,7 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
                     }
                     else
                     {
-                        mostrarError(jLabelErrorContraseniaActual,"La contraseña ingresada es incorrecta");
+                        mostrarError(jLabelErrorContraseniaActual,"La contraseña ingresada es incorrecta",jPasswordFieldContraseniaActual);
                         Utilidades.mensajeAdvertencia("Contraseña no válida", "Atención");
                     }
 
@@ -662,17 +668,17 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
         
         if(this.jPasswordFieldContraseniaActual.getText().equals(""))
         {
-            mostrarError(jLabelErrorContraseniaActual, "Rellenar este campo");
+            mostrarError(jLabelErrorContraseniaActual, "Rellenar este campo", jPasswordFieldContraseniaActual);
             bandera = true;
         }
         if(this.jPasswordFieldNuevaContrasenia.getText().equals(""))
         {
-            mostrarError(jLabelErrorNuevaContrasenia, "Rellenar este campo");
+            mostrarError(jLabelErrorNuevaContrasenia, "Rellenar este campo",jPasswordFieldNuevaContrasenia);
             bandera = true;
         }
         if(this.jPasswordFieldConfirmarNuevaContrasenia.getText().equals(""))
         {
-            mostrarError(jLabelErrorConfirmarNuevaContrasenia, "Rellenar este campo");
+            mostrarError(jLabelErrorConfirmarNuevaContrasenia, "Rellenar este campo",jPasswordFieldConfirmarNuevaContrasenia);
             bandera = true;
         }
         
@@ -686,27 +692,38 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
         if(!jPasswordFieldNuevaContrasenia.getText().equals(jPasswordFieldConfirmarNuevaContrasenia.getText()))
         {
             bandera = true;
-            mostrarError(jLabelErrorConfirmarNuevaContrasenia, "La contraseña ingresada no coincide");
+            mostrarError(jLabelErrorConfirmarNuevaContrasenia, "La contraseña ingresada no coincide",jPasswordFieldConfirmarNuevaContrasenia);
         }
         return bandera;
     }
     
     private boolean verificarCaracteresValidos(JPasswordField campo) {
         
-        char[] caracteresNoValidos = {'!','#','$','%','&','/','(',')','=','?','¿','@','*',';',',',':','.','-','_'};    ///FALTAN POR AGREGAR
+        char[] caracteresValidos = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','r','s','t',
+                                    'u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9'};    ///FALTAN POR AGREGAR
                                       
-        boolean bandera=false;
+        boolean bandera = false; // false = validos
+        char[] caracteresEnCampo = campo.getText().toCharArray();
         
-        char[] letrasEnCampo = campo.getText().toCharArray();
-        
-        for(int j=0;j<caracteresNoValidos.length;j++){
-            String letraNoValida = String.valueOf(caracteresNoValidos[j]);
-            for(int i=0;i<letrasEnCampo.length;i++){
-                String letraCampo = String.valueOf(letrasEnCampo[i]);
-                if(letraCampo.equalsIgnoreCase(letraNoValida))
+        for(int i=0; i<caracteresEnCampo.length; i++){
+            
+            String caracterCampo = String.valueOf(caracteresEnCampo[i]);
+            boolean banderaInterna = false; // caracter incorrecto
+            
+            for(int j=0; j<caracteresValidos.length; j++){
+                
+                String caracterValido = String.valueOf(caracteresValidos[j]);
+                
+                if(caracterCampo.equalsIgnoreCase(caracterValido))
                 {
-                    bandera=true;
+                    banderaInterna = true;
+                    break;
                 }
+            }
+            
+            if(banderaInterna == false){
+                bandera = true;
+                break;
             }
         }
         return bandera;
@@ -718,19 +735,19 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
                 
         if(verificarCaracteresValidos(jPasswordFieldContraseniaActual) == true)
         {
-            mostrarError(jLabelErrorContraseniaActual, "Carácter ingresado no válido");
+            mostrarError(jLabelErrorContraseniaActual, "Carácter ingresado no válido",jPasswordFieldContraseniaActual);
             bandera=true;
         }
         
         if(verificarCaracteresValidos(jPasswordFieldNuevaContrasenia) == true)
         {
-            mostrarError(jLabelErrorNuevaContrasenia, "Carácter ingresado no válido");
+            mostrarError(jLabelErrorNuevaContrasenia, "Carácter ingresado no válido", jPasswordFieldNuevaContrasenia);
             bandera=true;
         }
         
         if(verificarCaracteresValidos(jPasswordFieldConfirmarNuevaContrasenia) == true)
         {
-            mostrarError(jLabelErrorConfirmarNuevaContrasenia, "Carácter ingresado no válido");
+            mostrarError(jLabelErrorConfirmarNuevaContrasenia, "Carácter ingresado no válido",jPasswordFieldConfirmarNuevaContrasenia);
             bandera=true;
         }
         
@@ -757,7 +774,7 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
         
         if(contrasenia.getText().length() < 8 || contrasenia.getText().length() > 15){ 
             bandera = true;
-            mostrarError(error, "La contraseña debe poseer entre 8 y 15 caracteres");            
+            mostrarError(error, "La contraseña debe poseer entre 8 y 15 caracteres",contrasenia);            
         }
        
         return bandera;
@@ -765,9 +782,10 @@ public class VtnModificarContrasenia extends javax.swing.JFrame {
     
     //FALTA VALIDAR QUE LA CONTRASEÑA SEA LA CORRECTA
     
-    private void mostrarError(JLabel notificacion, String error){
+    private void mostrarError(JLabel notificacion, String error, JPasswordField campo){
             notificacion.setText(error);
             notificacion.setVisible(true);
+            campo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
     }
     // VALIDACIÓN campos final =================================================
     

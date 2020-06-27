@@ -1,4 +1,4 @@
-package cliente.vista;
+package cliente.vista.administrador;
 
 import cliente.servicios.cliente;
 import com.google.gson.Gson;
@@ -6,8 +6,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -21,7 +19,7 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
 
     public VtnIniciarSesion(cliente objCliente) {
         initComponents();
-        Image icon = Toolkit.getDefaultToolkit().getImage("./src/Recursos/logo.jpg");
+        Image icon = Toolkit.getDefaultToolkit().getImage("./src/Recursos/logo.png");
         this.setIconImage(icon);
         ocultarErrores();
         this.objCliente=objCliente;
@@ -230,7 +228,7 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
         jPasswordFieldContrasenia.setBackground(new java.awt.Color(255, 255, 255));
         jPasswordFieldContrasenia.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         jPasswordFieldContrasenia.setForeground(new java.awt.Color(102, 102, 102));
-        jPasswordFieldContrasenia.setText("Password");
+        jPasswordFieldContrasenia.setText("Digite su contraseña");
         jPasswordFieldContrasenia.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 focusGainedPassword(evt);
@@ -280,12 +278,12 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
     private void focusLostPassword(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_focusLostPassword
         if(jPasswordFieldContrasenia.getText().equals("")){
             jPasswordFieldContrasenia.setForeground(new java.awt.Color(102,102,102));
-            jPasswordFieldContrasenia.setText("Password");
+            jPasswordFieldContrasenia.setText("Digite su contraseña");
         }
     }//GEN-LAST:event_focusLostPassword
 
     private void focusGainedPassword(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_focusGainedPassword
-        if(jPasswordFieldContrasenia.getText().equals("Password")){
+        if(jPasswordFieldContrasenia.getText().equals("Digite su contraseña")){
             this.jPasswordFieldContrasenia.setText("");
             jPasswordFieldContrasenia.setForeground(new java.awt.Color(0, 0, 0));
         }
@@ -348,7 +346,7 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
                 }
 
             } catch (IOException ex) {
-                Logger.getLogger(VtnIniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
+                Utilidades.mensajeError("Fallo en conexión", "Error");
             }
             
         }else{
@@ -356,6 +354,8 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
                 Utilidades.mensajeAdvertencia("Hay campos obligatorios sin rellenar", "Error");
             else if (camposValidos == true)
                 Utilidades.mensajeAdvertencia("Caracter(es) ingresado(s) no válido(s)", "Error");
+            else 
+                Utilidades.mensajeAdvertencia("Hay campos no válidos", "Error");
         }
 
     }//GEN-LAST:event_jButtonIngresarActionPerformed
@@ -374,12 +374,8 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonIngresarKeyPressed
 
-    //Funcion para ocultar notificaciones de error
-    private void ocultarErrores(){
-        this.jLabelErrorLogin.setVisible(false);
-        this.jLabelErrorContrasenia.setVisible(false);
-    }
-    
+        
+        
     // Eventos VISIBILIDAD CONTRASEÑA inicio ===============================================
     private void jLabelVisibilidadContraseniaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelVisibilidadContraseniaMousePressed
         this.jPasswordFieldContrasenia.setEchoChar((char)0);
@@ -405,13 +401,11 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
         
         switch (this.jTextFieldLogin.getText()) {
             case "Digite su login":
-                this.jLabelErrorLogin.setText("Rellene este campo");
-                this.jLabelErrorLogin.setVisible(true);
+                mostrarError(jLabelErrorLogin, "Rellene este campo",jTextFieldLogin);
                 bandera = true;
                 break;
             case "":
-                this.jLabelErrorLogin.setText("Rellene este campo");
-                this.jLabelErrorLogin.setVisible(true);
+                mostrarError(jLabelErrorLogin, "Rellene este campo",jTextFieldLogin);
                 bandera = true;
                 break;
             default:
@@ -419,14 +413,12 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
         }
         
         switch (this.jPasswordFieldContrasenia.getText()) {
-            case "Password":
-                this.jLabelErrorContrasenia.setText("Rellene este campo");
-                this.jLabelErrorContrasenia.setVisible(true);
+            case "Digite su contraseña":
+                mostrarError(jLabelErrorContrasenia, "Rellene este campo", jPasswordFieldContrasenia);
                 bandera = true;
                 break;
             case "":
-                this.jLabelErrorContrasenia.setText("Rellene este campo");
-                this.jLabelErrorContrasenia.setVisible(true);
+                mostrarError(jLabelErrorContrasenia, "Rellene este campo", jPasswordFieldContrasenia);
                 bandera = true;
                 break;
             default:
@@ -436,19 +428,26 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
         return bandera;
     }    
     
+    private void ocultarErrores(){
+        this.jLabelErrorLogin.setVisible(false);
+        this.jLabelErrorContrasenia.setVisible(false);
+        jTextFieldLogin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPasswordFieldContrasenia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    }
+    
     private boolean verificarCamposValidos(){
         
         boolean bandera = false; // false = campos validos        
                 
         if(verificarCaracteresValidosLogin(jTextFieldLogin) == true)
         {   
-            mostrarError(jLabelErrorLogin, "Carácter ingresado no válido");
+            mostrarError(jLabelErrorLogin, "Carácter ingresado no válido",jTextFieldLogin);
             bandera=true;
         }        
         
         if(verificarCaracteresValidosPassword(jPasswordFieldContrasenia) == true)
         {
-            mostrarError(jLabelErrorContrasenia, "Carácter ingresado no válido");
+            mostrarError(jLabelErrorContrasenia, "Carácter ingresado no válido",jPasswordFieldContrasenia);
             bandera=true;
         }
                
@@ -457,20 +456,31 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
     
     private boolean verificarCaracteresValidosLogin(JTextField campo) {
         
-        char[] caracteresNoValidos = {'!','#','$','%','&','/','(',')','=','?','¿','@','*',';',',',':','.','-','_'};    ///FALTAN POR AGREGAR
+        char[] caracteresValidos = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','r','s','t',
+                                    'u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9'};    ///FALTAN POR AGREGAR
                                       
-        boolean bandera=false;
+        boolean bandera = false; // false = validos
+        char[] caracteresEnCampo = campo.getText().toCharArray();
         
-        char[] letrasEnCampo = campo.getText().toCharArray();
-        
-        for(int j=0;j<caracteresNoValidos.length;j++){
-            String letraNoValida = String.valueOf(caracteresNoValidos[j]);
-            for(int i=0;i<letrasEnCampo.length;i++){
-                String letraCampo = String.valueOf(letrasEnCampo[i]);
-                if(letraCampo.equalsIgnoreCase(letraNoValida))
+        for(int i=0; i<caracteresEnCampo.length; i++){
+            
+            String caracterCampo = String.valueOf(caracteresEnCampo[i]);
+            boolean banderaInterna = false; // caracter incorrecto
+            
+            for(int j=0; j<caracteresValidos.length; j++){
+                
+                String caracterValido = String.valueOf(caracteresValidos[j]);
+                
+                if(caracterCampo.equalsIgnoreCase(caracterValido))
                 {
-                    bandera=true;
+                    banderaInterna = true;
+                    break;
                 }
+            }
+            
+            if(banderaInterna == false){
+                bandera = true;
+                break;
             }
         }
         return bandera;
@@ -482,7 +492,7 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
         
         if(jTextFieldLogin.getText().length() > 15){ 
             bandera = true;
-            mostrarError(jLabelErrorLogin, "El login debe poseer menos de 16 digitos");            
+            mostrarError(jLabelErrorLogin, "El login debe poseer máximo 15 digitos",jTextFieldLogin);            
         }
                
         return bandera;
@@ -490,20 +500,31 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
     
     private boolean verificarCaracteresValidosPassword(JPasswordField campo) {
         
-        char[] caracteresNoValidos = {'!','#','$','%','&','/','(',')','=','?','¿','@','*',';',',',':','.','-','_'};    ///FALTAN POR AGREGAR
+        char[] caracteresValidos = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','r','s','t',
+                                    'u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9'};    ///FALTAN POR AGREGAR
                                       
-        boolean bandera=false;
+        boolean bandera = false; // false = validos
+        char[] caracteresEnCampo = campo.getText().toCharArray();
         
-        char[] letrasEnCampo = campo.getText().toCharArray();
-        
-        for(int j=0;j<caracteresNoValidos.length;j++){
-            String letraNoValida = String.valueOf(caracteresNoValidos[j]);
-            for(int i=0;i<letrasEnCampo.length;i++){
-                String letraCampo = String.valueOf(letrasEnCampo[i]);
-                if(letraCampo.equalsIgnoreCase(letraNoValida))
+        for(int i=0; i<caracteresEnCampo.length; i++){
+            
+            String caracterCampo = String.valueOf(caracteresEnCampo[i]);
+            boolean banderaInterna = false; // caracter incorrecto
+            
+            for(int j=0; j<caracteresValidos.length; j++){
+                
+                String caracterValido = String.valueOf(caracteresValidos[j]);
+                
+                if(caracterCampo.equalsIgnoreCase(caracterValido))
                 {
-                    bandera=true;
+                    banderaInterna = true;
+                    break;
                 }
+            }
+            
+            if(banderaInterna == false){
+                bandera = true;
+                break;
             }
         }
         return bandera;
@@ -515,13 +536,14 @@ public class VtnIniciarSesion extends javax.swing.JFrame {
         
         if(jPasswordFieldContrasenia.getText().length() > 15){ 
             bandera = true;
-            mostrarError(jLabelErrorContrasenia, "La contraseña debe poseer menos de 16 digitos");            
+            mostrarError(jLabelErrorContrasenia, "La contraseña debe poseer másimo 15 digitos",jPasswordFieldContrasenia);            
         }
                
         return bandera;
     }
     
-    private void mostrarError(JLabel notificacion, String error){
+    private void mostrarError(JLabel notificacion, String error, JTextField field){
+            field.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
             notificacion.setText(error);
             notificacion.setVisible(true);
     }

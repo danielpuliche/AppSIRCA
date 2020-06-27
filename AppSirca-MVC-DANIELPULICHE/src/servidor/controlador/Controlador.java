@@ -1,21 +1,27 @@
 package servidor.controlador;
 
+import servidor.DAO.ClsAdministradorDAO;
+import servidor.DAO.ClsUsuarioDAO;
 import com.google.gson.Gson;
 import java.util.ArrayList;
-import modelo.ClsAdministrador;
-import modelo.ClsOrganizacion;
 import modelo.DTO.ClsPeticionDTO;
+import modelo.DTO.ClsRegistroDTO;
 import modelo.DTO.ClsResultadoDTO;
 import modelo.DTO.ClsUsuarioDTO;
+import servidor.DAO.ClsRegistroDAO;
 
 public class Controlador {
 
     private final Gson objConvertidor;
-    private final ClsOrganizacion objOrganizacion;
+    private final ClsAdministradorDAO objAdministradorDAO;
+    private final ClsUsuarioDAO objUsuarioDAO;
+    private final ClsRegistroDAO objRegistroDAO;
     
-    public Controlador(ClsOrganizacion objOrganizacion){
+    public Controlador(){
         this.objConvertidor = new Gson();
-        this.objOrganizacion = objOrganizacion;
+        this.objAdministradorDAO = new ClsAdministradorDAO();
+        this.objUsuarioDAO = new ClsUsuarioDAO();
+        this.objRegistroDAO = new ClsRegistroDAO();
     }
     
     public String decodificarPeticion(String JSONPeticion) {    
@@ -24,9 +30,9 @@ public class Controlador {
         String argumentosPeticion;
         String resultado;     
         
-        ClsPeticionDTO objPeticion= objConvertidor.fromJson(JSONPeticion, ClsPeticionDTO.class); 
-        accion=objPeticion.getAccion();
-        argumentosPeticion=objPeticion.getArgumentos();
+        ClsPeticionDTO objPeticion = objConvertidor.fromJson(JSONPeticion, ClsPeticionDTO.class); 
+        accion = objPeticion.getAccion();
+        argumentosPeticion = objPeticion.getArgumentos();
         
         resultado = procesarAccion(accion, argumentosPeticion);
         return resultado;
@@ -45,41 +51,12 @@ public class Controlador {
                 String login = datosDePerfil[0];
                 String contrasenia = datosDePerfil[1];
                 
-                ClsAdministrador objAdministrador = this.objOrganizacion.getAdministrador();
-                if(objAdministrador.getLogin().equals(login) && objAdministrador.getConstrasenia().equals(contrasenia)){
+                boolean respuesta = objAdministradorDAO.iniciarSesion(login, contrasenia);
+                
+                if (respuesta)
                     objResultado.setCodigoResultado(1);
-                }else{
+                else
                     objResultado.setCodigoResultado(-1);
-                }
-                
-            break;
-            
-            case "listarTodosLosUsuarios":
-
-                ArrayList<ClsUsuarioDTO> listaTodos = objOrganizacion.getListaUsuarios();
-                
-                if(listaTodos.isEmpty()){
-                    objResultado.setCodigoResultado(-1);
-                }else{
-                    objResultado.setCodigoResultado(1);
-                    String respuestaListaUsuarios = objConvertidor.toJson(listaTodos);
-                    objResultado.setJSONResultado(respuestaListaUsuarios);
-                }
-                
-            break;
-            
-            case "buscarUsuarios":
-
-                String codigoPorBuscar = argumentosPeticion;
-                ArrayList<ClsUsuarioDTO> listaCoincidentes = objOrganizacion.buscarUsuariosCoincidentes(codigoPorBuscar);
-                
-                if(listaCoincidentes.isEmpty()){
-                    objResultado.setCodigoResultado(-1);
-                }else{
-                    objResultado.setCodigoResultado(1);
-                    String respuestaListaCoincidentes = objConvertidor.toJson(listaCoincidentes);
-                    objResultado.setJSONResultado(respuestaListaCoincidentes);
-                }               
                 
             break;
             
@@ -89,8 +66,9 @@ public class Controlador {
                 String loginActual = cambioDeLogin[0];
                 String loginNuevo = cambioDeLogin[1];
                 
-                if(loginActual.equals(objOrganizacion.getAdministrador().getLogin())){
-                    objOrganizacion.getAdministrador().setLogin(loginNuevo);
+                boolean cambioLogin = objAdministradorDAO.modificarLogin(loginNuevo,loginActual);
+                
+                if(cambioLogin){
                     objResultado.setCodigoResultado(1);
                 }else
                     objResultado.setCodigoResultado(-1);
@@ -103,11 +81,54 @@ public class Controlador {
                 String contraseniaActual = cambioDeContrasenia[0];
                 String contraseniaNueva = cambioDeContrasenia[1];
                 
-                if(contraseniaActual.equals(objOrganizacion.getAdministrador().getConstrasenia())){
-                    objOrganizacion.getAdministrador().setConstrasenia(contraseniaNueva);
+                 boolean cambioContrasenia = objAdministradorDAO.modificarcontrasenia(contraseniaNueva, contraseniaActual);
+                
+                if(cambioContrasenia){
                     objResultado.setCodigoResultado(1);
                 }else
                     objResultado.setCodigoResultado(-1);
+                
+            break;
+            
+            case "listarTodosLosUsuarios":
+                
+                ArrayList<ClsUsuarioDTO> listaTodos = objUsuarioDAO.consultarUsuarios();
+                
+                if(listaTodos.isEmpty()){
+                    objResultado.setCodigoResultado(-1);
+                }else{
+                    objResultado.setCodigoResultado(1);
+                    String respuestaListaUsuarios = objConvertidor.toJson(listaTodos);
+                    objResultado.setJSONResultado(respuestaListaUsuarios);
+                }
+                
+            break;
+            
+            case "listarUsuariosDentro":
+                
+                ArrayList<ClsUsuarioDTO> listaUsuariosDentro = objUsuarioDAO.consultarUsuariosDentro();
+                
+                if(listaUsuariosDentro.isEmpty()){
+                    objResultado.setCodigoResultado(-1);
+                }else{
+                    objResultado.setCodigoResultado(1);
+                    String respuestaListaUsuarios = objConvertidor.toJson(listaUsuariosDentro);
+                    objResultado.setJSONResultado(respuestaListaUsuarios);
+                }
+                
+            break;
+            
+            case "listarUsuariosFuera":
+                
+                ArrayList<ClsUsuarioDTO> listaUsuariosFuera = objUsuarioDAO.consultarUsuariosFuera();
+                
+                if(listaUsuariosFuera.isEmpty()){
+                    objResultado.setCodigoResultado(-1);
+                }else{
+                    objResultado.setCodigoResultado(1);
+                    String respuestaListaUsuarios = objConvertidor.toJson(listaUsuariosFuera);
+                    objResultado.setJSONResultado(respuestaListaUsuarios);
+                }
                 
             break;
             
@@ -115,21 +136,10 @@ public class Controlador {
                 
                 ClsUsuarioDTO objUsuario = objConvertidor.fromJson(argumentosPeticion, ClsUsuarioDTO.class);
                     
-                String codigo = objUsuario.getCodigo();
-                String apellidos = objUsuario.getApellidos();
-                String nombres = objUsuario.getNombres();
-                String rol = objUsuario.obtenerRol(objUsuario.getRol());
-                String genero = objUsuario.obtenerGenero(objUsuario.getGenero());
-                  
-                if(this.objOrganizacion.existeUsuario(codigo) == false)
-                {
-                    this.objOrganizacion.agregarUsuario(codigo, apellidos, nombres, genero, rol);
+                if(objUsuarioDAO.registrarUsuario(objUsuario))
                     objResultado.setCodigoResultado(1);
-                }
                 else
-                {
                     objResultado.setCodigoResultado(-1);
-                }
                 
             break;
             
@@ -137,27 +147,11 @@ public class Controlador {
                   
                 String codigoEliminar = argumentosPeticion;
 
-                if(objOrganizacion.eliminarUsuario(codigoEliminar))
+                if(objUsuarioDAO.eliminarUsuario(codigoEliminar))
                     objResultado.setCodigoResultado(1);
                 else
                     objResultado.setCodigoResultado(-1);                
                 
-            break;
-            
-            case "asignarRol":
-                
-                String datosDeAsignacionRol[] = argumentosPeticion.split(",");
-                String codigoAsignarRol = datosDeAsignacionRol[0];
-                String nuevoRol = datosDeAsignacionRol[1];
-                System.out.println(codigoAsignarRol);
-
-                if(objOrganizacion.existeUsuario(codigoAsignarRol)){
-                    objOrganizacion.asignarRol(codigoAsignarRol, nuevoRol);
-                    objResultado.setCodigoResultado(1);
-                }else{
-                    objResultado.setCodigoResultado(-1);                
-                }
-    
             break;
             
             case "editarUsuario":
@@ -166,32 +160,98 @@ public class Controlador {
                 String codigoOriginal = datosDeUsuarioAEditar[0];
                 ClsUsuarioDTO objUsuarioEditado = this.objConvertidor.fromJson(datosDeUsuarioAEditar[1], ClsUsuarioDTO.class); 
                 
-                String codigoEditado = objUsuarioEditado.getCodigo();
-                String nombresEditado = objUsuarioEditado.getNombres();
-                String apellidosEditado = objUsuarioEditado.getApellidos();
-                String generoEditado = objUsuarioEditado.obtenerGenero(objUsuarioEditado.getGenero());
-                String rolEditado = objUsuarioEditado.obtenerRol(objUsuarioEditado.getRol());
-                
-                if(this.objOrganizacion.existeUsuario(codigoOriginal) == true)
-                {
-                    if(codigoOriginal.equals(codigoEditado)){
-                        this.objOrganizacion.editarUsuario(codigoOriginal, codigoEditado, apellidosEditado, nombresEditado, generoEditado, rolEditado);
-                        objResultado.setCodigoResultado(1);
-                    }else{ 
-                        if(this.objOrganizacion.existeUsuario(codigoEditado) == false){
-                            this.objOrganizacion.editarUsuario(codigoOriginal, codigoEditado, apellidosEditado, nombresEditado, generoEditado, rolEditado);
-                            objResultado.setCodigoResultado(1);
-                        }else
-                            objResultado.setCodigoResultado(-2);
-                    }
-                }
-                else
-                {
+                if(objUsuarioDAO.editarUsuario(objUsuarioEditado, codigoOriginal)){
+                    objResultado.setCodigoResultado(1);
+                }else 
                     objResultado.setCodigoResultado(-1);
-                }
                 
             break;
-           
+            
+            case "asignarRol":
+                
+                String datosDeAsignacionRol[] = argumentosPeticion.split(",");
+                String codigoAsignarRol = datosDeAsignacionRol[0];
+                String nuevoRol = datosDeAsignacionRol[1];
+
+                if(objUsuarioDAO.editarRol(nuevoRol, codigoAsignarRol))
+                    objResultado.setCodigoResultado(1);
+                else
+                    objResultado.setCodigoResultado(-1);                
+                
+            break;
+            
+            case "buscarUsuarios":
+
+                String codigoPorBuscar = argumentosPeticion;
+                ArrayList<ClsUsuarioDTO> listaCoincidentes = objUsuarioDAO.consultarUsuariosCoincidencia(codigoPorBuscar);
+                
+                if(listaCoincidentes.isEmpty()){
+                    objResultado.setCodigoResultado(-1);
+                }else{
+                    objResultado.setCodigoResultado(1);
+                    String respuestaListaCoincidentes = objConvertidor.toJson(listaCoincidentes);
+                    objResultado.setJSONResultado(respuestaListaCoincidentes);
+                }               
+                
+            break;
+            
+            case "entradaUsuario":
+                
+                String datosEntrada[] = argumentosPeticion.split("x");
+                String registroEntrada = datosEntrada[0];
+                String codigoEntrada = datosEntrada[1];
+                
+                if(objUsuarioDAO.existeUsuario(codigoEntrada)){
+                
+                    int ultimoRegistro = objRegistroDAO.obtenerUltimoRegistro(codigoEntrada);
+
+                    if(ultimoRegistro == 2){
+
+                        ClsRegistroDTO objRegistroDTOEntrada = this.objConvertidor.fromJson(registroEntrada, ClsRegistroDTO.class); 
+                        boolean respuestaEntrada = objRegistroDAO.asignarRegistroUsuario(codigoEntrada, objRegistroDTOEntrada);
+
+                        if (respuestaEntrada)
+                            objResultado.setCodigoResultado(1);  // exito en registro
+                        else
+                            objResultado.setCodigoResultado(-2); // error DB
+
+                    }else if(ultimoRegistro == 1)
+                        objResultado.setCodigoResultado(-1); // violacion de seguridad
+                    
+                }else
+                    objResultado.setCodigoResultado(-3); // no registrado
+                
+            break;
+            
+            case "salidaUsuario":
+                
+                String datosSalida[] = argumentosPeticion.split("x");
+                String registroSalida = datosSalida[0];
+                String codigoSalida = datosSalida[1];
+                
+                if(objUsuarioDAO.existeUsuario(codigoSalida)){
+                
+                    int ultimoRegistrox = objRegistroDAO.obtenerUltimoRegistro(codigoSalida);
+
+                    if(ultimoRegistrox == 1){
+
+                        ClsRegistroDTO objRegistroDTOEntrada = this.objConvertidor.fromJson(registroSalida, ClsRegistroDTO.class); 
+                        boolean respuestaEntrada = objRegistroDAO.asignarRegistroUsuario(codigoSalida, objRegistroDTOEntrada);
+
+                        if (respuestaEntrada)
+                            objResultado.setCodigoResultado(1);  // exito en registro
+                        else
+                            objResultado.setCodigoResultado(-2); // error DB
+
+                    }else if(ultimoRegistrox == 2)
+                        objResultado.setCodigoResultado(-1); // violacion de seguridad
+                
+                }else
+                    objResultado.setCodigoResultado(-3); // no registrado
+                
+                
+            break;
+            
         }
         
         resultadoJSON = objConvertidor.toJson(objResultado);

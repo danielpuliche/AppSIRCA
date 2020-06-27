@@ -1,4 +1,4 @@
-package cliente.vista;
+package cliente.vista.administrador;
 
 import java.awt.Color;
 import java.awt.Component;

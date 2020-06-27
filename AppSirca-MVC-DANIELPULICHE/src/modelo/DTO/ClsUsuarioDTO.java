@@ -1,5 +1,7 @@
 package modelo.DTO;
 
+import java.util.ArrayList;
+
 public class ClsUsuarioDTO {
     
     private String codigo;
@@ -7,6 +9,7 @@ public class ClsUsuarioDTO {
     private String apellidos;
     private EnumGenero genero;
     private EnumRol rol;
+    private ArrayList<ClsRegistroDTO> registros;
 
     public ClsUsuarioDTO(String codigo, String apellidos, String nombres, String genero, String rol) {
         this.codigo = codigo;
@@ -14,9 +17,22 @@ public class ClsUsuarioDTO {
         this.nombres = nombres;
         this.genero = darGenero(genero);
         this.rol = darRol(rol);
+        this.registros = new ArrayList();
+    }
+
+    public ArrayList<ClsRegistroDTO> getRegistros() {
+        return registros;
+    }
+
+    public void setRegistros(ArrayList<ClsRegistroDTO> registros) {
+        this.registros = registros;
     }
     
-    public EnumGenero darGenero(String generoRecibido){
+    public void asignarRegistro(ClsRegistroDTO registro){
+        this.registros.add(registro);
+    }
+    
+    public static EnumGenero darGenero(String generoRecibido){
         
         EnumGenero generoEnum = EnumGenero.Otro;
         
@@ -78,7 +94,7 @@ public class ClsUsuarioDTO {
         return String;
     }
     
-    public EnumRol darRol(String rolRecibido){
+    public static EnumRol darRol(String rolRecibido){
         
         EnumRol rolEnum = EnumRol.No_Asignado;
         
@@ -98,8 +114,8 @@ public class ClsUsuarioDTO {
         }
         
         return rolEnum;
-    }
-
+    }       
+    
     public String getCodigo() {
         return codigo;
     }
