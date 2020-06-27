@@ -43,7 +43,7 @@ public class ClsRegistroDAO implements InterfazAccesoDatosRegistroDAO{
     }
 
     @Override
-    public int obtenerUltimoRegistro(String codigoEntrada) {
+    public int obtenerTipoUltimoRegistro(String codigo) {
         int tipoRegistro = 2;
         
         conexionABaseDeDatos.conectar();
@@ -52,7 +52,7 @@ public class ClsRegistroDAO implements InterfazAccesoDatosRegistroDAO{
             PreparedStatement sentencia = null;
             String consulta = "SELECT registros.tipoRegistro FROM registros WHERE registros.codigoUsuario=? ORDER by registros.idRegistro DESC LIMIT 1";
             sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);
-            sentencia.setString(1, codigoEntrada);
+            sentencia.setString(1, codigo);
             ResultSet res = sentencia.executeQuery();
             while(res.next()){
                 tipoRegistro = res.getInt("tipoRegistro");
@@ -61,10 +61,39 @@ public class ClsRegistroDAO implements InterfazAccesoDatosRegistroDAO{
             conexionABaseDeDatos.desconectar();
 
         } catch (SQLException e) {
-            System.out.println("Error en el registro: "+e.getMessage());         
+            System.out.println("Error al obtener tipo registro: "+e.getMessage());         
         }
         
         return tipoRegistro;
+    }
+
+    @Override
+    public ClsRegistroDTO obtenerUltimoRegistro(String codigo) {
+        
+        ClsRegistroDTO objRegistro = null;
+        
+        conexionABaseDeDatos.conectar();
+        try {
+            
+            PreparedStatement sentencia = null;
+            String consulta = "SELECT * FROM registros WHERE registros.codigoUsuario=? ORDER by registros.idRegistro DESC LIMIT 1";
+            sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);
+            sentencia.setString(1, codigo);
+            ResultSet res = sentencia.executeQuery();
+            while(res.next()){
+                String fecha = res.getDate("fecha").toString();
+                String hora = res.getTime("hora").toString();
+                int tipoRegistro = res.getInt("tipoRegistro");
+                objRegistro = new ClsRegistroDTO(fecha, hora, tipoRegistro);
+            }  
+            sentencia.close();
+            conexionABaseDeDatos.desconectar();
+
+        } catch (SQLException e) {
+            System.out.println("Error al obtener registro: "+e.getMessage());         
+        } 
+        
+        return objRegistro;
     }
     
 }

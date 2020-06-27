@@ -11,6 +11,7 @@ import modelo.DTO.ClsUsuarioDTO;
 public class ClsUsuarioDAO implements InterfazAccesoDatosUsuarioDAO{
     
     private final ConexionBD conexionABaseDeDatos;
+    private ClsRegistroDAO objRegistroDAO;
     
     public ClsUsuarioDAO()
     {
@@ -52,36 +53,39 @@ public class ClsUsuarioDAO implements InterfazAccesoDatosUsuarioDAO{
     public ArrayList<ClsUsuarioDTO> consultarUsuariosDentro() {
         
         ArrayList<ClsUsuarioDTO> listaUsuariosDentro = new ArrayList();
+        ArrayList<String> codigosRegistros = new ArrayList();
         
         conexionABaseDeDatos.conectar();        
         try {            
             PreparedStatement sentencia = null;
-            String consulta = "select registros.fecha, registros.hora, usuarios.codigo, "
-                            + "usuarios.nombres, usuarios.apellidos, usuarios.genero, "
-                            + "usuarios.rol from registros join usuarios on registros.codigoUsuario=usuarios.codigo "
-                            + "where registros.tipoRegistro=1";
+            String consulta = "SELECT * from registros GROUP by registros.codigoUsuario";
             sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);            
             
             ResultSet res = sentencia.executeQuery();
+            
             while(res.next()){
-                String fecha = res.getDate("fecha").toString();
-                String hora = res.getTime("hora").toString();
-                ClsRegistroDTO objRegistro = new ClsRegistroDTO(fecha, hora, 1);
-                String codigo = res.getString("codigo");
-                String nombres = res.getString("nombres");
-                String apellidos = res.getString("apellidos");
-                String genero = res.getString("genero");
-                String rol = res.getString("rol");
-                ClsUsuarioDTO objUsuario = new ClsUsuarioDTO(codigo, apellidos, nombres, genero, rol);
-                objUsuario.asignarRegistro(objRegistro);
-                listaUsuariosDentro.add(objUsuario);
-            }   
+                codigosRegistros.add(res.getString("codigoUsuario"));
+            } 
             
             sentencia.close();
             conexionABaseDeDatos.desconectar();
+            
+            String codigo = "";
+            ClsRegistroDTO objRegistro = new ClsRegistroDTO("","",0);
+            
+            for (int i = 0; i < codigosRegistros.size(); i++) {
+                codigo = codigosRegistros.get(i);
+                
+                ClsUsuarioDTO objUsuario = new ClsUsuarioDTO(codigo, "a", "n", "Otro", "Sin asignar");
+                objUsuario.asignarRegistro(objRegistro);
+                listaUsuariosDentro.add(objUsuario);
+            }
+            
 
         } catch (SQLException e) {
-                  System.out.println("Error en el listar: "+e.getMessage());         
+            System.out.println("Error en el listar: "+e.getMessage());         
+        } catch (Exception ex){
+            System.out.println("Error xD");
         }
         
         return listaUsuariosDentro;
@@ -284,6 +288,33 @@ public class ClsUsuarioDAO implements InterfazAccesoDatosUsuarioDAO{
         
         return resultado == 1;
         
+    }
+
+    @Override
+    public ArrayList<String> codigosUsuarios() {
+        
+        ArrayList<String> codigosUsuarios = new ArrayList();
+        
+        conexionABaseDeDatos.conectar();        
+        try {            
+            PreparedStatement sentencia = null;
+            String consulta = "SELECT * from usuarios GROUP by usuarios.codigo";
+            sentencia = conexionABaseDeDatos.getConnection().prepareStatement(consulta);            
+            
+            ResultSet res = sentencia.executeQuery();
+            
+            while(res.next()){
+                codigosUsuarios.add(res.getString("codigo"));
+            } 
+            
+            sentencia.close();
+            conexionABaseDeDatos.desconectar();
+
+        } catch (SQLException e) {
+            System.out.println("Error en el listar: "+e.getMessage());         
+        }
+        
+        return codigosUsuarios;
     }
     
 }

@@ -23,4 +23,6 @@ public interface InterfazAccesoDatosUsuarioDAO {
     
     public boolean existeUsuario(String codigoUsuario);
     
+    public ArrayList<String> codigosUsuarios();
+    
     }

@@ -203,7 +203,7 @@ public class Controlador {
                 
                 if(objUsuarioDAO.existeUsuario(codigoEntrada)){
                 
-                    int ultimoRegistro = objRegistroDAO.obtenerUltimoRegistro(codigoEntrada);
+                    int ultimoRegistro = objRegistroDAO.obtenerTipoUltimoRegistro(codigoEntrada);
 
                     if(ultimoRegistro == 2){
 
@@ -231,7 +231,7 @@ public class Controlador {
                 
                 if(objUsuarioDAO.existeUsuario(codigoSalida)){
                 
-                    int ultimoRegistrox = objRegistroDAO.obtenerUltimoRegistro(codigoSalida);
+                    int ultimoRegistrox = objRegistroDAO.obtenerTipoUltimoRegistro(codigoSalida);
 
                     if(ultimoRegistrox == 1){
 

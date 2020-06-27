@@ -6,6 +6,8 @@ public interface InterfazAccesoDatosRegistroDAO {
 
     public boolean asignarRegistroUsuario(String codigo, ClsRegistroDTO registro);
     
-    public int obtenerUltimoRegistro(String codigoEntrada);
+    public int obtenerTipoUltimoRegistro(String codigo);
+    
+    public ClsRegistroDTO obtenerUltimoRegistro(String codigo);
     
 }
